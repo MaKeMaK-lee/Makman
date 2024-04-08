@@ -12,7 +12,7 @@ namespace Makman.Visual.MVVM.Model
             _testAndDebugService.DatabaseFill();
         }
 
-        public IEnumerable<CollectionDirectory> GetDirictories()
+        public IEnumerable<CollectionDirectory> GetDirectories()
         {
             return _collectionDatabaseService.GetCollectionDirectories();
         }

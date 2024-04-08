@@ -107,7 +107,7 @@ namespace Makman.Visual.MVVM.ViewModel
 
             SetCommands();
 
-            directoryCollection = _servicesAccessor.GetDirictories();
+            directoryCollection = _servicesAccessor.GetDirectories();
             //foreach (var item in DirectoryCollection)
             //{
             //    item.PickDirectoryCommand = new RelayCommand(item.PickDirectoryCommandAction, o => true);
