@@ -19,6 +19,7 @@ namespace Makman.Data.SQLite
             TagCategory,
             CollectionDirectory
         }
+        //TODO 5 пофиксить  инкапс приват сделать
         internal ObservableCollection<Bunch> Bunchs
         {
             private set;
