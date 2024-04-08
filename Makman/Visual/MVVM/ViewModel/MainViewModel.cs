@@ -23,7 +23,7 @@ namespace Makman.Visual.MVVM.ViewModel
         public RelayCommand NavigateToHomeCommand { get; set; }
         public RelayCommand NavigateToDiscoveryCommand { get; set; }
         public RelayCommand NavigateToCollectionCommand { get; set; }
-        public RelayCommand NavigateTodirectoriesManagerCommand { get; set; }
+        public RelayCommand NavigateToDirectoriesManagerCommand { get; set; }
 
         public MainViewModel(INavigation navigationService)
         {
@@ -40,7 +40,7 @@ namespace Makman.Visual.MVVM.ViewModel
             {
                 Navigation.NavigateTo<CollectionViewModel>();
             }, o => true);
-            NavigateTodirectoriesManagerCommand = new RelayCommand(o =>
+            NavigateToDirectoriesManagerCommand = new RelayCommand(o =>
             {
                 Navigation.NavigateTo<DirectoriesManagerViewModel>();
             }, o => true);

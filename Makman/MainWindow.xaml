@@ -90,7 +90,7 @@
                              Foreground="WhiteSmoke"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding NavigateTodirectoriesManagerCommand}"/>
+                             Command="{Binding NavigateToDirectoriesManagerCommand}"/>
                 <RadioButton Content="DEBUG"
                              Height="50"
                              Foreground="WhiteSmoke"
