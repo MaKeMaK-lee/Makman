@@ -1,0 +1,113 @@
+﻿<Application x:Class="Makman.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Makman"
+             xmlns:viewModel="clr-namespace:Makman.Visual.MVVM.ViewModel"
+             xmlns:view="clr-namespace:Makman.Visual.MVVM.View"
+             xmlns:converters="clr-namespace:Makman.Visual.Converters"
+              >
+
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Visual/Themes/CollectionTheme.xaml"/>
+                <ResourceDictionary Source="Visual/Themes/MenuButtonTheme.xaml"/>
+                <ResourceDictionary Source="Visual/Themes/AppStateManageButtonTheme.xaml"/>
+                <ResourceDictionary Source="Visual/Themes/ButtonWithTextTheme.xaml"/>
+                <ResourceDictionary Source="Visual/Themes/TextBoxTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <converters:FilePathToImageConverter x:Key="FilePathToImageConverter" />
+
+            <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+                <view:HomeView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:DiscoveryViewModel}">
+                <view:DiscoveryView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:CollectionViewModel}">
+                <view:CollectionView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:DirectoriesManagerViewModel}">
+                <view:DirectoriesManagerView/>
+            </DataTemplate>
+
+
+            <Style TargetType="{x:Type DataGrid}">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="Transparent"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RowBackground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="#25000000"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="AlternatingRowBackground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="#40000000"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="{x:Type DataGridColumnHeader}">
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="#40000000"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="{x:Type DataGridRowHeader}">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="#40000000"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="{x:Type CheckBox}">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="Transparent"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="5" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                <Grid>
+                                    <Rectangle x:Name="background" Fill="{TemplateBinding Background}"/>
+                                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Effect" >
+                                        <Setter.Value>
+                                            <BlurEffect Radius="3"></BlurEffect>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="background" Property="Effect" >
+                                        <Setter.Value>
+                                            <DropShadowEffect BlurRadius="15" ShadowDepth="0"></DropShadowEffect>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

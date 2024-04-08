@@ -1,0 +1,20 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="{x:Type Button}" 
+           x:Key="ButtonWithTextTheme" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Button Margin="5" 
+                                    Background="#10FFFFFF"
+                                    BorderBrush="#20000000"
+                                    BorderThickness="1"
+                                    Foreground="#80FFFFFF"
+                                    Content="{TemplateBinding Property=Content}"  
+                                    Command="{TemplateBinding Property=Command}"></Button>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+</ResourceDictionary>
