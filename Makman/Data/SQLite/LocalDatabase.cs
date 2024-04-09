@@ -177,6 +177,10 @@ namespace Makman.Data.SQLite
             //SaveChanges();
             //LoadActualData(DataType.CollectionDirectory);
         }
+        internal void Add(Tag recordToAdd)
+        {
+            Tags.Add(recordToAdd); 
+        }
 
         internal void Load()
         {

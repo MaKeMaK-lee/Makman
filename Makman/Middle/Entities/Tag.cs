@@ -33,6 +33,10 @@ namespace Makman.Middle.Entities
         [Column("TagUnits")]
         public ICollection<Unit> Units { get; set; }
 
+        public Tag( )
+        {
+
+        }
         public Tag(string name, string color = "")
         {
             init();

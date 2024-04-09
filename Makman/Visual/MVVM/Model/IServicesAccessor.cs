@@ -11,6 +11,7 @@ namespace Makman.Visual.MVVM.Model
     {
         void DatabaseFill();
         IEnumerable<CollectionDirectory> GetDirictories();
+        IEnumerable<Tag> GetTags();
         IEnumerable<Unit> GetUnits();
     }
 }

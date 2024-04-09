@@ -19,6 +19,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <converters:FilePathToImageConverter x:Key="FilePathToImageConverter" />
+            <converters:StringColoroBrushConverter x:Key="StringColoroBrushConverter" />
 
             <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
                 <view:HomeView/>
@@ -35,6 +36,11 @@
             <DataTemplate DataType="{x:Type viewModel:DirectoriesManagerViewModel}">
                 <view:DirectoriesManagerView/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:TagsManagerViewModel}">
+                <view:TagsManagerView/>
+            </DataTemplate>
+
 
 
             <Style TargetType="{x:Type DataGrid}">

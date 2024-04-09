@@ -17,6 +17,11 @@ namespace Makman.Visual.MVVM.Model
             return _collectionDatabaseService.GetCollectionDirectories();
         }
 
+        public IEnumerable<Tag> GetTags()
+        {
+            return _collectionDatabaseService.GetTags();
+        }
+
         public IEnumerable<Unit> GetUnits()
         {
 
