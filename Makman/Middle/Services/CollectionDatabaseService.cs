@@ -28,11 +28,6 @@ namespace Makman.Middle.Services
             disposed = true;
         }
 
-        //public void Load()
-        //{
-        //    Database?.Load();
-        //}
-
         public bool Save()
         {
             return Database.Save();
@@ -40,17 +35,20 @@ namespace Makman.Middle.Services
 
         public void Add(IEnumerable<Unit> elements)
         {
-            Database.Add(elements);
+            foreach (var item in elements)
+            {
+                Database.Units.Add(item);
+            }
         }
 
         public void Add(CollectionDirectory element)
         {
-            Database.Add(element);
+            Database.CollectionDirectories.Add(element);
         }
 
         public void Add(Tag element)
         {
-            Database.Add(element);
+            Database.Tags.Add(element);
         }
 
         public void Remove(Tag element)

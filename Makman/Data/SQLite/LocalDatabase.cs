@@ -18,8 +18,7 @@ namespace Makman.Data.SQLite
             Bunch,
             TagCategory,
             CollectionDirectory
-        }
-        //TODO 5 пофиксить  инкапс приват сделать
+        } 
         internal ObservableCollection<Bunch> Bunchs
         {
             private set;
@@ -72,7 +71,53 @@ namespace Makman.Data.SQLite
             CollectionDirectories = _dbContext.CollectionDirectories.Local.ToObservableCollection();
             Bunchs = _dbContext.Bunchs.Local.ToObservableCollection();
         }
-        /*
+        
+        private bool SaveChanges()
+        {
+            try
+            {
+                _dbContext.SaveChanges();
+
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+            return true;
+        }
+         
+        internal void Load()
+        {
+            LoadData();
+        }
+
+        /// <summary>
+        /// Save current database state to file
+        /// </summary>
+        /// <returns>True if saved</returns>
+        internal bool Save()  
+        {
+            return SaveChanges(); 
+        }
+         
+        public void Dispose()
+        {
+            if (disposed)
+            {
+                return;
+            }
+
+
+            _dbContext.Dispose();
+
+            GC.SuppressFinalize(this);
+            disposed = true;
+
+        }
+    }
+}
+/* very old trash
         private void LoadActualDataOld(DataType? dataType = null)
         {
             if (dataType == null || dataType == DataType.Unit)
@@ -96,130 +141,55 @@ namespace Makman.Data.SQLite
                 CollectionDirectories = _dbContext.CollectionDirectories.Local.ToObservableCollection();
             }
         }*/
-        private void AddRecords(IEnumerable<Unit> recordsToAdd)
-        {
-            _dbContext.Units.AddRange(recordsToAdd);
-        }
-        private void AddRecords(IEnumerable<Tag> recordsToAdd)
-        {
-            _dbContext.Tags.AddRange(recordsToAdd);
-        }
-        private void AddRecords(IEnumerable<Bunch> recordsToAdd)
-        {
-            _dbContext.Bunchs.AddRange(recordsToAdd);
-        }
-        private void AddRecords(IEnumerable<TagCategory> recordsToAdd)
-        {
-            _dbContext.TagCategories.AddRange(recordsToAdd);
-        }
-        private void AddRecords(IEnumerable<CollectionDirectory> recordsToAdd)
-        {
-            _dbContext.CollectionDirectories.AddRange(recordsToAdd);
-        }
-        private bool SaveChanges()
-        {
-            try
-            {
-                _dbContext.SaveChanges();
+/* useless but may still work
+private void AddRecords(IEnumerable<Unit> recordsToAdd)
+{
+    _dbContext.Units.AddRange(recordsToAdd);
+}
+private void AddRecords(IEnumerable<Tag> recordsToAdd)
+{
+    _dbContext.Tags.AddRange(recordsToAdd);
+}
+private void AddRecords(IEnumerable<Bunch> recordsToAdd)
+{
+    _dbContext.Bunchs.AddRange(recordsToAdd);
+}
+private void AddRecords(IEnumerable<TagCategory> recordsToAdd)
+{
+    _dbContext.TagCategories.AddRange(recordsToAdd);
+}
+private void AddRecords(IEnumerable<CollectionDirectory> recordsToAdd)
+{
+    _dbContext.CollectionDirectories.AddRange(recordsToAdd);
+}
+internal void Add(IEnumerable<Unit> recordsToAdd)
+{
+    foreach (var item in recordsToAdd)
+    {
+        Units.Add(item);
 
-            }
-            catch (Exception)
-            {
+    } 
+}
+internal void Add(IEnumerable<Tag> recordsToAdd)
+{ 
+}
+internal void Add(IEnumerable<TagCategory> recordsToAdd)
+{ 
+}
+internal void Add(IEnumerable<Bunch> recordsToAdd)
+{
 
-                return false;
-            }
-            return true;
-        }
-
-
-
-
-
-        internal void Add(IEnumerable<Unit> recordsToAdd)
-        {
-            foreach (var item in recordsToAdd)
-            {
-                Units.Add(item);
-
-            }
-            //AddRecords(recordsToAdd);
-
-            //SaveChanges();
-            //LoadActualData(DataType.Unit);
-        }
-        internal void Add(IEnumerable<Tag> recordsToAdd)
-        {
-            //AddRecords(recordsToAdd);
-
-            //SaveChanges();
-            //LoadActualData(DataType.Tag);
-        }
-        internal void Add(IEnumerable<TagCategory> recordsToAdd)
-        {
-            //AddRecords(recordsToAdd);
-
-            //SaveChanges();
-            //LoadActualData(DataType.TagCategory);
-        }
-        internal void Add(IEnumerable<Bunch> recordsToAdd)
-        {
-
-            //AddRecords(recordsToAdd);
-
-            //SaveChanges();
-            //LoadActualData(DataType.Bunch);
-        }
-        internal void Add(CollectionDirectory recordToAdd)
-        {
-            CollectionDirectories.Add(recordToAdd);
-
-            //AddRecords(recordsToAdd);
-
-            //SaveChanges();
-            //LoadActualData(DataType.CollectionDirectory);
-        }
-        internal void Add(Tag recordToAdd)
-        {
-            Tags.Add(recordToAdd); 
-        }
-
-        internal void Load()
-        {
-            LoadData();
-        }
-
-        /// <summary>
-        /// Save current database state to file
-        /// </summary>
-        /// <returns>True if saved</returns>
-        internal bool Save()//bool reloadData = true //TODO 500 почистить 
-        {
-            return SaveChanges();
-            //if (reloadData)
-            //{
-            //    LoadData();
-            //}
-        }
-
-
-
-        public void Dispose()
-        {
-            if (disposed)
-            {
-                return;
-            }
-
-
-            _dbContext.Dispose();
-
-            GC.SuppressFinalize(this);
-            disposed = true;
-
-        }
-    }
+}
+internal void Add(CollectionDirectory recordToAdd)
+{
+    CollectionDirectories.Add(recordToAdd); 
+}
+internal void Add(Tag recordToAdd)
+{
+    Tags.Add(recordToAdd); 
 }
 
+*/
 //string fileName = "UnitsData.json";
 //if (WindowsUse.FileExists(fileName))
 //{
