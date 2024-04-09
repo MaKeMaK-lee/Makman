@@ -42,10 +42,22 @@ namespace Makman.Middle.Services
         {
             Database.Add(elements);
         }
+
         public void Add(CollectionDirectory element)
         {
             Database.Add(element);
         }
+
+        public void Add(Tag element)
+        {
+            Database.Add(element);
+        }
+
+        public void Remove(Tag element)
+        {
+            Database.Tags.Remove(element);
+        }
+
         public void Remove(CollectionDirectory element)
         {
             Database.CollectionDirectories.Remove(element);
@@ -60,5 +72,11 @@ namespace Makman.Middle.Services
         {
             return Database.CollectionDirectories;
         }
+
+        public IEnumerable<Tag> GetTags()
+        {
+            return Database.Tags;
+        }
+
     }
 }

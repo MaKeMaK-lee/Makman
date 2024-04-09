@@ -1,4 +1,4 @@
-﻿using Makman.Middle.Entities; 
+﻿using Makman.Middle.Entities;
 
 namespace Makman.Visual.MVVM.Model
 {
@@ -6,6 +6,7 @@ namespace Makman.Visual.MVVM.Model
     {
         void DatabaseFill();
         IEnumerable<CollectionDirectory> GetDirectories();
+        IEnumerable<Tag> GetTags();
         IEnumerable<Unit> GetUnits();
     }
 }

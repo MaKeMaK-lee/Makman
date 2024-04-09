@@ -28,6 +28,7 @@ namespace Makman
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<HomeViewModel>();
             services.AddSingleton<DirectoriesManagerViewModel>();
+            services.AddSingleton<TagsManagerViewModel>();
             services.AddSingleton<CollectionViewModel>();
             services.AddSingleton<DiscoveryViewModel>();
             services.AddSingleton<Func<Type, ViewModel>>
@@ -40,6 +41,7 @@ namespace Makman
             services.AddSingleton<IWindowsAccessService, WindowsAccessService>();
             services.AddSingleton<IUnitManagementService, UnitManagementService>();
             services.AddSingleton<ICollectionDirectoryManagementService, CollectionDirectoryManagementService>();
+            services.AddSingleton<ITagManagementService, TagManagementService>();
 
 
 

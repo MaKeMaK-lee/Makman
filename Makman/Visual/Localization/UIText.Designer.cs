@@ -205,6 +205,87 @@ namespace Makman.Visual.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Tags.
+        /// </summary>
+        public static string mw_pagelist_tags_manager {
+            get {
+                return ResourceManager.GetString("mw pagelist tags manager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Category.
+        /// </summary>
+        public static string tag_itemspanel_headers_category {
+            get {
+                return ResourceManager.GetString("tag itemspanel headers category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Color.
+        /// </summary>
+        public static string tag_itemspanel_headers_color {
+            get {
+                return ResourceManager.GetString("tag itemspanel headers color", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Id.
+        /// </summary>
+        public static string tag_itemspanel_headers_id {
+            get {
+                return ResourceManager.GetString("tag itemspanel headers id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Name.
+        /// </summary>
+        public static string tag_itemspanel_headers_name {
+            get {
+                return ResourceManager.GetString("tag itemspanel headers name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Parent tag.
+        /// </summary>
+        public static string tag_itemspanel_headers_parenttag {
+            get {
+                return ResourceManager.GetString("tag itemspanel headers parenttag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Id.
+        /// </summary>
+        public static string tag_itemspanel_id {
+            get {
+                return ResourceManager.GetString("tag itemspanel id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Add new tag.
+        /// </summary>
+        public static string tag_managepanel_add {
+            get {
+                return ResourceManager.GetString("tag managepanel add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Remove.
+        /// </summary>
+        public static string tag_managepanel_remove {
+            get {
+                return ResourceManager.GetString("tag managepanel remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Text now missing.
         /// </summary>
         public static string u_no_text {

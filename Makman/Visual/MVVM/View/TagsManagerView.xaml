@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="Makman.Visual.MVVM.View.TagsManagerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
+             xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:localization="clr-namespace:Makman.Visual.Localization" 
+             xmlns:viewmodel="clr-namespace:Makman.Visual.MVVM.ViewModel"  
+             mc:Ignorable="d" Background="Transparent">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Row="0">
+            <Button FontSize="11" Style="{StaticResource ButtonWithTextTheme}" Command="{Binding RemoveTagCommand}" IsEnabled="{Binding IsSelectedAnyItemInTagCollection, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" >
+                <Button.Content>
+                    <TextBlock Margin="5" FontSize="16" Text="{x:Static localization:UIText.tag_managepanel_remove}"></TextBlock>
+                </Button.Content>
+            </Button>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <Button FontSize="11" Style="{StaticResource ButtonWithTextTheme}" Command="{Binding AddTagCommand}" >
+                <Button.Content>
+                    <TextBlock Margin="5" FontSize="16" Text="{x:Static localization:UIText.tag_managepanel_add}"></TextBlock>
+                </Button.Content>
+            </Button>
+        </StackPanel>
+        <DataGrid Grid.Row="1" ItemsSource="{Binding TagCollection}" SelectionMode="Extended"
+              IsReadOnly="False" 
+              CanUserAddRows="False"
+              CanUserDeleteRows="True"
+              CanUserResizeColumns="True"
+              CanUserSortColumns="True"
+        BorderThickness="0"  AutoGenerateColumns="False"  
+           >
+            <DataGrid.Resources>
+                <Style x:Key="NameColumnStyle" TargetType="TextBlock">
+                    <Setter Property="Foreground" 
+                            Value="{Binding Item.Color, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, 
+                            Converter={StaticResource StringColoroBrushConverter}}"/>
+                </Style>
+            </DataGrid.Resources>
+            <behaviors:Interaction.Triggers>
+                <behaviors:EventTrigger EventName="SelectionChanged" >
+                    <behaviors:InvokeCommandAction CommandParameter="{Binding SelectedItems, RelativeSource=
+                        {RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" Command="{Binding DataGridSelectionChangedCommand }"/>
+                </behaviors:EventTrigger>
+            </behaviors:Interaction.Triggers>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="{x:Static localization:UIText.tag_itemspanel_headers_id}" IsReadOnly="True" CanUserResize="False"  >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock HorizontalAlignment="Center" ToolTip="{Binding Id}" Text="{x:Static localization:UIText.tag_itemspanel_id}" ></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn IsReadOnly="True" MaxWidth="480"  Binding="{Binding Name}" ElementStyle="{StaticResource NameColumnStyle}" >
+                    <DataGridTextColumn.Header>
+                        <TextBlock  ToolTip="{Binding Name}" HorizontalAlignment="Left" Text="{x:Static localization:UIText.tag_itemspanel_headers_name}" />
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="False" Binding="{Binding Color}" >
+                    <DataGridTextColumn.Header>
+                        <TextBlock HorizontalAlignment="Left" Text="{x:Static localization:UIText.tag_itemspanel_headers_color}" />
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Category}" >
+                    <DataGridTextColumn.Header>
+                        <TextBlock HorizontalAlignment="Left" Text="{x:Static localization:UIText.tag_itemspanel_headers_parenttag}" />
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding ParentTag}" >
+                    <DataGridTextColumn.Header>
+                        <TextBlock HorizontalAlignment="Left" Text="{x:Static localization:UIText.tag_itemspanel_headers_category}" />
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+    </Grid>
+</UserControl>
