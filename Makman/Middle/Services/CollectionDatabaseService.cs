@@ -76,5 +76,9 @@ namespace Makman.Middle.Services
             return Database.Tags;
         }
 
+        public bool IsContainTagWithName(string name)
+        {
+            return Database.Tags.Any(i => i.Name == name);
+        }
     }
 }

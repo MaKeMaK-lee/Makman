@@ -34,18 +34,16 @@ namespace Makman.Visual.MVVM.ViewModel
                 OnPropertyChanged(nameof(IsSelectedAnyItemInTagCollection));
             }
         }
-
-        //private Tag selectedTag;
-        //public Tag SelectedTag
-        //{
-        //    get => selectedTag;
-        //    set
-        //    {
-        //        selectedTag = value;
-        //        OnPropertyChanged(nameof(IsSelectedAnyItemInTagCollection));
-        //    }
-        //}
-
+        public string filterText; 
+        public string FilterText 
+        {
+            get => filterText;//TODO 200 filtering
+            set 
+            {
+                filterText = value;
+            }
+        }
+        
         public bool IsSelectedOnlyOneItemInTagCollection
         {
             get
@@ -68,6 +66,7 @@ namespace Makman.Visual.MVVM.ViewModel
                     return true;
             }
         }
+        public RelayCommand FilterTextBoxTextChangedCommand { get; set; }
         public RelayCommand DataGridSelectionChangedCommand { get; set; }
         public RelayCommand RemoveTagCommand { get; set; } 
         public RelayCommand AddTagCommand { get; set; }
@@ -75,7 +74,7 @@ namespace Makman.Visual.MVVM.ViewModel
         {
             AddTagCommand = new RelayCommand(o =>
             {
-                _tagManagementService.AddNew();
+                _tagManagementService.AddNew(FilterText);
             }, o => true); 
             RemoveTagCommand = new RelayCommand(o =>
             {

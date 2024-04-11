@@ -20,6 +20,7 @@
             </Button>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <TextBox Margin="8" Text="{Binding FilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
             <Button FontSize="11" Style="{StaticResource ButtonWithTextTheme}" Command="{Binding AddTagCommand}" >
                 <Button.Content>
                     <TextBlock Margin="5" FontSize="16" Text="{x:Static localization:UIText.tag_managepanel_add}"></TextBlock>

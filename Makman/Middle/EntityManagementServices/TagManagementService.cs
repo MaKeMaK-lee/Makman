@@ -8,9 +8,9 @@ namespace Makman.Middle.EntityManagementServices
     {
         readonly ICollectionDatabaseService _collectionDatabaseService = collectionDatabaseService;
         readonly IWindowsAccessService _windowsAccessService = windowsAccessService;
-        public void AddNew()
+        public void AddNew(string name)
         {
-            var createdItem = Create();
+            var createdItem = Create(name);
             if (createdItem == null) { return; }
             _collectionDatabaseService.Add(createdItem);
             _collectionDatabaseService.Save();
@@ -23,14 +23,15 @@ namespace Makman.Middle.EntityManagementServices
                 _collectionDatabaseService.Remove(item);
             }
             _collectionDatabaseService.Save();
-        } 
+        }
 
-        public Tag? Create()
+        public Tag? Create(string name)
         {
-            string? path = _windowsAccessService.ChooseDirectory();
-            if (path == null) { return null; }
-
-            return new Tag(path );
-        } 
-        } 
+            if (_collectionDatabaseService.IsContainTagWithName(name))
+            {
+                return null;
+            }
+            return new Tag(name);
+        }
+    }
 }

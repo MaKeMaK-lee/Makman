@@ -14,6 +14,7 @@ namespace Makman.Middle.Services
         public void Remove(CollectionDirectory element);
         public void Add(Tag element);
         public void Remove(Tag element);
+        public bool IsContainTagWithName(string name);
         
     }
 }

@@ -9,8 +9,8 @@ namespace Makman.Middle.EntityManagementServices
 {
     public interface ITagManagementService
     { 
-        void AddNew();
-        Tag? Create(); 
+        void AddNew(string name);
+        Tag? Create(string name); 
         void Remove(IEnumerable<Tag> collectionDirectory);
     }
 }
