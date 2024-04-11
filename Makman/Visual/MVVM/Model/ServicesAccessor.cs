@@ -22,11 +22,13 @@ namespace Makman.Visual.MVVM.Model
             return _collectionDatabaseService.GetTags();
         }
 
+        public IEnumerable<TagCategory> GetTagCategories()
+        { 
+            return _collectionDatabaseService.GetTagCategories();
+        }
+        
         public IEnumerable<Unit> GetUnits()
-        {
-
-            //var u = _collectionDatabaseService.GetUnits().FirstOrDefault(u=>u.FileName.StartsWith("-EA"));
-            //var tags = u.Tags;
+        { 
             return _collectionDatabaseService.GetUnits();
         }
     }

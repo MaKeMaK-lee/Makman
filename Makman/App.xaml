@@ -41,6 +41,10 @@
                 <view:TagsManagerView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModel:TagCategoriesManagerViewModel}">
+                <view:TagCategoriesManagerView/>
+            </DataTemplate>
+
 
 
             <Style TargetType="{x:Type DataGrid}">

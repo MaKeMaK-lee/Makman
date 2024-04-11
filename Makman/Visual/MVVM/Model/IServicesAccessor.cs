@@ -6,6 +6,7 @@ namespace Makman.Visual.MVVM.Model
     {
         void DatabaseFill();
         IEnumerable<CollectionDirectory> GetDirectories();
+        IEnumerable<TagCategory> GetTagCategories();
         IEnumerable<Tag> GetTags();
         IEnumerable<Unit> GetUnits();
     }

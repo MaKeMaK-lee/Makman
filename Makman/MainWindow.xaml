@@ -97,6 +97,12 @@
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding NavigateToTagsManagerCommand}"/>
+                <RadioButton Content="{x:Static localization:UIText.mw_pagelist_tag_categories_manager}"
+                             Height="50"
+                             Foreground="WhiteSmoke"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding NavigateToTagCategoriesManagerCommand}"/>
                 <RadioButton Content="DEBUG"
                              Height="50"
                              Foreground="WhiteSmoke"

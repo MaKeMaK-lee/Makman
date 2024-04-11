@@ -51,6 +51,16 @@ namespace Makman.Middle.Services
             Database.Tags.Add(element);
         }
 
+        public void Add(TagCategory element)
+        {
+            Database.TagCategories.Add(element);
+        }
+
+        public void Remove(TagCategory element)
+        {
+            Database.TagCategories.Remove(element);
+        }
+
         public void Remove(Tag element)
         {
             Database.Tags.Remove(element);
@@ -76,9 +86,18 @@ namespace Makman.Middle.Services
             return Database.Tags;
         }
 
+        public IEnumerable<TagCategory> GetTagCategories()
+        {
+            return Database.TagCategories;
+        }
+
         public bool IsContainTagWithName(string name)
         {
             return Database.Tags.Any(i => i.Name == name);
+        }
+        public bool IsContainTagCategoryWithName(string name)
+        {
+            return Database.TagCategories.Any(i => i.Name == name);
         }
     }
 }

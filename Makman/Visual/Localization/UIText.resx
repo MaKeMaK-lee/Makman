@@ -165,8 +165,29 @@
   <data name="mw pagelist home" xml:space="preserve">
     <value>Home</value>
   </data>
+  <data name="mw pagelist tag categories manager" xml:space="preserve">
+    <value>Tag Categories</value>
+  </data>
   <data name="mw pagelist tags manager" xml:space="preserve">
     <value>Tags</value>
+  </data>
+  <data name="tag category itemspanel headers color" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="tag category itemspanel headers id" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="tag category itemspanel headers name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="tag category itemspanel id" xml:space="preserve">
+    <value>☉</value>
+  </data>
+  <data name="tag category managepanel add" xml:space="preserve">
+    <value>Add new tag category</value>
+  </data>
+  <data name="tag category managepanel remove" xml:space="preserve">
+    <value>Remove</value>
   </data>
   <data name="tag itemspanel headers category" xml:space="preserve">
     <value>Category</value>
@@ -184,7 +205,7 @@
     <value>Parent tag</value>
   </data>
   <data name="tag itemspanel id" xml:space="preserve">
-    <value>Id</value>
+    <value>☉</value>
   </data>
   <data name="tag managepanel add" xml:space="preserve">
     <value>Add new tag</value>
