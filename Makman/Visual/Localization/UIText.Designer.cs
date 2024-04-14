@@ -340,6 +340,15 @@ namespace Makman.Visual.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Pick category.
+        /// </summary>
+        public static string tag_managepanel_pickcategory {
+            get {
+                return ResourceManager.GetString("tag managepanel pickcategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Remove.
         /// </summary>
         public static string tag_managepanel_remove {

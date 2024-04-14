@@ -10,12 +10,36 @@ namespace Makman.Visual.MVVM.ViewModel
         private readonly IServicesAccessor _servicesAccessor;
         private readonly ITagManagementService _tagManagementService;
 
+        private IEnumerable<TagCategory> tagCategoriesCollection;
+        public IEnumerable<TagCategory> TagCategoriesCollection
+        {
+            get
+            {
+                return tagCategoriesCollection;
+            }
+        }
+
         private IEnumerable<Tag> tagCollection;
         public IEnumerable<Tag> TagCollection
         {
             get
             {
                 return tagCollection;
+            }
+        }
+
+        public TagCategory? selectedTagCategory;
+        public TagCategory? SelectedTagCategory
+        {
+            get => selectedTagCategory;
+            set
+            {
+                if (value != selectedTagCategory)
+                {
+                    selectedTagCategory = value;
+                    OnPropertyChanged(nameof(SelectedTagCategory));
+                }
+                 
             }
         }
 
@@ -30,20 +54,39 @@ namespace Makman.Visual.MVVM.ViewModel
                 {
                     selectedTags = null;
                 }
+
                 OnPropertyChanged(nameof(IsSelectedOnlyOneItemInTagCollection));
                 OnPropertyChanged(nameof(IsSelectedAnyItemInTagCollection));
+
+
+                //Refresh SelectedTagCategory
+                if (selectedTags?.Count() > 0)
+                {
+                    if (_tagManagementService.IsSameOrNullCategory(selectedTags))
+                    {
+                        SelectedTagCategory = selectedTags.First().Category;
+                    }
+                    else
+                    {
+                        SelectedTagCategory = null;//TODO 369 This is null if selected many with nulls and if selected many with not same categs => user can't intuitivly see it in picker
+                    }
+                }
+                else
+                {
+                    SelectedTagCategory = null;
+                }
             }
         }
-        public string filterText; 
-        public string FilterText 
+        public string filterText;
+        public string FilterText
         {
             get => filterText;//TODO 200 filtering
-            set 
+            set
             {
                 filterText = value;
             }
         }
-        
+
         public bool IsSelectedOnlyOneItemInTagCollection
         {
             get
@@ -66,16 +109,17 @@ namespace Makman.Visual.MVVM.ViewModel
                     return true;
             }
         }
+        public RelayCommand ComboBoxSelectionChangedCommand { get; set; }
         public RelayCommand FilterTextBoxTextChangedCommand { get; set; }
         public RelayCommand DataGridSelectionChangedCommand { get; set; }
-        public RelayCommand RemoveTagCommand { get; set; } 
+        public RelayCommand RemoveTagCommand { get; set; }
         public RelayCommand AddTagCommand { get; set; }
         private void SetCommands()
         {
             AddTagCommand = new RelayCommand(o =>
             {
                 _tagManagementService.AddNew(FilterText);
-            }, o => true); 
+            }, o => true);
             RemoveTagCommand = new RelayCommand(o =>
             {
                 if (SelectedTags != null)
@@ -90,6 +134,12 @@ namespace Makman.Visual.MVVM.ViewModel
                     SelectedTags = ((IEnumerable<object>)o).Cast<Tag>();
                 }
             }, o => true);
+            ComboBoxSelectionChangedCommand = new RelayCommand(o =>
+            {
+
+                if (SelectedTags != null && SelectedTagCategory != null)
+                    _tagManagementService.SetCategory(SelectedTags, SelectedTagCategory);
+            }, o => true);
         }
 
 
@@ -101,6 +151,7 @@ namespace Makman.Visual.MVVM.ViewModel
             SetCommands();
 
             tagCollection = _servicesAccessor.GetTags();
+            tagCategoriesCollection = _servicesAccessor.GetTagCategories();
             //foreach (var item in TagCollection)
             //{
             //    item.PickTagCommand = new RelayCommand(item.PickTagCommandAction, o => true);

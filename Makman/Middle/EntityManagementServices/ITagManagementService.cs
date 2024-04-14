@@ -10,7 +10,13 @@ namespace Makman.Middle.EntityManagementServices
     public interface ITagManagementService
     { 
         void AddNew(string name);
-        Tag? Create(string name); 
+        Tag? Create(string name);
+        /// <summary>
+        /// 
+        /// </summary> 
+        /// <returns>True if all tags category is same (some or all may be null) or if tags is null or empty, otherwise false </returns>
+        bool IsSameOrNullCategory(IEnumerable<Tag>? tags);
         void Remove(IEnumerable<Tag> collectionDirectory);
+        void SetCategory(IEnumerable<Tag> tags, TagCategory? tagCategory);
     }
 }

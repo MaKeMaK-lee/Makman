@@ -15,7 +15,7 @@
                 <ResourceDictionary Source="Visual/Themes/MenuButtonTheme.xaml"/>
                 <ResourceDictionary Source="Visual/Themes/AppStateManageButtonTheme.xaml"/>
                 <ResourceDictionary Source="Visual/Themes/ButtonWithTextTheme.xaml"/>
-                <ResourceDictionary Source="Visual/Themes/TextBoxTheme.xaml"/> 
+                <ResourceDictionary Source="Visual/Themes/TextBoxTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <converters:FilePathToImageConverter x:Key="FilePathToImageConverter" />
@@ -122,6 +122,24 @@
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
+            </Style> 
+            <Style TargetType="{x:Type ComboBox}">
+                <Style.Triggers>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Effect" >
+                            <Setter.Value>
+                                <BlurEffect Radius="3"></BlurEffect>
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter  Property="Effect" >
+                            <Setter.Value>
+                                <DropShadowEffect BlurRadius="15" ShadowDepth="0"></DropShadowEffect>
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                </Style.Triggers>
             </Style>
 
         </ResourceDictionary>

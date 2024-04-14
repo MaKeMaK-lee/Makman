@@ -210,6 +210,9 @@
   <data name="tag managepanel add" xml:space="preserve">
     <value>Add new tag</value>
   </data>
+  <data name="tag managepanel pickcategory" xml:space="preserve">
+    <value>Pick category</value>
+  </data>
   <data name="tag managepanel remove" xml:space="preserve">
     <value>Remove</value>
   </data>

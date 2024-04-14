@@ -1,4 +1,4 @@
-﻿using Makman.Middle.Core;
+﻿
 using Makman.Middle.Entities;
 using Makman.Middle.Services;
 
@@ -27,11 +27,33 @@ namespace Makman.Middle.EntityManagementServices
 
         public Tag? Create(string name)
         {
-            if (_collectionDatabaseService.IsContainTagWithName(name))
+            if (name == "" || _collectionDatabaseService.IsContainTagWithName(name))
             {
                 return null;
             }
             return new Tag(name);
+        }
+
+        public bool IsSameOrNullCategory(IEnumerable<Tag>? tags)
+        {
+            if (tags?.Count() > 0)
+            {
+#pragma warning disable CS8602 // Разыменование вероятной пустой ссылки.
+                var first = tags.FirstOrDefault(t => t.Category != null, null);
+#pragma warning restore CS8602 // Разыменование вероятной пустой ссылки.
+                if (first == null)
+                    return true;
+                return tags.Where(t => t.Category != null).All(t => t.Category == first.Category);
+            }
+            return true;
+        }
+
+        public void SetCategory(IEnumerable<Tag> tags, TagCategory? tagCategory)
+        {
+            foreach (var item in tags)
+            {
+                item.Category = tagCategory;
+            }
         }
     }
 }

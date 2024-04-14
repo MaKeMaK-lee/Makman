@@ -13,11 +13,27 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Row="0">
-            <Button FontSize="11" Style="{StaticResource ButtonWithTextTheme}" Command="{Binding RemoveTagCommand}" IsEnabled="{Binding IsSelectedAnyItemInTagCollection, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" >
+            <Button Style="{StaticResource ButtonWithTextTheme}" Command="{Binding RemoveTagCommand}" IsEnabled="{Binding IsSelectedAnyItemInTagCollection, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" >
                 <Button.Content>
                     <TextBlock Margin="5" FontSize="16" Text="{x:Static localization:UIText.tag_managepanel_remove}"></TextBlock>
                 </Button.Content>
             </Button>
+            <ComboBox Background="ForestGreen" ItemsSource="{Binding TagCategoriesCollection}" VerticalContentAlignment="Center" MaxWidth="150" Margin="6" FontSize="16" Opacity="0.4" SelectedItem="{Binding SelectedTagCategory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsSelectedAnyItemInTagCollection, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" Foreground="{Binding Color, 
+                            Converter={StaticResource StringColoroBrushConverter}}">
+                            
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+                <behaviors:Interaction.Triggers>
+                    <behaviors:EventTrigger EventName="SelectionChanged" >
+                        <behaviors:InvokeCommandAction Command="{Binding ComboBoxSelectionChangedCommand }"/>
+                    </behaviors:EventTrigger>
+                </behaviors:Interaction.Triggers>
+            </ComboBox>
+
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="0">
             <TextBox Margin="8" Text="{Binding FilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
@@ -36,9 +52,19 @@
         BorderThickness="0"  AutoGenerateColumns="False"  
            >
             <DataGrid.Resources>
-                <Style x:Key="NameColumnStyle" TargetType="TextBlock">
+                <Style x:Key="ColoredColumnStyle" TargetType="TextBlock">
                     <Setter Property="Foreground" 
-                            Value="{Binding Item.Color, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, 
+                            Value="{Binding Item.SummaryColor, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, 
+                            Converter={StaticResource StringColoroBrushConverter}}"/>
+                </Style>
+                <Style x:Key="ColoredByCategoryColumnStyle" TargetType="TextBlock">
+                    <Setter Property="Foreground" 
+                            Value="{Binding Item.Category.Color, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, 
+                            Converter={StaticResource StringColoroBrushConverter}}"/>
+                </Style>
+                <Style x:Key="ColoredByParentTagColumnStyle" TargetType="TextBlock">
+                    <Setter Property="Foreground" 
+                            Value="{Binding Item.ParentTag.SummaryColor, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, 
                             Converter={StaticResource StringColoroBrushConverter}}"/>
                 </Style>
             </DataGrid.Resources>
@@ -56,7 +82,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn IsReadOnly="True" MaxWidth="480"  Binding="{Binding Name}" ElementStyle="{StaticResource NameColumnStyle}" >
+                <DataGridTextColumn IsReadOnly="False" MaxWidth="390"  Binding="{Binding Name}" ElementStyle="{StaticResource ColoredColumnStyle}" >
                     <DataGridTextColumn.Header>
                         <TextBlock  ToolTip="{Binding Name}" HorizontalAlignment="Left" Text="{x:Static localization:UIText.tag_itemspanel_headers_name}" />
                     </DataGridTextColumn.Header>
@@ -66,16 +92,16 @@
                         <TextBlock HorizontalAlignment="Left" Text="{x:Static localization:UIText.tag_itemspanel_headers_color}" />
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
-                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Category}" >
-                    <DataGridTextColumn.Header>
-                        <TextBlock HorizontalAlignment="Left" Text="{x:Static localization:UIText.tag_itemspanel_headers_parenttag}" />
-                    </DataGridTextColumn.Header>
-                </DataGridTextColumn>
-                <DataGridTextColumn IsReadOnly="True" Binding="{Binding ParentTag}" >
+                <DataGridTextColumn IsReadOnly="True" MaxWidth="150" Binding="{Binding Category.Name}" ElementStyle="{StaticResource ColoredByCategoryColumnStyle}" >
                     <DataGridTextColumn.Header>
                         <TextBlock HorizontalAlignment="Left" Text="{x:Static localization:UIText.tag_itemspanel_headers_category}" />
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding ParentTag.Name}" ElementStyle="{StaticResource ColoredByParentTagColumnStyle}" >
+                    <DataGridTextColumn.Header>
+                        <TextBlock HorizontalAlignment="Left" Text="{x:Static localization:UIText.tag_itemspanel_headers_parenttag}" />
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn> 
             </DataGrid.Columns>
 
         </DataGrid>

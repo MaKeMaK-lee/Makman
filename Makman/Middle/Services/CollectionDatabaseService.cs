@@ -93,11 +93,11 @@ namespace Makman.Middle.Services
 
         public bool IsContainTagWithName(string name)
         {
-            return Database.Tags.Any(i => i.Name == name);
+            return Database.Tags.Any(i => i.Name.ToLower() == name.ToLower());
         }
         public bool IsContainTagCategoryWithName(string name)
         {
-            return Database.TagCategories.Any(i => i.Name == name);
+            return Database.TagCategories.Any(i => i.Name.ToLower() == name.ToLower());
         }
     }
 }

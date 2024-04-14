@@ -22,9 +22,31 @@ namespace Makman.Middle.Entities
         [MaxLength(15)]
         public string Color { get; set; }
 
+        [NotMapped]
+        public string SummaryColor 
+        {
+            get
+            {
+                if (Color != "" || Category == null)
+                    return Color;
+                return Category.Color;
+            }
+        }
+
         [Column("TagCategory")]
         [MaxLength(15)]
-        public TagCategory? Category { get; set; }
+        private TagCategory? category;
+
+        [NotMapped]
+        public TagCategory? Category
+        {
+            get => category;
+            set
+            {
+                category = value;
+                OnPropertyChanged(nameof(Category));
+            }
+        }
 
         [Column("TagParentTag")]
         public Tag? ParentTag { get; set; }
