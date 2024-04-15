@@ -34,16 +34,16 @@ namespace Makman.Visual.MVVM.ViewModel
                 OnPropertyChanged(nameof(IsSelectedAnyItemInTagCategoryCollection));
             }
         }
-        public string filterText; 
-        public string FilterText 
+        public string filterText;
+        public string FilterText
         {
             get => filterText;//TODO 201 filtering
-            set 
+            set
             {
                 filterText = value;
             }
         }
-        
+
         public bool IsSelectedOnlyOneItemInTagCategoryCollection
         {
             get
@@ -68,14 +68,15 @@ namespace Makman.Visual.MVVM.ViewModel
         }
         public RelayCommand FilterTextBoxTextChangedCommand { get; set; }
         public RelayCommand DataGridSelectionChangedCommand { get; set; }
-        public RelayCommand RemoveTagCategoryCommand { get; set; } 
+        public RelayCommand RemoveTagCategoryCommand { get; set; }
         public RelayCommand AddTagCategoryCommand { get; set; }
         private void SetCommands()
         {
             AddTagCategoryCommand = new RelayCommand(o =>
             {
-                _tagCategoryManagementService.AddNew(FilterText);
-            }, o => true); 
+                if (string.IsNullOrEmpty(FilterText))
+                    _tagCategoryManagementService.AddNew(FilterText);
+            }, o => true);
             RemoveTagCategoryCommand = new RelayCommand(o =>
             {
                 if (SelectedTagCategories != null)

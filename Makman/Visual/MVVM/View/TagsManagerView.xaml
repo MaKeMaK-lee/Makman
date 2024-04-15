@@ -21,7 +21,7 @@
             <ComboBox Background="ForestGreen" ItemsSource="{Binding TagCategoriesCollection}" VerticalContentAlignment="Center" MaxWidth="150" Margin="6" FontSize="16" Opacity="0.4" SelectedItem="{Binding SelectedTagCategory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsSelectedAnyItemInTagCollection, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" >
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Name}" Foreground="{Binding Color, 
+                        <TextBlock Text="{Binding Name}" Foreground="{Binding ChangableColor, 
                             Converter={StaticResource StringColoroBrushConverter}}">
                             
                         </TextBlock>
@@ -53,19 +53,21 @@
            >
             <DataGrid.Resources>
                 <Style x:Key="ColoredColumnStyle" TargetType="TextBlock">
+                    <Setter Property="ToolTip" Value="{Binding Item.Name, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}},
+                        Mode=OneWay}"/>
                     <Setter Property="Foreground" 
                             Value="{Binding Item.SummaryColor, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, 
-                            Converter={StaticResource StringColoroBrushConverter}}"/>
+                            Converter={StaticResource StringColoroBrushConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </Style>
                 <Style x:Key="ColoredByCategoryColumnStyle" TargetType="TextBlock">
                     <Setter Property="Foreground" 
-                            Value="{Binding Item.Category.Color, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, 
-                            Converter={StaticResource StringColoroBrushConverter}}"/>
+                            Value="{Binding Item.Category.ChangableColor, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, 
+                            Converter={StaticResource StringColoroBrushConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </Style>
                 <Style x:Key="ColoredByParentTagColumnStyle" TargetType="TextBlock">
                     <Setter Property="Foreground" 
                             Value="{Binding Item.ParentTag.SummaryColor, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, 
-                            Converter={StaticResource StringColoroBrushConverter}}"/>
+                            Converter={StaticResource StringColoroBrushConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </Style>
             </DataGrid.Resources>
             <behaviors:Interaction.Triggers>
@@ -82,12 +84,12 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn IsReadOnly="False" MaxWidth="390"  Binding="{Binding Name}" ElementStyle="{StaticResource ColoredColumnStyle}" >
+                <DataGridTextColumn IsReadOnly="False" Width="390" Binding="{Binding Name}" ElementStyle="{StaticResource ColoredColumnStyle}" >
                     <DataGridTextColumn.Header>
-                        <TextBlock  ToolTip="{Binding Name}" HorizontalAlignment="Left" Text="{x:Static localization:UIText.tag_itemspanel_headers_name}" />
+                        <TextBlock HorizontalAlignment="Left" Text="{x:Static localization:UIText.tag_itemspanel_headers_name}" />
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
-                <DataGridTextColumn IsReadOnly="False" Binding="{Binding Color}" >
+                <DataGridTextColumn IsReadOnly="False" Binding="{Binding ChangableColor}" >
                     <DataGridTextColumn.Header>
                         <TextBlock HorizontalAlignment="Left" Text="{x:Static localization:UIText.tag_itemspanel_headers_color}" />
                     </DataGridTextColumn.Header>

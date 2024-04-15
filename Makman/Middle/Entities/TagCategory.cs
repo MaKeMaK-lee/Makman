@@ -22,6 +22,20 @@ namespace Makman.Middle.Entities
         [MaxLength(15)]
         public string Color { get; set; }
 
+        [NotMapped]
+        public string ChangableColor
+        {
+            get => Color;
+            set
+            {
+                Color = value;
+                OnPropertyChanged(Color);
+                OnPropertyChanged(ChangableColor);
+                //TODO 15 changed tags colors?
+            }
+        }
+
+        public TagCategory() { }
         public TagCategory(string name, string color = "")
         {
             init();

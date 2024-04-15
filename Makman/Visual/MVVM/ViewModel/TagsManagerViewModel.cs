@@ -118,7 +118,8 @@ namespace Makman.Visual.MVVM.ViewModel
         {
             AddTagCommand = new RelayCommand(o =>
             {
-                _tagManagementService.AddNew(FilterText);
+                if (string.IsNullOrEmpty(FilterText))
+                    _tagManagementService.AddNew(FilterText);
             }, o => true);
             RemoveTagCommand = new RelayCommand(o =>
             {

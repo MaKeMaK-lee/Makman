@@ -23,7 +23,20 @@ namespace Makman.Middle.Entities
         public string Color { get; set; }
 
         [NotMapped]
-        public string SummaryColor 
+        public string ChangableColor
+        {
+            get => Color;
+            set
+            {
+                Color = value;
+                OnPropertyChanged(Color);
+                OnPropertyChanged(ChangableColor);
+                OnPropertyChanged(SummaryColor);
+            }
+        }
+
+        [NotMapped]
+        public string SummaryColor
         {
             get
             {
@@ -33,8 +46,7 @@ namespace Makman.Middle.Entities
             }
         }
 
-        [Column("TagCategory")]
-        [MaxLength(15)]
+        [NotMapped]
         private TagCategory? category;
 
         [NotMapped]
@@ -45,6 +57,7 @@ namespace Makman.Middle.Entities
             {
                 category = value;
                 OnPropertyChanged(nameof(Category));
+                OnPropertyChanged(nameof(SummaryColor));
             }
         }
 
@@ -55,7 +68,7 @@ namespace Makman.Middle.Entities
         [Column("TagUnits")]
         public ICollection<Unit> Units { get; set; }
 
-        public Tag( )
+        public Tag()
         {
 
         }

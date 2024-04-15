@@ -37,9 +37,11 @@
        >
             <DataGrid.Resources>
                 <Style x:Key="NameColumnStyle" TargetType="TextBlock">
+                    <Setter Property="ToolTip" Value="{Binding Item.Name, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}},
+                        Mode=OneWay}"/>
                     <Setter Property="Foreground" 
-                        Value="{Binding Item.Color, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, 
-                        Converter={StaticResource StringColoroBrushConverter}}"/>
+                        Value="{Binding Item.ChangableColor, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, 
+                        Converter={StaticResource StringColoroBrushConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </Style>
             </DataGrid.Resources>
             <behaviors:Interaction.Triggers>
@@ -56,12 +58,12 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn IsReadOnly="True" MaxWidth="480"  Binding="{Binding Name}" ElementStyle="{StaticResource NameColumnStyle}" >
+                <DataGridTextColumn IsReadOnly="False" Width="480" Binding="{Binding Name}" ElementStyle="{StaticResource NameColumnStyle}" >
                     <DataGridTextColumn.Header>
-                        <TextBlock  ToolTip="{Binding Name}" HorizontalAlignment="Left" Text="{x:Static localization:UIText.tag_category_itemspanel_headers_name}" />
+                        <TextBlock HorizontalAlignment="Left" Text="{x:Static localization:UIText.tag_category_itemspanel_headers_name}" />
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
-                <DataGridTextColumn IsReadOnly="False" Binding="{Binding Color}" >
+                <DataGridTextColumn IsReadOnly="False" Binding="{Binding ChangableColor}" >
                     <DataGridTextColumn.Header>
                         <TextBlock HorizontalAlignment="Left" Text="{x:Static localization:UIText.tag_category_itemspanel_headers_color}" />
                     </DataGridTextColumn.Header>
