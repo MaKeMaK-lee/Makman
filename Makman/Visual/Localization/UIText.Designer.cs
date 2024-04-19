@@ -61,6 +61,87 @@ namespace Makman.Visual.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Bunching mode.
+        /// </summary>
+        public static string co_managepanel_bind_to_bunch {
+            get {
+                return ResourceManager.GetString("co managepanel bind to bunch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на -.
+        /// </summary>
+        public static string co_unitoverview_multiselected_filename {
+            get {
+                return ResourceManager.GetString("co unitoverview multiselected filename", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на -.
+        /// </summary>
+        public static string co_unitoverview_multiselected_filesize {
+            get {
+                return ResourceManager.GetString("co unitoverview multiselected filesize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на -.
+        /// </summary>
+        public static string co_unitoverview_multiselected_fullfilename {
+            get {
+                return ResourceManager.GetString("co unitoverview multiselected fullfilename", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на -.
+        /// </summary>
+        public static string co_unitoverview_multiselected_id {
+            get {
+                return ResourceManager.GetString("co unitoverview multiselected id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на -.
+        /// </summary>
+        public static string co_unitoverview_nonselected_filename {
+            get {
+                return ResourceManager.GetString("co unitoverview nonselected filename", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на -.
+        /// </summary>
+        public static string co_unitoverview_nonselected_filesize {
+            get {
+                return ResourceManager.GetString("co unitoverview nonselected filesize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на -.
+        /// </summary>
+        public static string co_unitoverview_nonselected_fullfilename {
+            get {
+                return ResourceManager.GetString("co unitoverview nonselected fullfilename", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на -.
+        /// </summary>
+        public static string co_unitoverview_nonselected_id {
+            get {
+                return ResourceManager.GetString("co unitoverview nonselected id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Auto.
         /// </summary>
         public static string dir_itemspanel_headers_autoscanning {
