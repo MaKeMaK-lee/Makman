@@ -1,14 +1,15 @@
 ﻿
 using Makman.Middle.Entities;
 using Makman.Visual.MVVM.Model;
-using System.Collections;
 using Makman.Middle.Core;
+using Makman.Middle.EntityManagementServices;
 
 namespace Makman.Visual.MVVM.ViewModel
 {
     public class CollectionViewModel : Core.ViewModel//TODO стиль и источник текста под картинками, подгрузка тумбов
     {
         private readonly IServicesAccessor _servicesAccessor;
+        private readonly IUnitManagementService _unitManagementService;
 
         private IEnumerable<Unit> unitCollection;
         public IEnumerable<Unit> UnitCollection
@@ -20,10 +21,9 @@ namespace Makman.Visual.MVVM.ViewModel
         }
 
 
-        public Unit? SelectedUnitsBack { get; set; }  
-        public Unit? SelectedUnit { get; set; }  
+        public IEnumerable<Unit>? SelectedUnitsPrevious { get; set; }
 
-        public IEnumerable<Unit>? selectedUnits;
+        private IEnumerable<Unit>? selectedUnits;
         public IEnumerable<Unit>? SelectedUnits
         {
             get => selectedUnits;
@@ -35,10 +35,18 @@ namespace Makman.Visual.MVVM.ViewModel
                     selectedUnits = null;
                 }
 
-                if (selectedUnits?.Count() < 0)
+                if (IsBunchBindingMode)
                 {
-                    SelectedUnitsBack = selectedUnits.First();
+                    //TODO 200: ui notificating user about result
+                    if (_unitManagementService.TryBindToBunch(
+                        SelectedUnits,
+                        SelectedUnitsPrevious, 
+                        includeExamples:true ))
+                        IsBunchBindingMode = false;
                 }
+
+
+                RecalculateSelectedUnitsPrevious();
 
                 OnPropertyChanged(nameof(IsSelectedOnlyOneItemInCollection));
                 OnPropertyChanged(nameof(IsSelectedAnyItemInCollection));
@@ -47,14 +55,31 @@ namespace Makman.Visual.MVVM.ViewModel
             }
         }
 
-        public bool check;
-        public bool Check
+
+
+        private void RecalculateSelectedUnitsPrevious()
         {
-            get => check;
+            if (SelectedUnits?.Count() > 0)
+            {
+                SelectedUnitsPrevious = SelectedUnits.ToList();
+            }
+            else
+            {
+                SelectedUnitsPrevious = null;
+            }
+
+        }
+
+        //TODO 150 Update this: save bunch when set it to true and apply this bunch until set it to false, or something else
+        private bool isBunchBindingMode;
+        public bool IsBunchBindingMode
+        {
+            get => isBunchBindingMode;
             
             set
             {
-                check = value;
+                isBunchBindingMode = value;
+                OnPropertyChanged(nameof(IsBunchBindingMode));
             }
         }
 
@@ -85,9 +110,10 @@ namespace Makman.Visual.MVVM.ViewModel
 
         public RelayCommand ListViewSelectionChangedCommand { get; set; }
 
-        public CollectionViewModel(IServicesAccessor servicesAccessor)
+        public CollectionViewModel(IServicesAccessor servicesAccessor, IUnitManagementService unitManagementService)
         {
             _servicesAccessor = servicesAccessor;
+            _unitManagementService = unitManagementService;
 
 
             ListViewSelectionChangedCommand = new RelayCommand(o =>

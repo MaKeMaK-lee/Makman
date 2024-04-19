@@ -44,6 +44,7 @@ namespace Makman
             services.AddSingleton<ICollectionDirectoryManagementService, CollectionDirectoryManagementService>();
             services.AddSingleton<ITagManagementService, TagManagementService>();
             services.AddSingleton<ITagCategoryManagementService, TagCategoryManagementService>();
+            services.AddSingleton<IBunchManagementService, BunchManagementService>();
 
 
 

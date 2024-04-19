@@ -51,7 +51,7 @@
         
         <Rectangle Margin="3" Grid.Row="0" Grid.Column="0"/>
         <StackPanel Margin="10" Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Row="0" Grid.Column="0">
-            <CheckBox HorizontalAlignment="Center" Content="{x:Static localization:UIText.co_managepanel_bind_to_bunch}" IsChecked="{Binding Check, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <CheckBox HorizontalAlignment="Center" Content="{x:Static localization:UIText.co_managepanel_bind_to_bunch}" IsChecked="{Binding IsBunchBindingMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             </CheckBox>
             <!--<Button FontSize="11" Style="{StaticResource ButtonWithTextTheme}" Command="{Binding  }" IsEnabled="{Binding IsSelectedAnyItemInCollection, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" >
                 <Button.Content>
@@ -106,7 +106,7 @@
 
         <Rectangle Margin="3" Grid.Row="1" Grid.Column="0"/>
         <ListView Margin="10" Grid.Row="1" Grid.Column="0" Background="Transparent" ItemsSource="{Binding UnitCollection}" SelectionMode="Extended"
-              BorderThickness="0" SelectedItem="{Binding SelectedUnit}"
+              BorderThickness="0"
               
               >
             <behaviors:Interaction.Triggers>

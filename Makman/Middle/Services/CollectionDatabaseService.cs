@@ -46,6 +46,11 @@ namespace Makman.Middle.Services
             Database.CollectionDirectories.Add(element);
         }
 
+        public void Add(Bunch element)
+        {
+            Database.Bunchs.Add(element);
+        }
+
         public void Add(Tag element)
         {
             Database.Tags.Add(element);

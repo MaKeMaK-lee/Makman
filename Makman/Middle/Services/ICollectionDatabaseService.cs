@@ -11,6 +11,7 @@ namespace Makman.Middle.Services
         public IEnumerable<TagCategory> GetTagCategories();
         public bool Save();
         public void Add(IEnumerable<Unit> elements);
+        public void Add(Bunch element);
         public void Add(CollectionDirectory element);
         public void Remove(CollectionDirectory element);
         public void Add(Tag element);
