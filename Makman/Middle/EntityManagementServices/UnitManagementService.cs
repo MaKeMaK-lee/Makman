@@ -20,7 +20,9 @@ namespace Makman.Middle.EntityManagementServices
             else
                 fullFileNamesToAdd = _windowsAccessService.GetFilesFromDirectory(directoryPath);
 
-            var units = CreateMany(fullFileNamesToAdd.Where(name => !_collectionDatabaseService.GetUnits().Where(unit => unit.FullFileName == name).Any()));
+            var units = CreateMany(fullFileNamesToAdd.Where(name => !_collectionDatabaseService.GetUnits()
+                .Where(unit => unit.FullFileName == name).Any()));
+
             _collectionDatabaseService.Add(units);
             _collectionDatabaseService.Save();
 

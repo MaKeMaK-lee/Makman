@@ -8,6 +8,11 @@ namespace Makman.Visual.MVVM.ViewModel
 {
     public class CollectionViewModel : Core.ViewModel//TODO стиль и источник текста под картинками, подгрузка тумбов
     {
+        const int OverviewItemHeight = 60;
+
+        const int OverviewBunchedUnitsMaxCount = 16;
+        const int OverviewChildUnitsMaxCount = 16;
+
         private readonly IServicesAccessor _servicesAccessor;
         private readonly IUnitManagementService _unitManagementService;
 
@@ -40,8 +45,8 @@ namespace Makman.Visual.MVVM.ViewModel
                     //TODO 200: ui notificating user about result
                     if (_unitManagementService.TryBindToBunch(
                         SelectedUnits,
-                        SelectedUnitsPrevious, 
-                        includeExamples:true ))
+                        SelectedUnitsPrevious,
+                        includeExamples: true))
                         IsBunchBindingMode = false;
                 }
 
@@ -75,7 +80,7 @@ namespace Makman.Visual.MVVM.ViewModel
         public bool IsBunchBindingMode
         {
             get => isBunchBindingMode;
-            
+
             set
             {
                 isBunchBindingMode = value;
@@ -122,7 +127,7 @@ namespace Makman.Visual.MVVM.ViewModel
                     SelectedUnits = null;
                 else
                 {
-                        SelectedUnits = ((IEnumerable<object>)o).Cast<Unit>();
+                    SelectedUnits = ((IEnumerable<object>)o).Cast<Unit>();
                 }
             }, o => true);
 
@@ -138,6 +143,9 @@ namespace Makman.Visual.MVVM.ViewModel
             OnPropertyChanged(nameof(OverviewPicturePath));
             OnPropertyChanged(nameof(OverviewFullFileName));
             OnPropertyChanged(nameof(OverviewFileName));
+            OnPropertyChanged(nameof(OverviewBunchedUnits));
+            OnPropertyChanged(nameof(OverviewParentUnits));
+            OnPropertyChanged(nameof(OverviewChildUnits));
         }
         public string OverviewId
         {
@@ -245,6 +253,34 @@ namespace Makman.Visual.MVVM.ViewModel
             }
         }
 
+        public IEnumerable<Unit> OverviewBunchedUnits
+        {
+            get
+            {
+                if (SelectedUnits?.Count() > 0)
+                {
+                    if (SelectedUnits.Count() < 2)
+                    {
+                        var b = SelectedUnits.First().Bunch;
+                        if (b != null)
+                            return b.Units;
+                        else
+                            return [];
+                    }
+                    var units = new List<Unit>();
+                    foreach (var item in SelectedUnits.DistinctBy(item => item.Bunch))
+                    {
+                        if (item.Bunch != null)
+                            units.AddRange(item.Bunch.Units);
+                        if (units.Count > OverviewBunchedUnitsMaxCount)
+                            break;
+                    }
+                    return units;
+                }
+                return [];
+            }
+        }
+
         public IEnumerable<Unit> OverviewParentUnits
         {
             get
@@ -260,7 +296,7 @@ namespace Makman.Visual.MVVM.ViewModel
                             return [];
                     }
                     var units = new List<Unit>();
-                    foreach (var item in SelectedUnits)
+                    foreach (var item in SelectedUnits.DistinctBy(item => item.ParentUnit))
                     {
                         if (item.ParentUnit != null)
                             units.Add(item.ParentUnit);
@@ -285,6 +321,8 @@ namespace Makman.Visual.MVVM.ViewModel
                     foreach (var item in SelectedUnits)
                     {
                         units.AddRange(item.ChildUnits);
+                        if (units.Count > OverviewChildUnitsMaxCount)
+                            break;
                     }
                     return units;
                 }
