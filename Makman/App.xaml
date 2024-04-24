@@ -20,6 +20,7 @@
 
             <converters:FilePathToImageConverter x:Key="FilePathToImageConverter" />
             <converters:StringColoroBrushConverter x:Key="StringColoroBrushConverter" />
+            <converters:BoolToVisibleOrHiddenVisibilityConverter x:Key="BoolToVisibleOrHiddenVisibilityConverter" />
 
             <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
                 <view:HomeView/>
@@ -85,6 +86,15 @@
                         <SolidColorBrush Color="Transparent"/>
                     </Setter.Value>
                 </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Effect" >
+                            <Setter.Value>
+                                <DropShadowEffect BlurRadius="15" ShadowDepth="0"></DropShadowEffect>
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                </Style.Triggers>
             </Style>
 
             <Style TargetType="{x:Type TextBox}">
@@ -122,8 +132,12 @@
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
-            </Style> 
+            </Style>
             <Style TargetType="{x:Type ComboBox}">
+                <Setter Property="Padding" Value="2,0,2,0"/>
+                <Setter Property="Background" Value="#10000000"/>
+                <Setter Property="BorderBrush" Value="#80000000"/>
+                <Setter Property="VerticalContentAlignment" Value="Top"/>
                 <Style.Triggers>
                     <Trigger Property="IsEnabled" Value="False">
                         <Setter Property="Effect" >

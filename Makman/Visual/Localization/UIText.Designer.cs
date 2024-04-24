@@ -70,6 +70,51 @@ namespace Makman.Visual.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на +.
+        /// </summary>
+        public static string co_managepanel_tag_bind {
+            get {
+                return ResourceManager.GetString("co managepanel tag bind", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на -.
+        /// </summary>
+        public static string co_managepanel_tag_unbind {
+            get {
+                return ResourceManager.GetString("co managepanel tag unbind", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на B.
+        /// </summary>
+        public static string co_statestring_byte {
+            get {
+                return ResourceManager.GetString("co_statestring_byte", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Elements:.
+        /// </summary>
+        public static string co_statestring_elements {
+            get {
+                return ResourceManager.GetString("co_statestring_elements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Size:.
+        /// </summary>
+        public static string co_statestring_size {
+            get {
+                return ResourceManager.GetString("co_statestring_size", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на -.
         /// </summary>
         public static string co_unitoverview_multiselected_filename {

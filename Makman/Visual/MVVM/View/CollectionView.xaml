@@ -51,14 +51,61 @@
         HorizontalAlignment="Center" VerticalAlignment="Stretch" />
 
         <Rectangle Margin="3" Grid.Row="0" Grid.Column="0"/>
-        <StackPanel Margin="10" Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Row="0" Grid.Column="0">
-            <CheckBox HorizontalAlignment="Center" Content="{x:Static localization:UIText.co_managepanel_bind_to_bunch}" IsChecked="{Binding IsBunchBindingMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            </CheckBox>
-            <!--<Button FontSize="11" Style="{StaticResource ButtonWithTextTheme}" Command="{Binding  }" IsEnabled="{Binding IsSelectedAnyItemInCollection, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" >
+        <StackPanel Margin="5" Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Row="0" Grid.Column="0">
+            <Button FontSize="11" Style="{StaticResource ButtonWithTextTheme}" MinWidth="35" Command="{Binding TagUnbindCommand}" IsEnabled="{Binding IsSelectedAnyItemInCollection, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" >
                 <Button.Content>
-                    <TextBlock Margin="5" FontSize="16" Text="{x:Static localization:UIText.tag_category_managepanel_remove}"></TextBlock>
+                    <TextBlock Margin="5" FontSize="16" Text="{x:Static localization:UIText.co_managepanel_tag_unbind}"></TextBlock>
                 </Button.Content>
-            </Button>-->
+            </Button>
+            <Button FontSize="11" Style="{StaticResource ButtonWithTextTheme}" MinWidth="35" Command="{Binding TagBindCommand}" IsEnabled="{Binding IsSelectedAnyItemInCollection, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" >
+                <Button.Content>
+                    <TextBlock Margin="5" FontSize="16" Text="{x:Static localization:UIText.co_managepanel_tag_bind}"></TextBlock>
+                </Button.Content>
+            </Button>
+            <ComboBox ItemsSource="{Binding TagBinderTagCollection }" FlowDirection="LeftToRight"
+                      MaxWidth="150" MinWidth="150" Margin="6" Opacity="0.4"  FontSize="14"
+                      VerticalContentAlignment="Center" SelectedItem="{Binding TagBinderSelectedItem}" 
+                      IsEnabled="{Binding IsSelectedAnyItemInCollection, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" >
+
+                <ComboBox.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#20FFFFFF" />
+                </ComboBox.Resources>
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock HorizontalAlignment="Left" Text="{Binding Name}" Foreground="{Binding ChangableColor, 
+                                   Converter={StaticResource StringColoroBrushConverter}}" MaxWidth="600"
+                                   ToolTip="{Binding Name}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+                <!--<behaviors:Interaction.Triggers>
+                    <behaviors:EventTrigger EventName="GotFocus" >
+                        <behaviors:InvokeCommandAction Command="{Binding TagBinderGotFocusCommand }"/>
+                    </behaviors:EventTrigger>
+                    <behaviors:EventTrigger EventName="SelectionChanged" >
+                        <behaviors:InvokeCommandAction CommandParameter="{Binding SelectedItem, RelativeSource=
+                                    {RelativeSource FindAncestor, AncestorType={x:Type ComboBox}}}" Command="{Binding TagBinderSelectionChangedCommand }"/>
+                    </behaviors:EventTrigger>
+                </behaviors:Interaction.Triggers>-->
+            </ComboBox>
+        </StackPanel>
+        <StackPanel Margin="5" Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Row="0" Grid.Column="0">
+            <CheckBox HorizontalAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Stretch" Content="{x:Static localization:UIText.co_managepanel_bind_to_bunch}" IsChecked="{Binding IsBunchBindingMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            </CheckBox>
+        </StackPanel>
+
+        <Rectangle Margin="3" Grid.Row="2" Grid.Column="0"/>
+        <StackPanel Margin="5,5,10,5" Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Row="2" Grid.Column="0">
+            <TextBlock Visibility="{Binding IsSelectedAnyItemInCollection, Converter={StaticResource BoolToVisibleOrHiddenVisibilityConverter}}"
+                       Margin="0,0,5,0" FlowDirection="LeftToRight" Text="{x:Static localization:UIText.co_statestring_byte}"/>
+            <TextBlock Visibility="{Binding IsSelectedAnyItemInCollection, Converter={StaticResource BoolToVisibleOrHiddenVisibilityConverter}}"
+                       Margin="0,0,5,0" FlowDirection="LeftToRight" FontWeight="Bold" Text="{Binding OverviewFileSize}"/>
+            <TextBlock Visibility="{Binding IsSelectedAnyItemInCollection, Converter={StaticResource BoolToVisibleOrHiddenVisibilityConverter}}"
+                       Margin="0,0,5,0" FlowDirection="LeftToRight" Text="{x:Static localization:UIText.co_statestring_size}"/>
+            <TextBlock Visibility="{Binding IsSelectedMoreThanOneItemInCollection, Converter={StaticResource BoolToVisibleOrHiddenVisibilityConverter}}"
+                       Margin="0,0,5,0" FlowDirection="LeftToRight" FontWeight="Bold" Text="{Binding OverviewCount}"/>
+            <TextBlock Visibility="{Binding IsSelectedMoreThanOneItemInCollection, Converter={StaticResource BoolToVisibleOrHiddenVisibilityConverter}}"
+                       Margin="0,0,5,0" FlowDirection="LeftToRight" Text="{x:Static localization:UIText.co_statestring_elements}"/>
         </StackPanel>
 
         <Rectangle Margin="3" Grid.Row="0" Grid.RowSpan="3" Grid.Column="2"/>
@@ -67,20 +114,28 @@
             <StackPanel Background="Transparent"
                     Orientation="Vertical" FlowDirection="LeftToRight">
                 <Image Source="{Binding OverviewPicturePath, Converter={StaticResource FilePathToImageConverter} }" ></Image>
-                <TextBox Text="{Binding OverviewFileName, Mode=OneWay}" TextWrapping="Wrap" TextAlignment="Center" Background="Transparent" BorderThickness="0"/>
-                <TextBox Text="{Binding OverviewFullFileName, Mode=OneWay}" TextWrapping="Wrap" TextAlignment="Center" Background="Transparent" BorderThickness="0"/>
-                <WrapPanel Background="Transparent" Orientation="Horizontal">
-                    <ItemsControl ItemsSource="{Binding OverviewTags, Mode=OneWay}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Rectangle Opacity="0.25" Fill="{Binding SummaryColor}" Style="{StaticResource MiniItemsRectangle}" />
-                                    <TextBlock Text="{Binding Name}" Foreground="{Binding SummaryColor}"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </WrapPanel>
+                <TextBox IsReadOnly="True" Text="{Binding OverviewFileName, Mode=OneWay}" TextWrapping="Wrap" TextAlignment="Center" Background="Transparent" BorderThickness="0"/>
+                <TextBox IsReadOnly="True" Text="{Binding OverviewFullFileName, Mode=OneWay}" TextWrapping="Wrap" TextAlignment="Center" Background="Transparent" BorderThickness="0"/>
+                <ListView Background="Transparent" ItemsSource="{Binding OverviewTags, Mode=OneWay}"
+                          BorderThickness="0">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate >
+                            <WrapPanel Background="Transparent" 
+                           Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"  >
+                            </WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Height="20">
+                                <Rectangle Fill="#30000000" Style="{StaticResource MiniItemsRectangle}" />
+                                <TextBlock Margin="3" Text="{Binding Name}" ToolTip="{Binding Name}"
+                                               FontSize="10" Foreground="{Binding SummaryColor,
+                                               Converter={StaticResource StringColoroBrushConverter}}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
 
                 <ScrollViewer CanContentScroll="False" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                     <ItemsControl ItemsSource="{Binding OverviewBunchedUnits, Mode=OneWay}">
@@ -99,30 +154,40 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </ScrollViewer>
-                <StackPanel Background="Transparent" Orientation="Horizontal" >
+                <ScrollViewer CanContentScroll="False" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                     <ItemsControl ItemsSource="{Binding OverviewParentUnits, Mode=OneWay}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Background="Transparent" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Grid>
-                                    <Rectangle Fill="#80441177" Style="{StaticResource MiniItemsRectangle}" />
-                                    <Image Margin="2,5,2,0" Grid.Row="0" Source="{Binding FullFileName, Converter = {StaticResource FilePathToImageConverter} }" ></Image>
+                                <Grid Margin="3" Height="80" Width="60">
+                                    <Rectangle Height="{Binding Height, ElementName=imgMini, Mode=OneWay}" Fill="#40441177" Style="{StaticResource MiniItemsRectangle}" />
+                                    <Image x:Name="imgMini" Margin="5,3,5,3" Grid.Row="0" Source="{Binding FullFileName, Converter = {StaticResource FilePathToImageConverter} }" ></Image>
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-                </StackPanel>
-                <StackPanel Background="Transparent" Orientation="Horizontal" >
+                </ScrollViewer>
+                <ScrollViewer CanContentScroll="False" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                     <ItemsControl ItemsSource="{Binding OverviewChildUnits, Mode=OneWay}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Background="Transparent" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Grid>
-                                    <Rectangle Fill="#80445522" Style="{StaticResource MiniItemsRectangle}" />
-                                    <Image Margin="2,5,2,0" Grid.Row="0" Source="{Binding FullFileName, Converter = {StaticResource FilePathToImageConverter} }" ></Image>
+                                <Grid Margin="3" Height="80" Width="60">
+                                    <Rectangle Height="{Binding Height, ElementName=imgMini, Mode=OneWay}" Fill="#40445522" Style="{StaticResource MiniItemsRectangle}" />
+                                    <Image x:Name="imgMini" Margin="5,3,5,3" Grid.Row="0" Source="{Binding FullFileName, Converter = {StaticResource FilePathToImageConverter} }" ></Image>
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-                </StackPanel>
+                </ScrollViewer>
             </StackPanel>
         </ScrollViewer>
 

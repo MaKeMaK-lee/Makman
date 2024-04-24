@@ -95,5 +95,42 @@ namespace Makman.Middle.EntityManagementServices
             return true;
 
         }
+
+        public void UnbindTag(Unit unit, Tag removingTag)
+        {
+            unit.Tags.Remove(removingTag);
+        }
+
+        public void TryUnbindTag(IEnumerable<Unit>? units, Tag? removingTag)
+        {
+            if (units == null || removingTag == null)
+                return;
+            if (!units.Any())
+                return;
+
+            foreach (var item in units)
+            {
+                UnbindTag(item, removingTag);
+            }
+        }
+
+        public void BindTag(Unit unit, Tag bindingTag)
+        {
+            unit.Tags.Add(bindingTag);
+        }
+
+        public void TryBindTag(IEnumerable<Unit>? units, Tag? bindingTag)
+        {
+            if (units == null || bindingTag == null)
+                return;
+            if (!units.Any())
+                return;
+
+            foreach (var item in units)
+            {
+                if (!item.Tags.Contains(bindingTag))
+                    BindTag(item, bindingTag);
+            }
+        }
     }
 }

@@ -38,8 +38,11 @@ namespace Makman.Visual.MVVM.ViewModel
                 {
                     selectedTagCategory = value;
                     OnPropertyChanged(nameof(SelectedTagCategory));
+                    //TODO 150 need fix(by creating button or something): this activating accidentally
+                    if (SelectedTags != null && SelectedTagCategory != null)
+                        _tagManagementService.SetCategory(SelectedTags, SelectedTagCategory);
                 }
-                 
+
             }
         }
 
@@ -118,7 +121,7 @@ namespace Makman.Visual.MVVM.ViewModel
         {
             AddTagCommand = new RelayCommand(o =>
             {
-                if (string.IsNullOrEmpty(FilterText))
+                if (!string.IsNullOrEmpty(FilterText))
                     _tagManagementService.AddNew(FilterText);
             }, o => true);
             RemoveTagCommand = new RelayCommand(o =>
@@ -138,8 +141,6 @@ namespace Makman.Visual.MVVM.ViewModel
             ComboBoxSelectionChangedCommand = new RelayCommand(o =>
             {
 
-                if (SelectedTags != null && SelectedTagCategory != null)
-                    _tagManagementService.SetCategory(SelectedTags, SelectedTagCategory);
             }, o => true);
         }
 

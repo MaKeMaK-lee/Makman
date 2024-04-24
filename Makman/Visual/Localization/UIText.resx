@@ -120,6 +120,12 @@
   <data name="co managepanel bind to bunch" xml:space="preserve">
     <value>Bunching mode</value>
   </data>
+  <data name="co managepanel tag bind" xml:space="preserve">
+    <value>+</value>
+  </data>
+  <data name="co managepanel tag unbind" xml:space="preserve">
+    <value>-</value>
+  </data>
   <data name="co unitoverview multiselected filename" xml:space="preserve">
     <value>-</value>
   </data>
@@ -143,6 +149,15 @@
   </data>
   <data name="co unitoverview nonselected id" xml:space="preserve">
     <value>-</value>
+  </data>
+  <data name="co_statestring_byte" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="co_statestring_elements" xml:space="preserve">
+    <value>Elements:</value>
+  </data>
+  <data name="co_statestring_size" xml:space="preserve">
+    <value>Size:</value>
   </data>
   <data name="dir itemspanel headers autoscanning" xml:space="preserve">
     <value>Auto</value>

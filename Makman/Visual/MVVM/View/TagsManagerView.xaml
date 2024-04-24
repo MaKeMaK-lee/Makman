@@ -18,17 +18,24 @@
                     <TextBlock Margin="5" FontSize="16" Text="{x:Static localization:UIText.tag_managepanel_remove}"></TextBlock>
                 </Button.Content>
             </Button>
-            <ComboBox Background="ForestGreen" ItemsSource="{Binding TagCategoriesCollection}" VerticalContentAlignment="Center" MaxWidth="150" Margin="6" FontSize="16" Opacity="0.4" SelectedItem="{Binding SelectedTagCategory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsSelectedAnyItemInTagCollection, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" >
+            <ComboBox ItemsSource="{Binding TagCategoriesCollection}" VerticalContentAlignment="Center" 
+                      Width="150" Margin="6" FontSize="14" Opacity="0.4" FlowDirection="LeftToRight"
+                      SelectedItem="{Binding SelectedTagCategory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      IsEnabled="{Binding IsSelectedAnyItemInTagCollection, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" >
+                <ComboBox.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#40FFFFFF" />
+                </ComboBox.Resources>
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}" Foreground="{Binding ChangableColor, 
-                            Converter={StaticResource StringColoroBrushConverter}}">
+                            Converter={StaticResource StringColoroBrushConverter}}" MaxWidth="600"
+                                   ToolTip="{Binding Name}">
                             
                         </TextBlock>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
                 <behaviors:Interaction.Triggers>
-                    <behaviors:EventTrigger EventName="SelectionChanged" >
+                    <behaviors:EventTrigger EventName="Selected" >
                         <behaviors:InvokeCommandAction Command="{Binding ComboBoxSelectionChangedCommand }"/>
                     </behaviors:EventTrigger>
                 </behaviors:Interaction.Triggers>

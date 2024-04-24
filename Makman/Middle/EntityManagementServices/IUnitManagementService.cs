@@ -14,6 +14,15 @@ namespace Makman.Middle.EntityManagementServices
 
         bool IsSameOrNullBunch(IEnumerable<Unit>? units);
 
+
+        public void UnbindTag(Unit unit, Tag removingTag);
+
+        public void TryUnbindTag(IEnumerable<Unit>? units, Tag? removingTag);
+
+        public void BindTag(Unit unit, Tag bindingTag);
+
+        public void TryBindTag(IEnumerable<Unit>? units, Tag? bindingTag);
+
         void BindToBunch(IEnumerable<Unit> bindingUnits, Bunch? nullableBunch);
 
         /// <returns>TRUE if binded</returns>

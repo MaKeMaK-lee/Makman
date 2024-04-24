@@ -3,6 +3,7 @@ using Makman.Middle.Entities;
 using Makman.Visual.MVVM.Model;
 using Makman.Middle.Core;
 using Makman.Middle.EntityManagementServices;
+using System.Text;
 
 namespace Makman.Visual.MVVM.ViewModel
 {
@@ -25,6 +26,47 @@ namespace Makman.Visual.MVVM.ViewModel
             }
         }
 
+        private IEnumerable<Tag> tagCollection;
+        public IEnumerable<Tag> TagCollection
+        {
+            get
+            {
+                return tagCollection;
+            }
+        }
+
+        public bool tagBinderIsDropDownOpen;
+        public bool TagBinderIsDropDownOpen
+        {
+            get => tagBinderIsDropDownOpen;
+            set
+            {
+                tagBinderIsDropDownOpen = value;
+                OnPropertyChanged(nameof(TagBinderIsDropDownOpen));
+            }
+        }
+
+        public Tag? tagBinderSelectedItem;
+        public Tag? TagBinderSelectedItem
+        {
+            get => tagBinderSelectedItem;
+            set
+            {
+                tagBinderSelectedItem = value;
+                OnPropertyChanged(nameof(TagBinderSelectedItem));
+            }
+        }
+
+        public IEnumerable<Tag> tagBinderTagCollection;
+        public IEnumerable<Tag> TagBinderTagCollection
+        {
+            get => tagBinderTagCollection;
+            set
+            {
+                tagBinderTagCollection = value;
+                OnPropertyChanged(nameof(TagBinderTagCollection));
+            }
+        }
 
         public IEnumerable<Unit>? SelectedUnitsPrevious { get; set; }
 
@@ -53,6 +95,7 @@ namespace Makman.Visual.MVVM.ViewModel
 
                 RecalculateSelectedUnitsPrevious();
 
+                OnPropertyChanged(nameof(IsSelectedMoreThanOneItemInCollection));
                 OnPropertyChanged(nameof(IsSelectedOnlyOneItemInCollection));
                 OnPropertyChanged(nameof(IsSelectedAnyItemInCollection));
                 OverviewSourceChangedNotification();
@@ -88,6 +131,17 @@ namespace Makman.Visual.MVVM.ViewModel
             }
         }
 
+        public bool IsSelectedMoreThanOneItemInCollection
+        {
+            get
+            {
+                if (SelectedUnits == null)
+                    return false;
+                if (SelectedUnits.Count() > 1)
+                    return true;
+                return false;
+            }
+        }
 
         public bool IsSelectedOnlyOneItemInCollection
         {
@@ -113,14 +167,12 @@ namespace Makman.Visual.MVVM.ViewModel
             }
         }
 
+        public RelayCommand TagBindCommand { get; set; }
+        public RelayCommand TagUnbindCommand { get; set; }
         public RelayCommand ListViewSelectionChangedCommand { get; set; }
 
-        public CollectionViewModel(IServicesAccessor servicesAccessor, IUnitManagementService unitManagementService)
+        private void SetCommands()
         {
-            _servicesAccessor = servicesAccessor;
-            _unitManagementService = unitManagementService;
-
-
             ListViewSelectionChangedCommand = new RelayCommand(o =>
             {
                 if (o == null)
@@ -131,7 +183,30 @@ namespace Makman.Visual.MVVM.ViewModel
                 }
             }, o => true);
 
+            TagBindCommand = new RelayCommand(o =>
+            {
+                _unitManagementService.TryBindTag(SelectedUnits, TagBinderSelectedItem);
+                OnPropertyChanged(nameof(OverviewTags));
+            }, o => true);
+
+            TagUnbindCommand = new RelayCommand(o =>
+            {
+                _unitManagementService.TryUnbindTag(SelectedUnits, TagBinderSelectedItem);
+                OnPropertyChanged(nameof(OverviewTags));
+            }, o => true);
+        }
+
+        public CollectionViewModel(IServicesAccessor servicesAccessor, IUnitManagementService unitManagementService)
+        {
+            _servicesAccessor = servicesAccessor;
+            _unitManagementService = unitManagementService;
+
+            SetCommands();
+
             unitCollection = _servicesAccessor.GetUnits();
+            tagCollection = _servicesAccessor.GetTags();
+
+            TagBinderTagCollection = tagCollection.OrderBy(t => t.Name);
         }
 
 
@@ -140,12 +215,15 @@ namespace Makman.Visual.MVVM.ViewModel
         public void OverviewSourceChangedNotification()
         {
             OnPropertyChanged(nameof(OverviewId));
+            OnPropertyChanged(nameof(OverviewFileSize));
             OnPropertyChanged(nameof(OverviewPicturePath));
             OnPropertyChanged(nameof(OverviewFullFileName));
             OnPropertyChanged(nameof(OverviewFileName));
+            OnPropertyChanged(nameof(OverviewTags));
             OnPropertyChanged(nameof(OverviewBunchedUnits));
             OnPropertyChanged(nameof(OverviewParentUnits));
             OnPropertyChanged(nameof(OverviewChildUnits));
+            OnPropertyChanged(nameof(OverviewCount));
         }
         public string OverviewId
         {
@@ -307,6 +385,18 @@ namespace Makman.Visual.MVVM.ViewModel
             }
         }
 
+        public int OverviewCount
+        {
+            get
+            {
+                if (SelectedUnits?.Count() > 0)
+                {
+                    return SelectedUnits.Count();
+                }
+                return 0;
+            }
+        }
+
         public IEnumerable<Unit> OverviewChildUnits
         {
             get
@@ -320,7 +410,8 @@ namespace Makman.Visual.MVVM.ViewModel
                     var units = new List<Unit>();
                     foreach (var item in SelectedUnits)
                     {
-                        units.AddRange(item.ChildUnits);
+                        if (item.ChildUnits != null)
+                            units.AddRange(item.ChildUnits);
                         if (units.Count > OverviewChildUnitsMaxCount)
                             break;
                     }
