@@ -72,7 +72,7 @@
                 </ComboBox.Resources>
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock HorizontalAlignment="Left" Text="{Binding Name}" Foreground="{Binding ChangableColor, 
+                        <TextBlock HorizontalAlignment="Left" Text="{Binding Name}" Foreground="{Binding SummaryColor, 
                                    Converter={StaticResource StringColoroBrushConverter}}" MaxWidth="600"
                                    ToolTip="{Binding Name}" >
                         </TextBlock>

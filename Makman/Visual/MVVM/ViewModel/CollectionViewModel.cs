@@ -325,7 +325,7 @@ namespace Makman.Visual.MVVM.ViewModel
                     {
                         tags.AddRange(item.Tags);
                     }
-                    return tags;
+                    return tags.Distinct();
                 }
                 return [];
             }
