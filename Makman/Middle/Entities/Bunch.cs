@@ -1,4 +1,5 @@
-﻿ 
+﻿
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema; 
 
@@ -13,7 +14,7 @@ namespace Makman.Middle.Entities
         public Guid Id { get; set; }
         [Required]
         [Column("BunchUnits")]
-        public ICollection<Unit> Units { get; set; }
+        public ObservableCollection<Unit> Units { get; set; }
 
         public Bunch()
         {

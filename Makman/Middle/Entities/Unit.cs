@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -28,7 +29,7 @@ namespace Makman.Middle.Entities
 
         [Required]
         [Column("UnitTags")]
-        public required ICollection<Tag> Tags { get; set; }
+        public required ObservableCollection<Tag> Tags { get; set; }
 
         [Column("UnitBunchId")]
         public Guid? BunchId { get; set; }
@@ -44,7 +45,7 @@ namespace Makman.Middle.Entities
 
         [Required]
         [Column("UnitChildUnits")]
-        public required ICollection<Unit> ChildUnits { get; set; }
+        public required ObservableCollection<Unit> ChildUnits { get; set; }
 
 
         public bool Equals(Unit unit2)
