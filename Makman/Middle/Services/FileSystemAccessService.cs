@@ -3,7 +3,7 @@ using Makman.Data.WindowsOS;
 
 namespace Makman.Middle.Services
 {
-    public class WindowsAccessService : IWindowsAccessService
+    public class FileSystemAccessService : IFileSystemAccessService
     {
         public string? ChooseDirectory()
         {

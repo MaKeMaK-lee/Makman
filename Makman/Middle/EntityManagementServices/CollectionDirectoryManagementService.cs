@@ -4,10 +4,10 @@ using Makman.Middle.Services;
 
 namespace Makman.Middle.EntityManagementServices
 {
-    public class CollectionDirectoryManagementService(ICollectionDatabaseService collectionDatabaseService, IWindowsAccessService windowsAccessService) : ICollectionDirectoryManagementService
+    public class CollectionDirectoryManagementService(ICollectionDatabaseService collectionDatabaseService, IFileSystemAccessService windowsAccessService) : ICollectionDirectoryManagementService
     {
         readonly ICollectionDatabaseService _collectionDatabaseService = collectionDatabaseService;
-        readonly IWindowsAccessService _windowsAccessService = windowsAccessService;
+        readonly IFileSystemAccessService _windowsAccessService = windowsAccessService;
         public void AddNew()
         {
             var createdItem = Create();

@@ -3,10 +3,10 @@ using Makman.Middle.Services;
 
 namespace Makman.Middle.EntityManagementServices
 { 
-    public class TagCategoryManagementService(ICollectionDatabaseService collectionDatabaseService, IWindowsAccessService windowsAccessService) : ITagCategoryManagementService
+    public class TagCategoryManagementService(ICollectionDatabaseService collectionDatabaseService, IFileSystemAccessService windowsAccessService) : ITagCategoryManagementService
     {
         readonly ICollectionDatabaseService _collectionDatabaseService = collectionDatabaseService;
-        readonly IWindowsAccessService _windowsAccessService = windowsAccessService;
+        readonly IFileSystemAccessService _windowsAccessService = windowsAccessService;
         public void AddNew(string name)
         {
             var createdItem = Create(name);

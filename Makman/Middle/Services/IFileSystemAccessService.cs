@@ -4,7 +4,7 @@ using System.Windows.Media.Imaging;
 
 namespace Makman.Middle.Services
 {
-    public interface IWindowsAccessService
+    public interface IFileSystemAccessService
     {
         /// <summary>
         /// Opens the directory selection window

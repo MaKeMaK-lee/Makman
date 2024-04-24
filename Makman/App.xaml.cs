@@ -39,7 +39,7 @@ namespace Makman
 
             services.AddSingleton<ICollectionDatabaseService, CollectionDatabaseService>();
             services.AddSingleton<ITestAndDebugService, TestAndDebugService>();
-            services.AddSingleton<IWindowsAccessService, WindowsAccessService>();
+            services.AddSingleton<IFileSystemAccessService, FileSystemAccessService>();
             services.AddSingleton<IUnitManagementService, UnitManagementService>();
             services.AddSingleton<ICollectionDirectoryManagementService, CollectionDirectoryManagementService>();
             services.AddSingleton<ITagManagementService, TagManagementService>();

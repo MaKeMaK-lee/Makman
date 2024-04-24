@@ -6,10 +6,10 @@ using System.IO;
 namespace Makman.Middle.EntityManagementServices
 {
     public class UnitManagementService(ICollectionDatabaseService collectionDatabaseService,
-        IWindowsAccessService windowsAccessService, IBunchManagementService bunchManagementService) : IUnitManagementService
+        IFileSystemAccessService windowsAccessService, IBunchManagementService bunchManagementService) : IUnitManagementService
     {
         readonly ICollectionDatabaseService _collectionDatabaseService = collectionDatabaseService;
-        readonly IWindowsAccessService _windowsAccessService = windowsAccessService;
+        readonly IFileSystemAccessService _windowsAccessService = windowsAccessService;
         readonly IBunchManagementService _bunchManagementService = bunchManagementService;
 
         public int AddUnitsFromFilesOfFolderAndSyncToDatabase(string directoryPath, bool allowSubDirectories = true)
