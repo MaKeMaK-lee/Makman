@@ -113,7 +113,7 @@
                       VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
             <StackPanel Background="Transparent"
                     Orientation="Vertical" FlowDirection="LeftToRight">
-                <Image Source="{Binding OverviewPicturePath, Converter={StaticResource FilePathToImageConverter} }" ></Image>
+                <Image Source="{Binding OverviewPicturePath, Converter={StaticResource FilePathToThumbImageConverter} }" ></Image>
                 <TextBox IsReadOnly="True" Text="{Binding OverviewFileName, Mode=OneWay}" TextWrapping="Wrap" TextAlignment="Center" Background="Transparent" BorderThickness="0"/>
                 <TextBox IsReadOnly="True" Text="{Binding OverviewFullFileName, Mode=OneWay}" TextWrapping="Wrap" TextAlignment="Center" Background="Transparent" BorderThickness="0"/>
                 <ListView Background="Transparent" ItemsSource="{Binding OverviewTags, Mode=OneWay}"
@@ -148,7 +148,7 @@
                             <DataTemplate>
                                 <Grid Margin="3" Height="80" Width="60">
                                     <Rectangle Height="{Binding Height, ElementName=imgMini, Mode=OneWay}" Fill="#2033FF87" Style="{StaticResource MiniItemsRectangle}" />
-                                    <Image x:Name="imgMini" Margin="5,3,5,3" Grid.Row="0" Source="{Binding FullFileName, Converter = {StaticResource FilePathToImageConverter} }" ></Image>
+                                    <Image x:Name="imgMini" Margin="5,3,5,3" Grid.Row="0" Source="{Binding FullFileName, Converter = {StaticResource FilePathToThumbImageConverter} }" ></Image>
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
@@ -165,7 +165,7 @@
                             <DataTemplate>
                                 <Grid Margin="3" Height="80" Width="60">
                                     <Rectangle Height="{Binding Height, ElementName=imgMini, Mode=OneWay}" Fill="#40441177" Style="{StaticResource MiniItemsRectangle}" />
-                                    <Image x:Name="imgMini" Margin="5,3,5,3" Grid.Row="0" Source="{Binding FullFileName, Converter = {StaticResource FilePathToImageConverter} }" ></Image>
+                                    <Image x:Name="imgMini" Margin="5,3,5,3" Grid.Row="0" Source="{Binding FullFileName, Converter = {StaticResource FilePathToThumbImageConverter} }" ></Image>
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
@@ -182,7 +182,7 @@
                             <DataTemplate>
                                 <Grid Margin="3" Height="80" Width="60">
                                     <Rectangle Height="{Binding Height, ElementName=imgMini, Mode=OneWay}" Fill="#40445522" Style="{StaticResource MiniItemsRectangle}" />
-                                    <Image x:Name="imgMini" Margin="5,3,5,3" Grid.Row="0" Source="{Binding FullFileName, Converter = {StaticResource FilePathToImageConverter} }" ></Image>
+                                    <Image x:Name="imgMini" Margin="5,3,5,3" Grid.Row="0" Source="{Binding FullFileName, Converter = {StaticResource FilePathToThumbImageConverter} }" ></Image>
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
@@ -217,7 +217,7 @@
                             <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
                         <Rectangle Grid.Row="0" Grid.RowSpan="2" Style="{StaticResource ItemsRectangle}" />
-                        <Image Margin="2,5,2,0" Grid.Row="0" Source="{Binding FullFileName, Converter = {StaticResource FilePathToImageConverter} }" ></Image>
+                        <Image Margin="2,5,2,0" Grid.Row="0" Source="{Binding FullFileName, Converter = {StaticResource FilePathToThumbImageConverter} }" ></Image>
                         <TextBox Grid.Row="1" Text="{Binding FullFileName}" 
                              TextWrapping="Wrap" TextAlignment="Center"
                              Background="Transparent" BorderThickness="0">

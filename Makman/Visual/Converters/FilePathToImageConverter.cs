@@ -10,7 +10,7 @@ using System.Windows.Media.Imaging;
 namespace Makman.Visual.Converters
 {
     [ValueConversion(typeof(string), typeof(object))]
-    public class FilePathToImageConverter : IValueConverter
+    public class FilePathToThumbImageConverter : IValueConverter
     {
         public object? Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
