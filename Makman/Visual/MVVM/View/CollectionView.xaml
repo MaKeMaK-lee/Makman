@@ -113,7 +113,7 @@
                       VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
             <StackPanel Background="Transparent"
                     Orientation="Vertical" FlowDirection="LeftToRight">
-                <Image Source="{Binding OverviewPicturePath, Converter={StaticResource FilePathToThumbImageConverter} }" ></Image>
+                <Image Source="{Binding OverviewPicturePath, Converter={StaticResource FilePathToImageConverter} }" ></Image>
                 <TextBox IsReadOnly="True" Text="{Binding OverviewFileName, Mode=OneWay}" TextWrapping="Wrap" TextAlignment="Center" Background="Transparent" BorderThickness="0"/>
                 <TextBox IsReadOnly="True" Text="{Binding OverviewFullFileName, Mode=OneWay}" TextWrapping="Wrap" TextAlignment="Center" Background="Transparent" BorderThickness="0"/>
                 <ListView Background="Transparent" ItemsSource="{Binding OverviewTags, Mode=OneWay}"

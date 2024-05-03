@@ -18,6 +18,7 @@
                 <ResourceDictionary Source="Visual/Themes/TextBoxTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
+            <converters:FilePathToImageConverter x:Key="FilePathToImageConverter" />
             <converters:FilePathToThumbImageConverter x:Key="FilePathToThumbImageConverter" />
             <converters:StringColoroBrushConverter x:Key="StringColoroBrushConverter" />
             <converters:BoolToVisibleOrHiddenVisibilityConverter x:Key="BoolToVisibleOrHiddenVisibilityConverter" />

@@ -64,7 +64,7 @@
                             VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
                 <StackPanel Background="Transparent"
                 Orientation="Vertical" FlowDirection="LeftToRight">
-                    <Image Source="{Binding OverviewLeftUnit.FullFileName, Converter={StaticResource FilePathToThumbImageConverter} }" ></Image>
+                    <Image Source="{Binding OverviewLeftUnit.FullFileName, Converter={StaticResource FilePathToImageConverter} }" ></Image>
                     <TextBox IsReadOnly="True" Text="{Binding OverviewLeftUnit.FileName, Mode=OneWay}" TextWrapping="Wrap" TextAlignment="Center" Background="Transparent" BorderThickness="0"/>
                     <TextBox IsReadOnly="True" Text="{Binding OverviewLeftUnit.FullFileName, Mode=OneWay}" TextWrapping="Wrap" TextAlignment="Center" Background="Transparent" BorderThickness="0"/>
                     <ListView Background="Transparent" ItemsSource="{Binding OverviewLeftUnit.Tags, Mode=OneWay}"
@@ -147,7 +147,7 @@
                             VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
                 <StackPanel Background="Transparent"
                 Orientation="Vertical" FlowDirection="LeftToRight">
-                    <Image Source="{Binding OverviewRightUnit.FullFileName, Converter={StaticResource FilePathToThumbImageConverter} }" ></Image>
+                    <Image Source="{Binding OverviewRightUnit.FullFileName, Converter={StaticResource FilePathToImageConverter} }" ></Image>
                     <TextBox IsReadOnly="True" Text="{Binding OverviewRightUnit.FileName, Mode=OneWay}" TextWrapping="Wrap" TextAlignment="Center" Background="Transparent" BorderThickness="0"/>
                     <TextBox IsReadOnly="True" Text="{Binding OverviewRightUnit.FullFileName, Mode=OneWay}" TextWrapping="Wrap" TextAlignment="Center" Background="Transparent" BorderThickness="0"/>
                     <ListView Background="Transparent" ItemsSource="{Binding OverviewRightUnit.Tags, Mode=OneWay}"
