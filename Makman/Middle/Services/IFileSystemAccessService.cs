@@ -9,12 +9,14 @@ namespace Makman.Middle.Services
         /// <summary>
         /// Opens the directory selection window
         /// </summary> 
-        public string? ChooseDirectory();
+        string? ChooseDirectory();
 
         /// <returns>Full filenames of all files in directory</returns>
-        public IEnumerable<string> GetFilesFromDirectory(string directoryPath);
+        IEnumerable<string> GetFilesFromDirectory(string directoryPath);
 
         /// <returns>Full filenames of all files in directory and all subdirectories</returns>
-        public IEnumerable<string> GetFilesFromDirectoryAndChilderns(string directoryPath); 
+        IEnumerable<string> GetFilesFromDirectoryAndChilderns(string directoryPath);
+
+        void ViewInExplorer(string path);
     }
 }

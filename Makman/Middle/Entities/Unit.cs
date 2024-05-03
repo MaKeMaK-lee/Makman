@@ -47,6 +47,9 @@ namespace Makman.Middle.Entities
         [Column("UnitChildUnits")]
         public required ObservableCollection<Unit> ChildUnits { get; set; }
 
+        [NotMapped] 
+        public ObservableCollection<Unit>? BunchedUnits { get => Bunch?.Units; }
+
 
         public bool Equals(Unit unit2)
         {

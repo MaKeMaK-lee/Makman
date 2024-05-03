@@ -26,6 +26,7 @@ namespace Makman.Visual.MVVM.ViewModel
         public RelayCommand NavigateToTagsManagerCommand { get; set; }
         public RelayCommand NavigateToTagCategoriesManagerCommand { get; set; }
         public RelayCommand NavigateToDirectoriesManagerCommand { get; set; }
+        public RelayCommand NavigateToUnitsManagerCommand { get; set; }
 
         public MainViewModel(INavigation navigationService)
         {
@@ -53,6 +54,10 @@ namespace Makman.Visual.MVVM.ViewModel
             NavigateToTagCategoriesManagerCommand = new RelayCommand(o =>
             {
                 Navigation.NavigateTo<TagCategoriesManagerViewModel>();
+            }, o => true);
+            NavigateToUnitsManagerCommand = new RelayCommand(o =>
+            {
+                Navigation.NavigateTo<UnitsManagerViewModel>();
             }, o => true);
 
             Navigation.NavigateTo<HomeViewModel>();

@@ -3,10 +3,14 @@ using Makman.Middle.Services;
 
 namespace Makman.Visual.MVVM.Model
 {
-    public class ServicesAccessor(ITestAndDebugService testAndDebugService, ICollectionDatabaseService collectionDatabaseService) : IServicesAccessor
+    public class ServicesAccessor(
+        ITestAndDebugService testAndDebugService,
+        ICollectionDatabaseService collectionDatabaseService,
+        IFileSystemAccessService fileSystemAccessService) : IServicesAccessor
     {
         private readonly ITestAndDebugService _testAndDebugService = testAndDebugService;
         private readonly ICollectionDatabaseService _collectionDatabaseService = collectionDatabaseService;
+        private readonly IFileSystemAccessService _fileSystemAccessService = fileSystemAccessService;
         public void DatabaseFill()
         {
             _testAndDebugService.DatabaseFill();
@@ -23,12 +27,22 @@ namespace Makman.Visual.MVVM.Model
         }
 
         public IEnumerable<TagCategory> GetTagCategories()
-        { 
+        {
             return _collectionDatabaseService.GetTagCategories();
         }
-        
+
+        public IEnumerable<IEnumerable<Unit>> FindUnitsWhereNamesLooksLikeDuplicate()
+        {
+            return _collectionDatabaseService.FindUnitsWhereNamesLooksLikeDuplicate();
+        }
+
+        public void ViewInExplorer(string path)
+        {
+            _fileSystemAccessService.ViewInExplorer(path);
+        }
+
         public IEnumerable<Unit> GetUnits()
-        { 
+        {
             return _collectionDatabaseService.GetUnits();
         }
     }

@@ -1,5 +1,7 @@
 ﻿using Makman.Data.SQLite;
 using Makman.Middle.Entities;
+using Makman.Visual.Localization;
+using System.Text.RegularExpressions;
 
 namespace Makman.Middle.Services
 {
@@ -100,9 +102,41 @@ namespace Makman.Middle.Services
         {
             return Database.Tags.Any(i => i.Name.ToLower() == name.ToLower());
         }
+
         public bool IsContainTagCategoryWithName(string name)
         {
             return Database.TagCategories.Any(i => i.Name.ToLower() == name.ToLower());
         }
+
+        public IEnumerable<IEnumerable<Unit>> FindUnitsWhereNamesLooksLikeDuplicate()
+        { 
+            string regexPatternString = $"^([\\s\\S]*?)((?= \\(\\d+\\))|(?= — {UIText.u_filesystem_copy}))+([\\s\\S]*?)(\\.[\\s\\S]*?)$";
+
+            IEnumerable<(string name, string ext)> potentiallyMultipliedFileNamesWithExtensions =
+                Database.Units
+                .Where(u => Regex.Match(u.FileName, regexPatternString).Success)
+                .Select(u =>
+                {
+                    var regexGroups = Regex.Match(u.FileName, regexPatternString).Groups;
+                    return (regexGroups[1].Value, regexGroups[4].Value);
+                })
+                .Distinct();
+
+            return potentiallyMultipliedFileNamesWithExtensions
+                .Select(ne =>
+                {
+                    return Database.Units.Where(u =>
+                    {
+                        var regexGroups = Regex.Match(u.FileName, regexPatternString).Groups;
+                        if ((regexGroups[1].Value == ne.name) && (regexGroups[4].Value == ne.ext))
+                            return true;
+                        else
+                            return false;
+                    });
+                })
+                .Where(list => list.Count() > 1);
+        }
+          
+
     }
 }

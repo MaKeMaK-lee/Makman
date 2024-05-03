@@ -349,6 +349,15 @@ namespace Makman.Visual.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Units.
+        /// </summary>
+        public static string mw_pagelist_units_manager {
+            get {
+                return ResourceManager.GetString("mw pagelist units manager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Color.
         /// </summary>
         public static string tag_category_itemspanel_headers_color {
@@ -484,6 +493,15 @@ namespace Makman.Visual.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на copy.
+        /// </summary>
+        public static string u_filesystem_copy {
+            get {
+                return ResourceManager.GetString("u filesystem copy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Text now missing.
         /// </summary>
         public static string u_no_text {
@@ -498,6 +516,96 @@ namespace Makman.Visual.Localization {
         public static string u_search {
             get {
                 return ResourceManager.GetString("u search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Search for duplicates.
+        /// </summary>
+        public static string unit_managepanel_searchduplicates {
+            get {
+                return ResourceManager.GetString("unit managepanel searchduplicates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на View in explorer.
+        /// </summary>
+        public static string unit_searchduplicates_exploreleft {
+            get {
+                return ResourceManager.GetString("unit searchduplicates exploreleft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на View in explorer.
+        /// </summary>
+        public static string unit_searchduplicates_exploreright {
+            get {
+                return ResourceManager.GetString("unit searchduplicates exploreright", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Seems like same files:.
+        /// </summary>
+        public static string unit_searchduplicates_message {
+            get {
+                return ResourceManager.GetString("unit searchduplicates message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на -&gt;.
+        /// </summary>
+        public static string unit_searchduplicates_next {
+            get {
+                return ResourceManager.GetString("unit searchduplicates next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на -&gt;|.
+        /// </summary>
+        public static string unit_searchduplicates_nexttoend {
+            get {
+                return ResourceManager.GetString("unit searchduplicates nexttoend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на &lt;-.
+        /// </summary>
+        public static string unit_searchduplicates_prev {
+            get {
+                return ResourceManager.GetString("unit searchduplicates prev", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на |&lt;-.
+        /// </summary>
+        public static string unit_searchduplicates_prevtoend {
+            get {
+                return ResourceManager.GetString("unit searchduplicates prevtoend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Skip -&gt;.
+        /// </summary>
+        public static string unit_searchduplicates_skip {
+            get {
+                return ResourceManager.GetString("unit searchduplicates skip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на &lt;- Skip.
+        /// </summary>
+        public static string unit_searchduplicates_skipback {
+            get {
+                return ResourceManager.GetString("unit searchduplicates skipback", resourceCulture);
             }
         }
     }

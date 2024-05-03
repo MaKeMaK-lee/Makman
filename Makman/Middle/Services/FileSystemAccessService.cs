@@ -1,5 +1,5 @@
 ﻿
-using Makman.Data.WindowsOS; 
+using Makman.Data.WindowsOS;
 
 namespace Makman.Middle.Services
 {
@@ -18,6 +18,11 @@ namespace Makman.Middle.Services
         public IEnumerable<string> GetFilesFromDirectoryAndChilderns(string directoryPath)
         {
             return WindowsUse.GetFilesFromDirectoryAndChilderns(directoryPath);
+        }
+
+        public void ViewInExplorer(string path)
+        {
+             WindowsUse.ViewInExplorer(path);
         }
     }
 }

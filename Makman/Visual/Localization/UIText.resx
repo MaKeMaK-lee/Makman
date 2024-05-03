@@ -213,6 +213,9 @@
   <data name="mw pagelist tags manager" xml:space="preserve">
     <value>Tags</value>
   </data>
+  <data name="mw pagelist units manager" xml:space="preserve">
+    <value>Units</value>
+  </data>
   <data name="tag category itemspanel headers color" xml:space="preserve">
     <value>Color</value>
   </data>
@@ -258,10 +261,43 @@
   <data name="tag managepanel remove" xml:space="preserve">
     <value>Remove</value>
   </data>
+  <data name="u filesystem copy" xml:space="preserve">
+    <value>copy</value>
+  </data>
   <data name="u no text" xml:space="preserve">
     <value>Text now missing</value>
   </data>
   <data name="u search" xml:space="preserve">
     <value>Search</value>
+  </data>
+  <data name="unit managepanel searchduplicates" xml:space="preserve">
+    <value>Search for duplicates</value>
+  </data>
+  <data name="unit searchduplicates exploreleft" xml:space="preserve">
+    <value>View in explorer</value>
+  </data>
+  <data name="unit searchduplicates exploreright" xml:space="preserve">
+    <value>View in explorer</value>
+  </data>
+  <data name="unit searchduplicates message" xml:space="preserve">
+    <value>Seems like same files:</value>
+  </data>
+  <data name="unit searchduplicates next" xml:space="preserve">
+    <value>-&gt;</value>
+  </data>
+  <data name="unit searchduplicates nexttoend" xml:space="preserve">
+    <value>-&gt;|</value>
+  </data>
+  <data name="unit searchduplicates prev" xml:space="preserve">
+    <value>&lt;-</value>
+  </data>
+  <data name="unit searchduplicates prevtoend" xml:space="preserve">
+    <value>|&lt;-</value>
+  </data>
+  <data name="unit searchduplicates skip" xml:space="preserve">
+    <value>Skip -&gt;</value>
+  </data>
+  <data name="unit searchduplicates skipback" xml:space="preserve">
+    <value>&lt;- Skip</value>
   </data>
 </root>

@@ -1,4 +1,5 @@
 ﻿
+using Makman.Data.WindowsOS;
 using Makman.Middle.Core; 
 using Makman.Visual.Core;
 using Makman.Visual.MVVM.Model; 
@@ -21,6 +22,7 @@ namespace Makman.Visual.MVVM.ViewModel
         }
 
 
+        public RelayCommand ViewInExplorerCommand { get; set; }
         public RelayCommand NavigateToHomeCommand { get; set; }
         public RelayCommand TestFillCommand { get; set; }
 
@@ -33,6 +35,10 @@ namespace Makman.Visual.MVVM.ViewModel
             NavigateToHomeCommand = new RelayCommand(o =>
             {
                 Navigation.NavigateTo<HomeViewModel>();
+            }, o => true);
+            ViewInExplorerCommand = new RelayCommand(o =>
+            {
+                WindowsUse.ViewInExplorer(WindowsUse.GetFilesFromDirectory(WindowsUse.ChooseDirectory()!).Skip(321).First());
             }, o => true);
             TestFillCommand = new RelayCommand(o =>
             {

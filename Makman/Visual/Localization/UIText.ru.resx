@@ -126,4 +126,7 @@
   <data name="mw pagelist home" xml:space="preserve">
     <value>Обзор</value>
   </data>
+  <data name="u filesystem copy" xml:space="preserve">
+    <value>копия</value>
+  </data>
 </root>

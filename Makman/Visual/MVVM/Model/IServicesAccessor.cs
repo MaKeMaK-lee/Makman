@@ -9,5 +9,7 @@ namespace Makman.Visual.MVVM.Model
         IEnumerable<TagCategory> GetTagCategories();
         IEnumerable<Tag> GetTags();
         IEnumerable<Unit> GetUnits();
+        IEnumerable<IEnumerable<Unit>> FindUnitsWhereNamesLooksLikeDuplicate();
+        void ViewInExplorer(string path);
     }
 }

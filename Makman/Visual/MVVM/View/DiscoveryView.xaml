@@ -8,7 +8,8 @@
              d:DesignHeight="450" d:DesignWidth="800"
              Background="Bisque">
     <Grid>
-        <Button Content="Button" Command="{Binding NavigateToHomeCommand}"  HorizontalAlignment="Left" Margin="212,225,0,0" VerticalAlignment="Top"/>
+        <Button Content="ViewInExplorer" Command="{Binding ViewInExplorerCommand}"  HorizontalAlignment="Left" Margin="212,225,0,0" VerticalAlignment="Top"/>
+        <Button Content="Button" Command="{Binding NavigateToHomeCommand}"  HorizontalAlignment="Left" Margin="275,179,0,0" VerticalAlignment="Top"/>
         <Button Content="TestFillCommand" Command="{Binding TestFillCommand}"  HorizontalAlignment="Left" Margin="363,227,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="83" Width="172">
             <Button.RenderTransform>
                 <TransformGroup>

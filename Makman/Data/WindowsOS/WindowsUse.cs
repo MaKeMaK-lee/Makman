@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using System.Diagnostics;
 using System.IO;
 
 namespace Makman.Data.WindowsOS
@@ -32,6 +33,12 @@ namespace Makman.Data.WindowsOS
         static internal IEnumerable<string> GetFilesFromDirectoryAndChilderns(string directoryPath)
         {
             return Directory.EnumerateFiles(directoryPath, "*", System.IO.SearchOption.AllDirectories);
+        }
+
+        static internal void ViewInExplorer(string path)
+        {
+            path.Replace("\\", "/");
+            Process.Start(new ProcessStartInfo {FileName = "explorer", Arguments= $"/n, /select, {path}"});
         }
 
         static internal bool FileExists(string fileName)

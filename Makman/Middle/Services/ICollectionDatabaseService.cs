@@ -1,12 +1,12 @@
-﻿using Makman.Middle.Entities; 
+﻿using Makman.Middle.Entities;
 
 namespace Makman.Middle.Services
 {
     public interface ICollectionDatabaseService : IDisposable
     {
         //public void Load();
-        public IEnumerable<Unit> GetUnits(); 
-        public IEnumerable<CollectionDirectory> GetCollectionDirectories(); 
+        public IEnumerable<Unit> GetUnits();
+        public IEnumerable<CollectionDirectory> GetCollectionDirectories();
         public IEnumerable<Tag> GetTags();
         public IEnumerable<TagCategory> GetTagCategories();
         public bool Save();
@@ -20,6 +20,8 @@ namespace Makman.Middle.Services
         public void Remove(TagCategory element);
         public bool IsContainTagWithName(string name);
         public bool IsContainTagCategoryWithName(string name);
-        
+
+        /// <returns>List of lists of duplicates</returns>
+        public IEnumerable<IEnumerable<Unit>> FindUnitsWhereNamesLooksLikeDuplicate();
     }
 }

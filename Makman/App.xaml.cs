@@ -32,6 +32,7 @@ namespace Makman
             services.AddSingleton<TagCategoriesManagerViewModel>();
             services.AddSingleton<CollectionViewModel>();
             services.AddSingleton<DiscoveryViewModel>();
+            services.AddSingleton<UnitsManagerViewModel>();
             services.AddSingleton<Func<Type, ViewModel>>
                 (serviceProvider => viewModelType => (ViewModel)serviceProvider.GetRequiredService(viewModelType));
             services.AddSingleton<INavigation, Navigation>();
@@ -40,6 +41,7 @@ namespace Makman
             services.AddSingleton<ICollectionDatabaseService, CollectionDatabaseService>();
             services.AddSingleton<ITestAndDebugService, TestAndDebugService>();
             services.AddSingleton<IFileSystemAccessService, FileSystemAccessService>();
+
             services.AddSingleton<IUnitManagementService, UnitManagementService>();
             services.AddSingleton<ICollectionDirectoryManagementService, CollectionDirectoryManagementService>();
             services.AddSingleton<ITagManagementService, TagManagementService>();
