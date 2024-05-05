@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.WindowsAPICodePack.Shell;
 using System.Globalization;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -17,6 +18,7 @@ namespace Makman.Visual.Converters
             if (value == null) { return null; }
             string path = (string)value;
             if (string.IsNullOrEmpty(path)) { return null; }
+            if (!File.Exists(path)) { return null; }
            
             //if (parameter == null)
             //{
@@ -26,7 +28,6 @@ namespace Makman.Visual.Converters
 
             ////if ((fileExtention == "jpg" || fileExtention == "jpeg" || fileExtention == "png") && fileSize < 1024 * 1024)
             ////    return fullFileName;
-
             var shellObject = ShellObject.FromParsingName(path);
             ////ulong size = (ulong)shellObject.Properties.GetProperty("System.Size").ValueAsObject;
             ////string contentType = (string)shellObject.Properties.GetProperty("System.ContentType").ValueAsObject;

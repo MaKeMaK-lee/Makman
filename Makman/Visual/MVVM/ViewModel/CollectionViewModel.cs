@@ -9,10 +9,14 @@ namespace Makman.Visual.MVVM.ViewModel
 {
     public class CollectionViewModel : Core.ViewModel//TODO стиль и источник текста под картинками, подгрузка тумбов
     {
-        const int OverviewItemHeight = 60;
-
         const int OverviewBunchedUnitsMaxCount = 16;
         const int OverviewChildUnitsMaxCount = 16;
+
+        public int CollectionPanelItemHeight { get; } = 150;
+        public int CollectionPanelItemWidth { get; } = 95;
+        public int CollectionPanelItemImageMaxHeight => CollectionPanelItemHeight - CollectionPanelItemTextMinHeight;
+        public int CollectionPanelItemTextMinHeight { get; } = 20;
+        public string CollectionPanelItemSize => CollectionPanelItemWidth + ", " + CollectionPanelItemHeight;
 
         private readonly IServicesAccessor _servicesAccessor;
         private readonly IUnitManagementService _unitManagementService;

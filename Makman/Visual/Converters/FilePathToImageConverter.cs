@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.WindowsAPICodePack.Shell;
+using System.IO;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
@@ -15,6 +16,8 @@ namespace Makman.Visual.Converters
             string path = (string)value;
             if (string.IsNullOrEmpty(path))
                 return null;
+            if (!File.Exists(path)) 
+                return null; 
 
 
             var shellObject = ShellObject.FromParsingName(path);
