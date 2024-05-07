@@ -6,7 +6,7 @@ using Makman.Visual.MVVM.Model;
 using System.Windows;
 
 namespace Makman.Visual.MVVM.ViewModel
-{//TODO Create custom view for 
+{
     public class UnitsManagerViewModel : Core.ViewModel
     {
         private readonly IServicesAccessor _servicesAccessor;
@@ -68,7 +68,7 @@ namespace Makman.Visual.MVVM.ViewModel
             {
                 TemporarilyIgnoreCurrentConflict();
 
-            }, o => true);//TODO group mode SearchDuplicatesSkip Commands
+            }, o => true);
             SearchDuplicatesSkipbackCommand = new RelayCommand(o =>
             {
                 TemporarilyIgnoreCurrentConflict(true);
@@ -78,7 +78,7 @@ namespace Makman.Visual.MVVM.ViewModel
             {
                 if (OverviewLeftUnit != null)
                     _servicesAccessor.ViewInExplorer(OverviewLeftUnit.FullFileName);
-            }, o => true);//TODO in-background mode SearchDuplicatesSeek Commands
+            }, o => true);
             SearchDuplicatesSeekRightCommand = new RelayCommand(o =>
             {
                 if (OverviewRightUnit != null)

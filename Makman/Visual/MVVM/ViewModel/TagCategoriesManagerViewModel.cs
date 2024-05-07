@@ -37,7 +37,7 @@ namespace Makman.Visual.MVVM.ViewModel
         public string filterText;
         public string FilterText
         {
-            get => filterText;//TODO 201 filtering
+            get => filterText;
             set
             {
                 filterText = value;

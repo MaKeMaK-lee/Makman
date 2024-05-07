@@ -31,7 +31,6 @@ namespace Makman.Middle.Entities
                 Color = value;
                 OnPropertyChanged(Color);
                 OnPropertyChanged(ChangableColor);
-                //TODO 15 changed tags colors?
             }
         }
 

@@ -38,7 +38,6 @@ namespace Makman.Visual.MVVM.ViewModel
                 {
                     selectedTagCategory = value;
                     OnPropertyChanged(nameof(SelectedTagCategory));
-                    //TODO 150 need fix(by creating button or something): this activating accidentally
                     if (SelectedTags != null && SelectedTagCategory != null)
                         _tagManagementService.SetCategory(SelectedTags, SelectedTagCategory);
                 }
@@ -71,7 +70,7 @@ namespace Makman.Visual.MVVM.ViewModel
                     }
                     else
                     {
-                        SelectedTagCategory = null;//TODO 369 This is null if selected many with nulls and if selected many with not same categs => user can't intuitivly see it in picker
+                        SelectedTagCategory = null;
                     }
                 }
                 else
@@ -83,7 +82,7 @@ namespace Makman.Visual.MVVM.ViewModel
         public string filterText;
         public string FilterText
         {
-            get => filterText;//TODO 200 filtering
+            get => filterText;
             set
             {
                 filterText = value;

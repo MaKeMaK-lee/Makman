@@ -7,7 +7,7 @@ namespace Makman.Visual.MVVM.ViewModel
     public class MainViewModel : Core.ViewModel
     {
 
-        private INavigation _navigation; //TODO 300 Cursor statuses
+        private INavigation _navigation;
 
 
         public INavigation Navigation

@@ -72,7 +72,7 @@ namespace Makman.Middle.EntityManagementServices
 
             foreach (var item in bindingUnits.Where(i => i.Bunch != bunch))
             {
-                item.Bunch = bunch;//TODO 0 warning dbidect
+                item.Bunch = bunch;
             }
             _collectionDatabaseService.Save();
         }

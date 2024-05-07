@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Makman.Visual.MVVM.ViewModel
 {
-    public class CollectionViewModel : Core.ViewModel//TODO стиль и источник текста под картинками, подгрузка тумбов
+    public class CollectionViewModel : Core.ViewModel
     {
         const int OverviewBunchedUnitsMaxCount = 16;
         const int OverviewChildUnitsMaxCount = 16;
@@ -88,7 +88,6 @@ namespace Makman.Visual.MVVM.ViewModel
 
                 if (IsBunchBindingMode)
                 {
-                    //TODO 200: ui notificating user about result
                     if (_unitManagementService.TryBindToBunch(
                         SelectedUnits,
                         SelectedUnitsPrevious,
@@ -122,7 +121,6 @@ namespace Makman.Visual.MVVM.ViewModel
 
         }
 
-        //TODO 150 Update this: save bunch when set it to true and apply this bunch until set it to false, or something else
         private bool isBunchBindingMode;
         public bool IsBunchBindingMode
         {

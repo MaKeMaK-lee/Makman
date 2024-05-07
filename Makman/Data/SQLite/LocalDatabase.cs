@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace Makman.Data.SQLite
 {
-    internal class LocalDatabase : IDisposable//TODO 450 Наверн всё же поделить на unitmanager и тп
+    internal class LocalDatabase : IDisposable
     {
         private bool disposed = false;
         private LocalDatabaseContext _dbContext;

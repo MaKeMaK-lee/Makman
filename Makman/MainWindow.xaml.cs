@@ -14,7 +14,7 @@ namespace Makman
         public required ICollectionDatabaseService collectionDatabaseService;
         public MainWindow()
         {
-            InitializeComponent();//TODO Сохранять размеры и позицию окна в настроечки
+            InitializeComponent();
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
