@@ -45,5 +45,10 @@ namespace Makman.Visual.MVVM.Model
         {
             return _collectionDatabaseService.GetUnits();
         }
+
+        public bool SaveDatabase()
+        {
+            return _collectionDatabaseService.Save();
+        }
     }
 }

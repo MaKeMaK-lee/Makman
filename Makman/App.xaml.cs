@@ -23,7 +23,7 @@ namespace Makman
             services.AddSingleton<MainWindow>(provider => new MainWindow
             {
                 DataContext = provider.GetRequiredService<MainViewModel>(),
-                collectionDatabaseService = provider.GetRequiredService<ICollectionDatabaseService>()
+                _servicesAccessor = provider.GetRequiredService<IServicesAccessor>()
             });
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<HomeViewModel>();

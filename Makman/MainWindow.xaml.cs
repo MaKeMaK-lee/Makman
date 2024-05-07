@@ -1,6 +1,6 @@
 ﻿
-using Makman.Middle.Services;//TODO 500 change
-using Makman.Visual.Localization; 
+using Makman.Visual.Localization;
+using Makman.Visual.MVVM.Model;
 using System.Windows;
 using System.Windows.Input;
 
@@ -11,7 +11,7 @@ namespace Makman
     /// </summary>
     public partial class MainWindow : Window
     {
-        public required ICollectionDatabaseService collectionDatabaseService;
+        public required IServicesAccessor _servicesAccessor;
         public MainWindow()
         {
             InitializeComponent();
@@ -25,7 +25,7 @@ namespace Makman
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = true;
-            if (collectionDatabaseService.Save())
+            if (_servicesAccessor.SaveDatabase())
                 e.Cancel = false;
             else
             {
