@@ -1,11 +1,12 @@
 ﻿
+using Makman.Middle.Core;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Makman.Middle.Entities
 {
     [Table("TagCategories")]
-    public class TagCategory : CollectionDatabaseEntity
+    public class TagCategory : ObservableObject
     {
         [Key]
         [Required]

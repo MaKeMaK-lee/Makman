@@ -1,4 +1,5 @@
 ﻿
+using Makman.Middle.Core;
 using Makman.Middle.Services;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Makman.Middle.Entities
 {
     [Table("CollectionDirectories")]
-    public class CollectionDirectory : CollectionDatabaseEntity
+    public class CollectionDirectory : ObservableObject
     {
 
 

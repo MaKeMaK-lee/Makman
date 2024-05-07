@@ -1,4 +1,5 @@
 ﻿
+using Makman.Middle.Core;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema; 
@@ -6,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Makman.Middle.Entities
 {
     [Table("Bunchs")]
-    public class Bunch: CollectionDatabaseEntity
+    public class Bunch: ObservableObject
     {
         [Key]
         [Required]
