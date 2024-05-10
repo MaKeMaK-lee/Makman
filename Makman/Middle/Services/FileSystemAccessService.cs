@@ -15,6 +15,16 @@ namespace Makman.Middle.Services
             return WindowsUse.FileExists(fileName);
         }
 
+        public DateTime GetFileLastWriteTime(string path)
+        {
+            return WindowsUse.GetFileLastWriteTime(path);
+        }
+
+        public long GetFileSize(string path)
+        {
+            return WindowsUse.GetFileSize(path);
+        }
+
         public IEnumerable<string> GetFilesFromDirectory(string directoryPath)
         {
             return WindowsUse.GetFilesFromDirectory(directoryPath);

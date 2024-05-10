@@ -1,13 +1,13 @@
-﻿using Makman.Middle.Core;
+﻿ 
 using Makman.Middle.Entities;
 using Makman.Middle.Services;
 
 namespace Makman.Middle.EntityManagementServices
 {
-    public class CollectionDirectoryManagementService(ICollectionDatabaseService collectionDatabaseService, IFileSystemAccessService windowsAccessService) : ICollectionDirectoryManagementService
+    public class CollectionDirectoryManagementService(ICollectionDatabaseService collectionDatabaseService, IFileSystemAccessService fileSystemAccessService) : ICollectionDirectoryManagementService
     {
         readonly ICollectionDatabaseService _collectionDatabaseService = collectionDatabaseService;
-        readonly IFileSystemAccessService _windowsAccessService = windowsAccessService;
+        readonly IFileSystemAccessService _fileSystemAccessService = fileSystemAccessService;
         public void AddNew()
         {
             var createdItem = Create();
@@ -26,7 +26,7 @@ namespace Makman.Middle.EntityManagementServices
         }
         public void PickNewPath(CollectionDirectory collectionDirectory)
         {
-            string? path = _windowsAccessService.ChooseDirectory();
+            string? path = _fileSystemAccessService.ChooseDirectory();
             if (path == null)
                 return;
             if (path == collectionDirectory.Path)
@@ -38,15 +38,10 @@ namespace Makman.Middle.EntityManagementServices
 
         public CollectionDirectory? Create()
         {
-            string? path = _windowsAccessService.ChooseDirectory();
+            string? path = _fileSystemAccessService.ChooseDirectory();
             if (path == null) { return null; }
 
             return new CollectionDirectory(path, synchronizingwithcloud: false);
-        }
-
-        //public void SetCommandActionToCommand(CollectionDirectory collectionDirectory)
-        //{
-        //    collectionDirectory.PickDirectoryCommand = new RelayCommand(collectionDirectory.PickDirectoryCommandAction, o => true);
-        //}
+        } 
     }
 }

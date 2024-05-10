@@ -2,14 +2,14 @@
 
 namespace Makman.Middle.Services
 {
-    public class TestAndDebugService(IFileSystemAccessService windowsAccessService, IUnitManagementService unitManagementService) : ITestAndDebugService
+    public class TestAndDebugService(IFileSystemAccessService fileSystemAccessService, IUnitManagementService unitManagementService) : ITestAndDebugService
     {
-        private readonly IFileSystemAccessService _windowsAccessService = windowsAccessService;
+        private readonly IFileSystemAccessService _fileSystemAccessService = fileSystemAccessService;
         private readonly IUnitManagementService _unitManagementService = unitManagementService;
 
         public void DatabaseFill()
         {
-            var chooseResult = _windowsAccessService.ChooseDirectory();
+            var chooseResult = _fileSystemAccessService.ChooseDirectory();
             if (chooseResult == null)
             {
                 return;

@@ -1,25 +1,24 @@
 ﻿
 using Makman.Middle.Entities;
 using Makman.Middle.Services;
-using System.Diagnostics;
-using System.IO;
 
 namespace Makman.Middle.EntityManagementServices
 {
     public class UnitManagementService(ICollectionDatabaseService collectionDatabaseService,
-        IFileSystemAccessService windowsAccessService, IBunchManagementService bunchManagementService) : IUnitManagementService
+        IFileSystemAccessService fileSystemAccessService, IBunchManagementService bunchManagementService) : IUnitManagementService
     {
+
         readonly ICollectionDatabaseService _collectionDatabaseService = collectionDatabaseService;
-        readonly IFileSystemAccessService _windowsAccessService = windowsAccessService;
+        readonly IFileSystemAccessService _fileSystemAccessService = fileSystemAccessService;
         readonly IBunchManagementService _bunchManagementService = bunchManagementService;
 
         public int AddUnitsFromFilesOfFolderAndSyncToDatabase(string directoryPath, bool allowSubDirectories = true)
         {
             IEnumerable<string> fullFileNamesToAdd = [];
             if (allowSubDirectories)
-                fullFileNamesToAdd = _windowsAccessService.GetFilesFromDirectoryAndChilderns(directoryPath);
+                fullFileNamesToAdd = _fileSystemAccessService.GetFilesFromDirectoryAndChilderns(directoryPath);
             else
-                fullFileNamesToAdd = _windowsAccessService.GetFilesFromDirectory(directoryPath);
+                fullFileNamesToAdd = _fileSystemAccessService.GetFilesFromDirectory(directoryPath);
 
             var units = CreateMany(fullFileNamesToAdd.Where(name => !_collectionDatabaseService.GetUnits()
                 .Where(unit => unit.FullFileName == name).Any()));
@@ -33,7 +32,7 @@ namespace Makman.Middle.EntityManagementServices
         public IEnumerable<Unit> CreateMany(IEnumerable<string> fullFileNames)
         {
             List<Unit> units = new(fullFileNames.Count());
-            var now = DateTime.Now;
+            var nowDateTimeForThisCreates = DateTime.Now;
 
             foreach (string fullFileName in fullFileNames)
             {
@@ -42,9 +41,9 @@ namespace Makman.Middle.EntityManagementServices
                     Id = Guid.NewGuid(),
                     FullFileName = fullFileName,
                     FileName = fullFileName.Split("\\").Last(),
-                    FileSize = new FileInfo(fullFileName).Length,
-                    TimeAddedToCollection = now,
-                    TimeLastWrite = new FileInfo(fullFileName).LastWriteTime,
+                    FileSize = _fileSystemAccessService.GetFileSize(fullFileName),
+                    TimeAddedToCollection = nowDateTimeForThisCreates,
+                    TimeLastWrite = _fileSystemAccessService.GetFileLastWriteTime(fullFileName),
                     ChildUnits = [],
                     Tags = []
                 });

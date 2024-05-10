@@ -58,6 +58,16 @@ namespace Makman.Data.WindowsOS
             File.WriteAllText(fileName, jsonString);
         }
 
+        static internal DateTime GetFileLastWriteTime(string path)
+        {
+            return new FileInfo(path).LastWriteTime;
+        }
+
+        static internal long GetFileSize(string path)
+        {
+            return new FileInfo(path).Length;
+        }
+
         static internal BitmapImage? TryGetImageOfFile(string path)
         {
             try

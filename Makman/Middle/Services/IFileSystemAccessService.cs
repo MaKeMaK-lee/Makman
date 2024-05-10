@@ -1,4 +1,4 @@
-﻿ 
+﻿
 namespace Makman.Middle.Services
 {
     public interface IFileSystemAccessService
@@ -13,6 +13,10 @@ namespace Makman.Middle.Services
 
         /// <returns>Full filenames of all files in directory and all subdirectories</returns>
         IEnumerable<string> GetFilesFromDirectoryAndChilderns(string directoryPath);
+
+        long GetFileSize(string path);
+
+        DateTime GetFileLastWriteTime(string path);
 
         void ViewInExplorer(string path);
 
