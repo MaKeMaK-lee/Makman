@@ -1,6 +1,8 @@
 ﻿using Microsoft.Win32;
+using Microsoft.WindowsAPICodePack.Shell;
 using System.Diagnostics;
 using System.IO;
+using System.Windows.Media.Imaging;
 
 namespace Makman.Data.WindowsOS
 {
@@ -38,7 +40,7 @@ namespace Makman.Data.WindowsOS
         static internal void ViewInExplorer(string path)
         {
             path.Replace("\\", "/");
-            Process.Start(new ProcessStartInfo {FileName = "explorer", Arguments= $"/n, /select, {path}"});
+            Process.Start(new ProcessStartInfo { FileName = "explorer", Arguments = $"/n, /select, {path}" });
         }
 
         static internal bool FileExists(string fileName)
@@ -54,6 +56,37 @@ namespace Makman.Data.WindowsOS
         static internal void WriteAllText(string fileName, string jsonString)
         {
             File.WriteAllText(fileName, jsonString);
+        }
+
+        static internal BitmapImage? TryGetImageOfFile(string path)
+        {
+            try
+            {
+                return new BitmapImage(new Uri(path));
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        static internal object GetImageOfFile(string path, bool justThumbnail)
+        {
+            var shellObject = ShellObject.FromParsingName(path);
+
+            if (!justThumbnail)
+            {
+                string contentType = (string)shellObject.Properties.GetProperty("System.ContentType").ValueAsObject;
+                if (contentType.StartsWith("image"))
+                {
+                    var imageResult = TryGetImageOfFile(path);
+                    if (imageResult != null)
+                        return imageResult;
+                }
+                return shellObject.Thumbnail.ExtraLargeBitmapSource;
+            }
+            return shellObject.Thumbnail.MediumBitmapSource;
+
         }
     }
 }

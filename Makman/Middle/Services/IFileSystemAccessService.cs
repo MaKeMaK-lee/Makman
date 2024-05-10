@@ -1,7 +1,4 @@
-﻿
-using Makman.Middle.Entities;
-using System.Windows.Media.Imaging;
-
+﻿ 
 namespace Makman.Middle.Services
 {
     public interface IFileSystemAccessService
@@ -18,5 +15,9 @@ namespace Makman.Middle.Services
         IEnumerable<string> GetFilesFromDirectoryAndChilderns(string directoryPath);
 
         void ViewInExplorer(string path);
+
+        bool FileExists(string fileName);
+
+        object GetImageOfFile(string path, bool justThumbnail);
     }
 }

@@ -21,7 +21,6 @@
             <converters:FilePathToImageConverter x:Key="FilePathToImageConverter" />
             <converters:FilePathToThumbImageConverter x:Key="FilePathToThumbImageConverter" />
             <converters:StringColoroBrushConverter x:Key="StringColoroBrushConverter" />
-            <converters:BoolToVisibleOrHiddenVisibilityConverter x:Key="BoolToVisibleOrHiddenVisibilityConverter" />
 
             <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
                 <view:HomeView/>

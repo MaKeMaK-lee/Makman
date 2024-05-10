@@ -1,6 +1,6 @@
-﻿
+﻿ 
 using Makman.Middle.EntityManagementServices;
-using Makman.Middle.Services;
+using Makman.Middle.Services; 
 using Makman.Visual.Core;
 using Makman.Visual.MVVM.Model;
 using Makman.Visual.MVVM.ViewModel;
@@ -38,6 +38,7 @@ namespace Makman
             services.AddSingleton<INavigation, Navigation>();
             services.AddSingleton<IServicesAccessor, ServicesAccessor>();
 
+            services.AddSingleton<IConvertService, ConvertService>();
             services.AddSingleton<ICollectionDatabaseService, CollectionDatabaseService>();
             services.AddSingleton<ITestAndDebugService, TestAndDebugService>();
             services.AddSingleton<IFileSystemAccessService, FileSystemAccessService>();
@@ -61,8 +62,15 @@ namespace Makman
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
-            mainWindow.Show();
 
+            ((IConvertServiceConnectable)Resources["StringColoroBrushConverter"])
+                ._ConvertService = _serviceProvider.GetRequiredService<IConvertService>();
+            ((IConvertServiceConnectable)Resources["FilePathToImageConverter"])
+                ._ConvertService = _serviceProvider.GetRequiredService<IConvertService>();
+            ((IConvertServiceConnectable)Resources["FilePathToThumbImageConverter"])
+                ._ConvertService = _serviceProvider.GetRequiredService<IConvertService>();
+
+            mainWindow.Show();
         }
     }
 

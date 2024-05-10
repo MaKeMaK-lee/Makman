@@ -72,7 +72,7 @@
                 </ComboBox.Resources>
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock HorizontalAlignment="Left" Text="{Binding Name}" Foreground="{Binding SummaryColor, 
+                        <TextBlock HorizontalAlignment="Left" Text="{Binding Name}" Foreground="{Binding SummaryColor,
                                    Converter={StaticResource StringColoroBrushConverter}}" MaxWidth="600"
                                    ToolTip="{Binding Name}" >
                         </TextBlock>
@@ -96,15 +96,15 @@
 
         <Rectangle Margin="3" Grid.Row="2" Grid.Column="0"/>
         <StackPanel Margin="5,5,10,5" Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Row="2" Grid.Column="0">
-            <TextBlock Visibility="{Binding IsSelectedAnyItemInCollection, Converter={StaticResource BoolToVisibleOrHiddenVisibilityConverter}}"
+            <TextBlock Visibility="{Binding IsSelectedAnyItemInCollectionToVisibleOrHidden}"
                        Margin="0,0,5,0" FlowDirection="LeftToRight" Text="{x:Static localization:UIText.co_statestring_byte}"/>
-            <TextBlock Visibility="{Binding IsSelectedAnyItemInCollection, Converter={StaticResource BoolToVisibleOrHiddenVisibilityConverter}}"
+            <TextBlock Visibility="{Binding IsSelectedAnyItemInCollectionToVisibleOrHidden}"
                        Margin="0,0,5,0" FlowDirection="LeftToRight" FontWeight="Bold" Text="{Binding OverviewFileSize}"/>
-            <TextBlock Visibility="{Binding IsSelectedAnyItemInCollection, Converter={StaticResource BoolToVisibleOrHiddenVisibilityConverter}}"
+            <TextBlock Visibility="{Binding IsSelectedAnyItemInCollectionToVisibleOrHidden}"
                        Margin="0,0,5,0" FlowDirection="LeftToRight" Text="{x:Static localization:UIText.co_statestring_size}"/>
-            <TextBlock Visibility="{Binding IsSelectedMoreThanOneItemInCollection, Converter={StaticResource BoolToVisibleOrHiddenVisibilityConverter}}"
+            <TextBlock Visibility="{Binding IsSelectedAnyItemInCollectionToVisibleOrHidden}"
                        Margin="0,0,5,0" FlowDirection="LeftToRight" FontWeight="Bold" Text="{Binding OverviewCount}"/>
-            <TextBlock Visibility="{Binding IsSelectedMoreThanOneItemInCollection, Converter={StaticResource BoolToVisibleOrHiddenVisibilityConverter}}"
+            <TextBlock Visibility="{Binding IsSelectedAnyItemInCollectionToVisibleOrHidden}"
                        Margin="0,0,5,0" FlowDirection="LeftToRight" Text="{x:Static localization:UIText.co_statestring_elements}"/>
         </StackPanel>
 
@@ -219,7 +219,7 @@
                                      {RelativeSource FindAncestor, AncestorType=UserControl}}"
                           >
                         <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.RowSpan="2" Style="{StaticResource ItemsRectangle}" />
-                            <Grid VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                        <Grid VerticalAlignment="Center" HorizontalAlignment="Stretch">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto" 
                                                MaxHeight="{Binding DataContext.CollectionPanelItemImageMaxHeight, RelativeSource=

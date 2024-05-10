@@ -3,7 +3,8 @@ using Makman.Middle.Entities;
 using Makman.Visual.MVVM.Model;
 using Makman.Middle.Core;
 using Makman.Middle.EntityManagementServices;
-using System.Text;
+using Makman.Middle.Services;
+using System.Windows;
 
 namespace Makman.Visual.MVVM.ViewModel
 {
@@ -158,6 +159,16 @@ namespace Makman.Visual.MVVM.ViewModel
             }
         }
 
+        public Visibility IsSelectedAnyItemInCollectionToVisibleOrHidden
+        {
+            get
+            {
+                if (IsSelectedAnyItemInCollection)
+                    return Visibility.Visible;
+                return Visibility.Hidden;
+            }
+        }
+
         public bool IsSelectedAnyItemInCollection
         {
             get
@@ -198,7 +209,7 @@ namespace Makman.Visual.MVVM.ViewModel
             }, o => true);
         }
 
-        public CollectionViewModel(IServicesAccessor servicesAccessor, IUnitManagementService unitManagementService)
+        public CollectionViewModel(IServicesAccessor servicesAccessor, IUnitManagementService unitManagementService, IFileSystemAccessService fileSystemAccessService)
         {
             _servicesAccessor = servicesAccessor;
             _unitManagementService = unitManagementService;
