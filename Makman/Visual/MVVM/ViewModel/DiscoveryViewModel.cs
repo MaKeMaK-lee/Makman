@@ -1,8 +1,8 @@
 ﻿
 using Makman.Data.WindowsOS;
-using Makman.Middle.Core; 
+using Makman.Middle.Core;
 using Makman.Visual.Core;
-using Makman.Visual.MVVM.Model; 
+using Makman.Visual.MVVM.Model;
 
 namespace Makman.Visual.MVVM.ViewModel
 {

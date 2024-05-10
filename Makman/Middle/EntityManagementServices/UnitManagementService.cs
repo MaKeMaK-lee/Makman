@@ -1,6 +1,7 @@
 ﻿
 using Makman.Middle.Entities;
 using Makman.Middle.Services;
+using System.Diagnostics;
 using System.IO;
 
 namespace Makman.Middle.EntityManagementServices
@@ -32,6 +33,8 @@ namespace Makman.Middle.EntityManagementServices
         public IEnumerable<Unit> CreateMany(IEnumerable<string> fullFileNames)
         {
             List<Unit> units = new(fullFileNames.Count());
+            var now = DateTime.Now;
+
             foreach (string fullFileName in fullFileNames)
             {
                 units.Add(new Unit()
@@ -40,6 +43,8 @@ namespace Makman.Middle.EntityManagementServices
                     FullFileName = fullFileName,
                     FileName = fullFileName.Split("\\").Last(),
                     FileSize = new FileInfo(fullFileName).Length,
+                    TimeAddedToCollection = now,
+                    TimeLastWrite = new FileInfo(fullFileName).LastWriteTime,
                     ChildUnits = [],
                     Tags = []
                 });

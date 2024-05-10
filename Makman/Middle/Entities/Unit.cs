@@ -29,6 +29,16 @@ namespace Makman.Middle.Entities
         public required string FileName { get; set; }
 
         [Required]
+        [Column("UnitTimeLastWrite")]
+        [MaxLength(32)]
+        public required DateTime TimeLastWrite { get; set; }
+         
+        [Required]
+        [Column("UnitTimeAddedToCollection")]
+        [MaxLength(32)]
+        public required DateTime TimeAddedToCollection { get; set; }
+
+        [Required]
         [Column("UnitTags")]
         public required ObservableCollection<Tag> Tags { get; set; }
 
