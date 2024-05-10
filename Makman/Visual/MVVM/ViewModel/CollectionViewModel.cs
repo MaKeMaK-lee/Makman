@@ -10,8 +10,8 @@ namespace Makman.Visual.MVVM.ViewModel
 {
     public class CollectionViewModel : Core.ViewModel
     {
-        const int OverviewBunchedUnitsMaxCount = 16;
-        const int OverviewChildUnitsMaxCount = 16;
+        public int OverviewBunchedUnitsMaxCount { get; } = 16;
+        public int OverviewChildUnitsMaxCount { get; } = 16;
 
         public int CollectionPanelItemHeight { get; } = 150;
         public int CollectionPanelItemWidth { get; } = 95;
