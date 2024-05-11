@@ -216,6 +216,12 @@
   <data name="mw pagelist units manager" xml:space="preserve">
     <value>Units</value>
   </data>
+  <data name="mw warning save caption" xml:space="preserve">
+    <value>Save warning</value>
+  </data>
+  <data name="mw warning save message" xml:space="preserve">
+    <value>Something going wrong when saving. Are you want to complete?</value>
+  </data>
   <data name="tag category itemspanel headers color" xml:space="preserve">
     <value>Color</value>
   </data>

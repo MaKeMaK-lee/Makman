@@ -25,7 +25,7 @@ namespace Makman.Middle.EntityManagementServices
 
         public TagCategory? Create(string name)
         {
-            if (name == "" || _collectionDatabaseService.IsContainTagCategoryWithName(name))
+            if (name == "" || _collectionDatabaseService.IsContainTagCategoryWithNameLower(name))
             {
                 return null;
             }

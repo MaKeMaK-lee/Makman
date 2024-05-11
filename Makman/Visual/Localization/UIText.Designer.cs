@@ -358,6 +358,24 @@ namespace Makman.Visual.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Save warning.
+        /// </summary>
+        public static string mw_warning_save_caption {
+            get {
+                return ResourceManager.GetString("mw warning save caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Something going wrong when saving. Are you want to complete?.
+        /// </summary>
+        public static string mw_warning_save_message {
+            get {
+                return ResourceManager.GetString("mw warning save message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Color.
         /// </summary>
         public static string tag_category_itemspanel_headers_color {

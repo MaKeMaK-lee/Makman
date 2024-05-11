@@ -25,11 +25,11 @@ namespace Makman
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = true;
-            if (_servicesAccessor.SaveDatabase())
+            if (_servicesAccessor.SaveDatabase() && _servicesAccessor.SaveSettings())
                 e.Cancel = false;
             else
             {
-                var result = MessageBox.Show(UIText.u_no_text, UIText.u_no_text, MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No);
+                var result = MessageBox.Show(UIText.mw_warning_save_message, UIText.mw_warning_save_caption, MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No);
                 if (result == MessageBoxResult.Yes)
                 {
                     e.Cancel = false;

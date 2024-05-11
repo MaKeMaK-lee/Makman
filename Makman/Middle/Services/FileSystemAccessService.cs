@@ -1,5 +1,5 @@
 ﻿
-using Makman.Data.WindowsOS; 
+using Makman.Data.WindowsOS;
 
 namespace Makman.Middle.Services
 {
@@ -45,5 +45,14 @@ namespace Makman.Middle.Services
             WindowsUse.ViewInExplorer(path);
         }
 
+        public string ReadAllText(string fileName)
+        {
+            return WindowsUse.ReadAllText(fileName);
+        }
+
+        public void WriteAllText(string fileName, string text)
+        {
+            WindowsUse.WriteAllText(fileName, text);
+        }
     }
 }

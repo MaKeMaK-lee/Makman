@@ -26,7 +26,7 @@ namespace Makman.Middle.EntityManagementServices
 
         public Tag? Create(string name)
         {
-            if (name == "" || _collectionDatabaseService.IsContainTagWithName(name))
+            if (name == "" || _collectionDatabaseService.IsContainTagWithNameLower(name))
             {
                 return null;
             }

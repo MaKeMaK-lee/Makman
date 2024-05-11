@@ -53,9 +53,9 @@ namespace Makman.Data.WindowsOS
             return File.ReadAllText(fileName);
         }
 
-        static internal void WriteAllText(string fileName, string jsonString)
+        static internal void WriteAllText(string fileName, string text)
         {
-            File.WriteAllText(fileName, jsonString);
+            File.WriteAllText(fileName, text);
         }
 
         static internal DateTime GetFileLastWriteTime(string path)

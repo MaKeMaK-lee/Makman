@@ -22,6 +22,10 @@ namespace Makman.Middle.Services
 
         bool FileExists(string fileName);
 
+        string ReadAllText(string fileName);
+
+        void WriteAllText(string fileName, string text);
+
         object GetImageOfFile(string path, bool justThumbnail);
     }
 }

@@ -6,11 +6,13 @@ namespace Makman.Visual.MVVM.Model
     public class ServicesAccessor(
         ITestAndDebugService testAndDebugService,
         ICollectionDatabaseService collectionDatabaseService,
-        IFileSystemAccessService fileSystemAccessService) : IServicesAccessor
+        IFileSystemAccessService fileSystemAccessService,
+        ISettingsService settingsService) : IServicesAccessor
     {
         private readonly ITestAndDebugService _testAndDebugService = testAndDebugService;
         private readonly ICollectionDatabaseService _collectionDatabaseService = collectionDatabaseService;
         private readonly IFileSystemAccessService _fileSystemAccessService = fileSystemAccessService;
+        private readonly ISettingsService _settingsService = settingsService;
         public void DatabaseFill()
         {
             _testAndDebugService.DatabaseFill();
@@ -49,6 +51,11 @@ namespace Makman.Visual.MVVM.Model
         public bool SaveDatabase()
         {
             return _collectionDatabaseService.Save();
+        }
+
+        public bool SaveSettings()
+        {
+            return _settingsService.Save();
         }
     }
 }

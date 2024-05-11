@@ -98,18 +98,25 @@ namespace Makman.Middle.Services
             return Database.TagCategories;
         }
 
-        public bool IsContainTagWithName(string name)
+        public bool IsContainTagWithNameLower(string name)
         {
             return Database.Tags.Any(i => i.Name.ToLower() == name.ToLower());
         }
 
-        public bool IsContainTagCategoryWithName(string name)
+        public bool IsContainTagCategoryWithNameLower(string name)
         {
             return Database.TagCategories.Any(i => i.Name.ToLower() == name.ToLower());
         }
 
+        public bool IsContainCollectionDirectoryWithPath(string path)
+        {
+            if (string.IsNullOrEmpty(path))
+                return false;
+            return Database.CollectionDirectories.Any(i => i.Path == path);
+        }
+
         public IEnumerable<IEnumerable<Unit>> FindUnitsWhereNamesLooksLikeDuplicate()
-        { 
+        {
             string regexPatternString = $"^([\\s\\S]*?)((?= \\(\\d+\\))|(?= — {UIText.u_filesystem_copy}))+([\\s\\S]*?)(\\.[\\s\\S]*?)$";
 
             IEnumerable<(string name, string ext)> potentiallyMultipliedFileNamesWithExtensions =
@@ -123,12 +130,13 @@ namespace Makman.Middle.Services
                 .Distinct();
 
             return potentiallyMultipliedFileNamesWithExtensions
-                .Select(ne =>
+                .Select(nameAndExtension =>
                 {
                     return Database.Units.Where(u =>
                     {
                         var regexGroups = Regex.Match(u.FileName, regexPatternString).Groups;
-                        if ((regexGroups[1].Value == ne.name) && (regexGroups[4].Value == ne.ext))
+                        if ((regexGroups[1].Value == nameAndExtension.name)
+                        && (regexGroups[4].Value == nameAndExtension.ext))
                             return true;
                         else
                             return false;
@@ -136,7 +144,15 @@ namespace Makman.Middle.Services
                 })
                 .Where(list => list.Count() > 1);
         }
-          
 
+        public IEnumerable<Tag> GetTagsByNamesLower(IEnumerable<string> names)
+        {
+            return Database.Tags.Where(tag => names.Any(name => name.ToLower() == tag.Name.ToLower()));
+        }
+
+        public CollectionDirectory GetCollectionDirectoryByPath(string path)
+        {
+            return Database.CollectionDirectories.First(collectionDirectory => collectionDirectory.Path == path);
+        }
     }
 }

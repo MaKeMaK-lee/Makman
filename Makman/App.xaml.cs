@@ -1,6 +1,6 @@
-﻿ 
+﻿
 using Makman.Middle.EntityManagementServices;
-using Makman.Middle.Services; 
+using Makman.Middle.Services;
 using Makman.Visual.Core;
 using Makman.Visual.MVVM.Model;
 using Makman.Visual.MVVM.ViewModel;
@@ -39,6 +39,7 @@ namespace Makman
             services.AddSingleton<IServicesAccessor, ServicesAccessor>();
 
             services.AddSingleton<IConvertService, ConvertService>();
+            services.AddSingleton<ISettingsService, SettingsService>();
             services.AddSingleton<ICollectionDatabaseService, CollectionDatabaseService>();
             services.AddSingleton<ITestAndDebugService, TestAndDebugService>();
             services.AddSingleton<IFileSystemAccessService, FileSystemAccessService>();
