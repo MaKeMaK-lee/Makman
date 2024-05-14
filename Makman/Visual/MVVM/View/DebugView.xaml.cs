@@ -6,11 +6,11 @@ using System.Windows.Controls;
 namespace Makman.Visual.MVVM.View
 {
     /// <summary>
-    /// Логика взаимодействия для DiscoveryView.xaml
+    /// Логика взаимодействия для DebugView.xaml
     /// </summary>
-    public partial class DiscoveryView : UserControl
+    public partial class DebugView : UserControl
     {
-        public DiscoveryView()
+        public DebugView()
         {
             InitializeComponent();
         } 

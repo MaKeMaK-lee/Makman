@@ -37,7 +37,7 @@ namespace Makman.Visual.MVVM.ViewModel
             }, o => true);
             NavigateToDiscoveryCommand = new RelayCommand(o =>
             {
-                Navigation.NavigateTo<DiscoveryViewModel>();
+                Navigation.NavigateTo<DebugViewModel>();
             }, o => true);
             NavigateToCollectionCommand = new RelayCommand(o =>
             {
@@ -76,10 +76,10 @@ namespace Makman.Visual.MVVM.ViewModel
 
 
         //public RelayCommand HomeViewCommand { get; set; }
-        //public RelayCommand DiscoveryViewCommand { get; set; }
+        //public RelayCommand DebugViewCommand { get; set; }
         //public RelayCommand ChangeBGColorCommand { get; set; }
         //public HomeViewModel HomeVM { get; set; }
-        //public DiscoveryViewModel DiscoveryVM { get; set; }
+        //public DebugViewModel DiscoveryVM { get; set; }
 
         //private object currentView;
 
@@ -96,7 +96,7 @@ namespace Makman.Visual.MVVM.ViewModel
         //public MainViewModel()
         //{
         //    HomeVM = new HomeViewModel();
-        //    DiscoveryVM = new DiscoveryViewModel(this);
+        //    DiscoveryVM = new DebugViewModel(this);
         //    Bgcolor = "#999999";
 
 
@@ -110,7 +110,7 @@ namespace Makman.Visual.MVVM.ViewModel
         //    {
         //        CurrentView = HomeVM;
         //    });
-        //    DiscoveryViewCommand = new RelayCommand(o =>
+        //    DebugViewCommand = new RelayCommand(o =>
         //    {
         //        CurrentView = DiscoveryVM;
         //    });

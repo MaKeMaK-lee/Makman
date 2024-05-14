@@ -32,7 +32,7 @@ namespace Makman
             services.AddSingleton<TagsManagerViewModel>();
             services.AddSingleton<TagCategoriesManagerViewModel>();
             services.AddSingleton<CollectionViewModel>();
-            services.AddSingleton<DiscoveryViewModel>();
+            services.AddSingleton<DebugViewModel>();
             services.AddSingleton<UnitsManagerViewModel>();
             services.AddSingleton<Func<Type, ViewModel>>
                 (serviceProvider => viewModelType => (ViewModel)serviceProvider.GetRequiredService(viewModelType));

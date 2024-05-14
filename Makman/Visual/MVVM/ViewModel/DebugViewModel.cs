@@ -8,7 +8,7 @@ using Makman.Visual.MVVM.Model;
 
 namespace Makman.Visual.MVVM.ViewModel
 {
-    public class DiscoveryViewModel : Core.ViewModel
+    public class DebugViewModel : Core.ViewModel
     {
         private INavigation _navigation;
         private readonly IServicesAccessor _servicesAccessor;
@@ -41,7 +41,7 @@ namespace Makman.Visual.MVVM.ViewModel
         public RelayCommand TestFillCommand { get; set; }
 
 
-        public DiscoveryViewModel(INavigation navigationService, IServicesAccessor servicesAccessor, IFileSystemAccessService fileSystemAccessService, IFileMoverService fileMoverService)
+        public DebugViewModel(INavigation navigationService, IServicesAccessor servicesAccessor, IFileSystemAccessService fileSystemAccessService, IFileMoverService fileMoverService)
         {
             _servicesAccessor = servicesAccessor;
             _fileMoverService = fileMoverService;
