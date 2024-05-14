@@ -68,6 +68,55 @@ namespace Makman.Data.WindowsOS
             return new FileInfo(path).Length;
         }
 
+        static internal void FilesMoveToDirectory(IEnumerable<string> filePaths, string directoryPath, Action<string>? statusUpdateAction)
+        {
+            int count = filePaths.Count();
+            int moved = 0;
+            foreach (var filePath in filePaths)
+            {
+                if (statusUpdateAction != null)
+                    statusUpdateAction("Files moved: " + moved + " / " + count + "\n\n" +
+                         "Current source: " + filePath + "\n\n" +
+                         "Current targrt directory: " + directoryPath);
+                File.Move(filePath, directoryPath + "\\" + filePath.Split("\\").Last());
+                moved++;
+            }
+        }
+
+        static internal void FilesMoveToDirectorySlowly(IEnumerable<string> filePaths, string directoryPath, Action<string> statusUpdateAction, long averageSpeedByKBpS, int msWaitingBetweenFiles)
+        {
+            int count = filePaths.Count();
+            int moved = 0;
+            foreach (var filePath in filePaths)
+            {
+                var statusString = "Files moved: " + moved + " / " + count + "\n\n" +
+                    "Current source: " + filePath + "\n\n" +
+                    "Current targrt directory: " + directoryPath;
+
+                int msPerIteration = 50;
+                long fileSizeKB = GetFileSize(filePath) / 1024;
+                int fileWaitingTime = ((int)(1000 * fileSizeKB / averageSpeedByKBpS)) + msWaitingBetweenFiles;
+
+                long timeSleeped = 0;
+                for (; timeSleeped < fileWaitingTime; timeSleeped += msPerIteration)
+                {
+                    statusUpdateAction(statusString + "\n\n" +
+                        $"Waiting: {(double)timeSleeped / 1000:f2} / {(double)fileWaitingTime / 1000:f2} с");
+                    Thread.Sleep(msPerIteration);
+                }
+
+                File.Move(filePath, directoryPath + "\\" + filePath.Split("\\").Last());
+
+                moved++;
+                statusString = "Files moved: " + moved + " / " + count + "\n\n" +
+                    "Current source: " + filePath + "\n\n" +
+                    "Current targrt directory: " + directoryPath;
+
+                statusUpdateAction(statusString + "\n\n");
+            }
+
+        }
+
         static internal BitmapImage? TryGetImageOfFile(string path)
         {
             try

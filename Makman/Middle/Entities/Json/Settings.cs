@@ -12,6 +12,8 @@ namespace Makman.Middle.Entities.Json
         public required int MainWindowWidth { get; set; }
         public required int MainWindowHeight { get; set; }
 
+        public required long CloudingAverageSpeedByKBytePerSecond { get; set; }
+        public required int CloudingPauseBetweenFilesByms { get; set; }
         public required string MainDirectoryPath { get; set; }
         public required string TagCategoryNameForBindTagToDirectory { get; set; }
 

@@ -51,6 +51,24 @@ namespace Makman.Middle.Services
                 OnPropertyChanged(nameof(MainWindowHeight));
             }
         }
+        public int CloudingPauseBetweenFilesByms
+        {
+            get => CurrentSettings.CloudingPauseBetweenFilesByms;
+            set
+            {
+                CurrentSettings.CloudingPauseBetweenFilesByms = value;
+                OnPropertyChanged(nameof(CloudingPauseBetweenFilesByms));
+            }
+        }
+        public long CloudingAverageSpeedByKBytePerSecond
+        {
+            get => CurrentSettings.CloudingAverageSpeedByKBytePerSecond;
+            set
+            {
+                CurrentSettings.CloudingAverageSpeedByKBytePerSecond = value;
+                OnPropertyChanged(nameof(CloudingAverageSpeedByKBytePerSecond));
+            }
+        }
         public string MainDirectoryPath
         {
             get => CurrentSettings.MainDirectoryPath;
@@ -210,6 +228,8 @@ namespace Makman.Middle.Services
                 MainWindowWidth = 920,
                 MainWindowHeight = 600,
 
+                CloudingPauseBetweenFilesByms = 1000,
+                CloudingAverageSpeedByKBytePerSecond = 512,
                 MainDirectoryPath = "",
                 TagCategoryNameForBindTagToDirectory = "",
 

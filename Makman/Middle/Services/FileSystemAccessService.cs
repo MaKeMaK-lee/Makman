@@ -3,8 +3,10 @@ using Makman.Data.WindowsOS;
 
 namespace Makman.Middle.Services
 {
-    public class FileSystemAccessService : IFileSystemAccessService
+    public class FileSystemAccessService(Lazy<ISettingsService> settingsService) : IFileSystemAccessService
     {
+        private Lazy<ISettingsService> _settingsService = settingsService;
+
         public string? ChooseDirectory()
         {
             return WindowsUse.ChooseDirectory();
@@ -53,6 +55,18 @@ namespace Makman.Middle.Services
         public void WriteAllText(string fileName, string text)
         {
             WindowsUse.WriteAllText(fileName, text);
+        }
+
+        public void FilesMoveToDirectorySlowly(IEnumerable<string> filePaths, string directoryPath, Action<string>? statusUpdateAction = null)
+        {
+            WindowsUse.FilesMoveToDirectorySlowly(filePaths, directoryPath, statusUpdateAction,
+                _settingsService.Value.CloudingAverageSpeedByKBytePerSecond,
+                _settingsService.Value.CloudingPauseBetweenFilesByms);
+        }
+
+        public void FilesMoveToDirectory(IEnumerable<string> filePaths, string directoryPath, Action<string>? statusUpdateAction = null)
+        {
+            WindowsUse.FilesMoveToDirectory(filePaths, directoryPath, statusUpdateAction);
         }
     }
 }

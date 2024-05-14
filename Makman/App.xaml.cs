@@ -1,4 +1,5 @@
 ﻿
+using Makman.Middle.Core;
 using Makman.Middle.EntityManagementServices;
 using Makman.Middle.Services;
 using Makman.Visual.Core;
@@ -42,6 +43,7 @@ namespace Makman
             services.AddSingleton<ISettingsService, SettingsService>();
             services.AddSingleton<ICollectionDatabaseService, CollectionDatabaseService>();
             services.AddSingleton<ITestAndDebugService, TestAndDebugService>();
+            services.AddSingleton<IFileMoverService, FileMoverService>();
             services.AddSingleton<IFileSystemAccessService, FileSystemAccessService>();
 
             services.AddSingleton<IUnitManagementService, UnitManagementService>();
@@ -51,6 +53,8 @@ namespace Makman
             services.AddSingleton<IBunchManagementService, BunchManagementService>();
 
 
+
+            services.AddLazyResolution();
 
             _serviceProvider = services.BuildServiceProvider();
 

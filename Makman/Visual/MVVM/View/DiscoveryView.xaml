@@ -9,6 +9,7 @@
              Background="Bisque">
     <Grid>
         <Button Content="ViewInExplorer" Command="{Binding ViewInExplorerCommand}"  HorizontalAlignment="Left" Margin="212,225,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding TestString}" Margin="10,270,449,86"/>
         <Button Content="Button" Command="{Binding NavigateToHomeCommand}"  HorizontalAlignment="Left" Margin="275,179,0,0" VerticalAlignment="Top"/>
         <Button Content="TestFillCommand" Command="{Binding TestFillCommand}"  HorizontalAlignment="Left" Margin="363,227,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="83" Width="172">
             <Button.RenderTransform>
