@@ -21,6 +21,7 @@ namespace Makman.Visual.MVVM.ViewModel
         }
 
         public RelayCommand NavigateToHomeCommand { get; set; }
+        public RelayCommand NavigateToUnitsAdderCommand { get; set; }
         public RelayCommand NavigateToDiscoveryCommand { get; set; }
         public RelayCommand NavigateToCollectionCommand { get; set; }
         public RelayCommand NavigateToTagsManagerCommand { get; set; }
@@ -34,6 +35,10 @@ namespace Makman.Visual.MVVM.ViewModel
             NavigateToHomeCommand = new RelayCommand(o =>
             {
                 Navigation.NavigateTo<HomeViewModel>();
+            }, o => true);
+            NavigateToUnitsAdderCommand = new RelayCommand(o =>
+            {
+                Navigation.NavigateTo<UnitsAdderViewModel>();
             }, o => true);
             NavigateToDiscoveryCommand = new RelayCommand(o =>
             {
@@ -83,7 +88,7 @@ namespace Makman.Visual.MVVM.ViewModel
 
         //private object currentView;
 
-        //public object CurrentView
+        //public object DragDropControl
         //{
         //    get { return currentView; }
         //    set
@@ -100,19 +105,19 @@ namespace Makman.Visual.MVVM.ViewModel
         //    Bgcolor = "#999999";
 
 
-        //    CurrentView = HomeVM;
+        //    DragDropControl = HomeVM;
 
         //    ChangeBGColorCommand = new RelayCommand(o =>
         //    {
-        //        CurrentView = HomeVM;
+        //        DragDropControl = HomeVM;
         //    });
         //    HomeViewCommand = new RelayCommand(o =>
         //    {
-        //        CurrentView = HomeVM;
+        //        DragDropControl = HomeVM;
         //    });
         //    DebugViewCommand = new RelayCommand(o =>
         //    {
-        //        CurrentView = DiscoveryVM;
+        //        DragDropControl = DiscoveryVM;
         //    });
 
         //}

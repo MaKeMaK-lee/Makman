@@ -79,6 +79,12 @@
                              IsChecked="True"
                              Command="{Binding NavigateToHomeCommand}"
                              FontFamily="/Visual/Fonts/#Protest Revolution"/>
+                <RadioButton Content="{x:Static localization:UIText.mw_pagelist_units_adder}"
+                             Height="50"
+                             Foreground="WhiteSmoke"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding NavigateToUnitsAdderCommand}"/>
                 <RadioButton Content="{x:Static localization:UIText.mw_pagelist_collection}"
                              Height="50"
                              Foreground="WhiteSmoke"

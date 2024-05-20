@@ -1,5 +1,6 @@
 ﻿
 using Makman.Data.WindowsOS;
+using Makman.Middle.Utilities;
 
 namespace Makman.Middle.Services
 {
@@ -59,14 +60,22 @@ namespace Makman.Middle.Services
 
         public void FilesMoveToDirectorySlowly(IEnumerable<string> filePaths, string directoryPath, Action<string>? statusUpdateAction = null)
         {
-            WindowsUse.FilesMoveToDirectorySlowly(filePaths, directoryPath, statusUpdateAction,
-                _settingsService.Value.CloudingAverageSpeedByKBytePerSecond,
-                _settingsService.Value.CloudingPauseBetweenFilesByms);
+            if (statusUpdateAction != null)
+                WindowsUse.FilesMoveToDirectorySlowly(filePaths, directoryPath, statusUpdateAction,
+                    _settingsService.Value.CurrentSettings.CloudingAverageSpeedByKBytePerSecond,
+                    _settingsService.Value.CurrentSettings.CloudingPauseBetweenFilesByms);
         }
 
         public void FilesMoveToDirectory(IEnumerable<string> filePaths, string directoryPath, Action<string>? statusUpdateAction = null)
         {
             WindowsUse.FilesMoveToDirectory(filePaths, directoryPath, statusUpdateAction);
+        }
+
+        public void RenameFile(string path, string newName)
+        { 
+            var newPath = StringUtils.ReplaceFileName(path, newName);
+
+            WindowsUse.RenameFile(path, newPath);
         }
     }
 }

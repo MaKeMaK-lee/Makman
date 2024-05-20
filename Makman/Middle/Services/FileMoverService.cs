@@ -10,27 +10,29 @@ namespace Makman.Middle.Services
 
         public void FilesMoveToDirectory(IEnumerable<string> filePaths, CollectionDirectory directory, Action<string>? statusUpdateAction = null)
         {
-            if (directory.SynchronizingWithCloud == true)
+            if (filePaths.Any())
             {
-                Task.Run(() =>
+                if (directory.SynchronizingWithCloud == true)
                 {
-                    _fileSystemAccessService.FilesMoveToDirectorySlowly(
-                    filePaths,
-                    directory.Path,
-                    statusUpdateAction);
-                }); 
-            }
-            else
-            {
-                Task.Run(() =>
+                    Task.Run(() =>
+                    {
+                        _fileSystemAccessService.FilesMoveToDirectorySlowly(
+                        filePaths,
+                        directory.Path,
+                        statusUpdateAction);
+                    });
+                }
+                else
                 {
-                    _fileSystemAccessService.FilesMoveToDirectory(
-                    filePaths,
-                    directory.Path,
-                    statusUpdateAction);
-                });
+                    Task.Run(() =>
+                    {
+                        _fileSystemAccessService.FilesMoveToDirectory(
+                        filePaths,
+                        directory.Path,
+                        statusUpdateAction);
+                    });
+                }
             }
-
 
         }
     }

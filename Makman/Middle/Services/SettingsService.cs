@@ -1,8 +1,9 @@
 ﻿
 using Makman.Middle.Core;
 using Makman.Middle.Entities;
-using Makman.Middle.Entities.Json; 
-using System.Text.Json;
+using Makman.Middle.Entities.Settings;
+using System.Collections.ObjectModel;
+using System.Text.Json; 
 
 namespace Makman.Middle.Services
 {
@@ -13,143 +14,78 @@ namespace Makman.Middle.Services
 
         private const string settingsFileName = "Settings.json";
 
-        private Settings CurrentSettings { get; set; }
+        public Settings CurrentSettings { get; set; }
 
-        public int MainWindowPositionX
+        private SettingsForJsonStoring SettingsToSettingsForJsonStoring(Settings settings)
         {
-            get => CurrentSettings.MainWindowPositionX;
-            set
+            return new SettingsForJsonStoring
             {
-                CurrentSettings.MainWindowPositionX = value;
-                OnPropertyChanged(nameof(MainWindowPositionX));
-            }
-        }
-        public int MainWindowPositionY
-        {
-            get => CurrentSettings.MainWindowPositionY;
-            set
-            {
-                CurrentSettings.MainWindowPositionY = value;
-                OnPropertyChanged(nameof(MainWindowPositionY));
-            }
-        }
-        public int MainWindowWidth
-        {
-            get => CurrentSettings.MainWindowWidth;
-            set
-            {
-                CurrentSettings.MainWindowWidth = value;
-                OnPropertyChanged(nameof(MainWindowWidth));
-            }
-        }
-        public int MainWindowHeight
-        {
-            get => CurrentSettings.MainWindowHeight;
-            set
-            {
-                CurrentSettings.MainWindowHeight = value;
-                OnPropertyChanged(nameof(MainWindowHeight));
-            }
-        }
-        public int CloudingPauseBetweenFilesByms
-        {
-            get => CurrentSettings.CloudingPauseBetweenFilesByms;
-            set
-            {
-                CurrentSettings.CloudingPauseBetweenFilesByms = value;
-                OnPropertyChanged(nameof(CloudingPauseBetweenFilesByms));
-            }
-        }
-        public long CloudingAverageSpeedByKBytePerSecond
-        {
-            get => CurrentSettings.CloudingAverageSpeedByKBytePerSecond;
-            set
-            {
-                CurrentSettings.CloudingAverageSpeedByKBytePerSecond = value;
-                OnPropertyChanged(nameof(CloudingAverageSpeedByKBytePerSecond));
-            }
-        }
-        public string MainDirectoryPath
-        {
-            get => CurrentSettings.MainDirectoryPath;
-            set
-            {
-                CurrentSettings.MainDirectoryPath = value;
-                OnPropertyChanged(nameof(MainDirectoryPath));
-            }
-        }
-        public string TagCategoryNameForBindTagToDirectory
-        {
-            get => CurrentSettings.TagCategoryNameForBindTagToDirectory;
-            set
-            {
-                CurrentSettings.TagCategoryNameForBindTagToDirectory = value;
-                OnPropertyChanged(nameof(TagCategoryNameForBindTagToDirectory));
-            }
-        }
-        public bool DefaultCollectionDirectoryAutoScanning
-        {
-            get => CurrentSettings.DefaultCollectionDirectoryAutoScanning;
-            set
-            {
-                CurrentSettings.DefaultCollectionDirectoryAutoScanning = value;
-                OnPropertyChanged(nameof(DefaultCollectionDirectoryAutoScanning));
-            }
-        }
-        public bool DefaultCollectionDirectorySynchronizingWithCloud
-        {
-            get => CurrentSettings.DefaultCollectionDirectorySynchronizingWithCloud;
-            set
-            {
-                CurrentSettings.DefaultCollectionDirectorySynchronizingWithCloud = value;
-                OnPropertyChanged(nameof(DefaultCollectionDirectorySynchronizingWithCloud));
-            }
-        }
-        public bool DefaultTryMoveFilesByDirectoryTagcategoryNameOnAdding
-        {
-            get => CurrentSettings.DefaultTryMoveFilesByDirectoryTagcategoryNameOnAdding;
-            set
-            {
-                CurrentSettings.DefaultTryMoveFilesByDirectoryTagcategoryNameOnAdding = value;
-                OnPropertyChanged(nameof(DefaultTryMoveFilesByDirectoryTagcategoryNameOnAdding));
-            }
+                MainWindowPositionX = settings.MainWindowPositionX,
+                MainWindowPositionY = settings.MainWindowPositionY,
+                MainWindowWidth = settings.MainWindowWidth,
+                MainWindowHeight = settings.MainWindowHeight,
+
+                CloudingPauseBetweenFilesByms = settings.CloudingPauseBetweenFilesByms,
+                CloudingAverageSpeedByKBytePerSecond = settings.CloudingAverageSpeedByKBytePerSecond,
+                MainDirectoryPath = settings.MainDirectory?.Path ?? "",
+                TagCategoryNameForBindTagToDirectory = settings.TagCategoryForBindTagToDirectory?.Name ?? "",
+
+                DefaultCollectionDirectoryAutoScanning = settings.DefaultCollectionDirectoryAutoScanning,
+                DefaultCollectionDirectorySynchronizingWithCloud = settings.DefaultCollectionDirectorySynchronizingWithCloud,
+
+                DefaultTryMoveFilesByDirectoryTagcategoryNameOnAdding = settings.DefaultTryMoveFilesByDirectoryTagcategoryNameOnAdding,
+                DefaultDirectoryPathToMoveOnAdding = settings.DefaultDirectoryToMoveOnAdding?.Path ?? "",
+                DefaultTagsOnAdding = settings.TagsOnAdding?.Select(t => t.Name).ToList() ?? []
+            };
         }
 
-        private CollectionDirectory? defaultDirectoryPathToMoveOnAdding = null;
-        public CollectionDirectory? DefaultDirectoryPathToMoveOnAdding
+        private Settings SettingsForJsonStoringToSettings(SettingsForJsonStoring settingsJson)
         {
-            get
-            {
-                if (defaultDirectoryPathToMoveOnAdding != null)
-                    return defaultDirectoryPathToMoveOnAdding;
+            CollectionDirectory? mainDirectory;
+            CollectionDirectory? defaultDirectoryToMoveOnAdding;
+            TagCategory? tagCategoryForBindTagToDirectory;
+            ObservableCollection<Tag>? defaultTagsOnAdding;
 
-                if (!_collectionDatabaseService.IsContainCollectionDirectoryWithPath(CurrentSettings.DefaultDirectoryPathToMoveOnAdding))
-                {
-                    defaultDirectoryPathToMoveOnAdding = null;
-                    return defaultDirectoryPathToMoveOnAdding;
-                }
+            if (!_collectionDatabaseService.IsContainCollectionDirectoryWithPath(settingsJson.MainDirectoryPath))
+                mainDirectory = null;
+            else
+                mainDirectory = _collectionDatabaseService.GetCollectionDirectory(settingsJson.MainDirectoryPath);
 
-                defaultDirectoryPathToMoveOnAdding = _collectionDatabaseService.GetCollectionDirectoryByPath(CurrentSettings.DefaultDirectoryPathToMoveOnAdding);
-                return defaultDirectoryPathToMoveOnAdding;
-            }
-            set
+            if (!_collectionDatabaseService.IsContainCollectionDirectoryWithPath(settingsJson.DefaultDirectoryPathToMoveOnAdding))
+                defaultDirectoryToMoveOnAdding = null;
+            else
+                defaultDirectoryToMoveOnAdding = _collectionDatabaseService.GetCollectionDirectory(settingsJson.DefaultDirectoryPathToMoveOnAdding);
+
+            if (!_collectionDatabaseService.IsContainTagCategoryWithNameLower(settingsJson.DefaultDirectoryPathToMoveOnAdding))
+                tagCategoryForBindTagToDirectory = null;
+            else
+                tagCategoryForBindTagToDirectory = _collectionDatabaseService.GetTagCategoryLower(settingsJson.TagCategoryNameForBindTagToDirectory);
+
+            defaultTagsOnAdding = new ObservableCollection<Tag>(_collectionDatabaseService.GetTagsByNamesLower(settingsJson.DefaultTagsOnAdding));
+
+
+            return new Settings
             {
-                defaultDirectoryPathToMoveOnAdding = value;
-                OnPropertyChanged(nameof(DefaultDirectoryPathToMoveOnAdding));
-            }
+                MainWindowPositionX = settingsJson.MainWindowPositionX,
+                MainWindowPositionY = settingsJson.MainWindowPositionY,
+                MainWindowWidth = settingsJson.MainWindowWidth,
+                MainWindowHeight = settingsJson.MainWindowHeight,
+
+                CloudingPauseBetweenFilesByms = settingsJson.CloudingPauseBetweenFilesByms,
+                CloudingAverageSpeedByKBytePerSecond = settingsJson.CloudingAverageSpeedByKBytePerSecond,
+                MainDirectory = mainDirectory,
+                TagCategoryForBindTagToDirectory = tagCategoryForBindTagToDirectory,
+
+                DefaultCollectionDirectoryAutoScanning = settingsJson.DefaultCollectionDirectoryAutoScanning,
+                DefaultCollectionDirectorySynchronizingWithCloud = settingsJson.DefaultCollectionDirectorySynchronizingWithCloud,
+
+                DefaultTryMoveFilesByDirectoryTagcategoryNameOnAdding = settingsJson.DefaultTryMoveFilesByDirectoryTagcategoryNameOnAdding,
+                DefaultDirectoryToMoveOnAdding = defaultDirectoryToMoveOnAdding,
+                CurrentDirectoryToMoveOnAdding = defaultDirectoryToMoveOnAdding,
+                TagsOnAdding = defaultTagsOnAdding
+            };
         }
-        private IEnumerable<Tag>? defaultTagsOnAdding = null;
-        public IEnumerable<Tag> DefaultTagsOnAdding
-        {
-            get
-            {
-                if (defaultTagsOnAdding != null)
-                    return defaultTagsOnAdding;
 
-                defaultTagsOnAdding = _collectionDatabaseService.GetTagsByNamesLower(CurrentSettings.DefaultTagsOnAdding);
-                return defaultTagsOnAdding;
-            }
-        }
 
         private bool TryLoadCurrentSettings()
         {
@@ -158,10 +94,10 @@ namespace Makman.Middle.Services
                 if (_fileSystemAccessService.FileExists(settingsFileName))
                 {
                     string jsonString = _fileSystemAccessService.ReadAllText(settingsFileName);
-                    var settings = JsonSerializer.Deserialize<Settings>(jsonString);
-                    if (settings != null)
+                    var jsonSettings = JsonSerializer.Deserialize<SettingsForJsonStoring>(jsonString);
+                    if (jsonSettings != null)
                     {
-                        CurrentSettings = settings;
+                        CurrentSettings = SettingsForJsonStoringToSettings(jsonSettings);
                         return true;
                     }
                 }
@@ -171,26 +107,14 @@ namespace Makman.Middle.Services
 
             }
             return false;
-        }
-
-        private void SynchronizeNonSyncronizedCurrentSettings()
-        {
-            CurrentSettings.DefaultTagsOnAdding = DefaultTagsOnAdding.Select(t => t.Name).ToList();
-
-            if (DefaultDirectoryPathToMoveOnAdding?.Path != null)
-                CurrentSettings.DefaultDirectoryPathToMoveOnAdding = DefaultDirectoryPathToMoveOnAdding.Path;
-            else
-                CurrentSettings.DefaultDirectoryPathToMoveOnAdding = "";
-        }
+        } 
 
         public bool Save()
-        {
-            SynchronizeNonSyncronizedCurrentSettings();
-
+        { 
             try
             {
                 string fileName = settingsFileName;
-                string jsonString = JsonSerializer.Serialize(CurrentSettings, options: new()
+                string jsonString = JsonSerializer.Serialize(SettingsToSettingsForJsonStoring(CurrentSettings), options: new()
                 {
                     IgnoreReadOnlyProperties = true,
                     WriteIndented = true
@@ -230,15 +154,16 @@ namespace Makman.Middle.Services
 
                 CloudingPauseBetweenFilesByms = 1000,
                 CloudingAverageSpeedByKBytePerSecond = 512,
-                MainDirectoryPath = "",
-                TagCategoryNameForBindTagToDirectory = "",
+                MainDirectory = null,
+                TagCategoryForBindTagToDirectory = null,
 
                 DefaultCollectionDirectoryAutoScanning = true,
                 DefaultCollectionDirectorySynchronizingWithCloud = true,
 
                 DefaultTryMoveFilesByDirectoryTagcategoryNameOnAdding = false,
-                DefaultDirectoryPathToMoveOnAdding = "",
-                DefaultTagsOnAdding = []
+                DefaultDirectoryToMoveOnAdding = null,
+                CurrentDirectoryToMoveOnAdding = null,
+                TagsOnAdding = []
             };
         }
     }

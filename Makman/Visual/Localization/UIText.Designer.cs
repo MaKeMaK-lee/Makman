@@ -349,6 +349,15 @@ namespace Makman.Visual.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Units adder.
+        /// </summary>
+        public static string mw_pagelist_units_adder {
+            get {
+                return ResourceManager.GetString("mw pagelist units adder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Units.
         /// </summary>
         public static string mw_pagelist_units_manager {
@@ -606,6 +615,15 @@ namespace Makman.Visual.Localization {
         public static string unit_searchduplicates_prevtoend {
             get {
                 return ResourceManager.GetString("unit searchduplicates prevtoend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на &lt;- Refuse.
+        /// </summary>
+        public static string unit_searchduplicates_removeleft {
+            get {
+                return ResourceManager.GetString("unit searchduplicates removeleft", resourceCulture);
             }
         }
         

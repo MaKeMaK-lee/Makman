@@ -213,6 +213,9 @@
   <data name="mw pagelist tags manager" xml:space="preserve">
     <value>Tags</value>
   </data>
+  <data name="mw pagelist units adder" xml:space="preserve">
+    <value>Units adder</value>
+  </data>
   <data name="mw pagelist units manager" xml:space="preserve">
     <value>Units</value>
   </data>
@@ -299,6 +302,9 @@
   </data>
   <data name="unit searchduplicates prevtoend" xml:space="preserve">
     <value>|&lt;-</value>
+  </data>
+  <data name="unit searchduplicates removeleft" xml:space="preserve">
+    <value>&lt;- Refuse</value>
   </data>
   <data name="unit searchduplicates skip" xml:space="preserve">
     <value>Skip -&gt;</value>

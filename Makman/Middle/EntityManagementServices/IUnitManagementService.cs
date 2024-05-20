@@ -10,6 +10,8 @@ namespace Makman.Middle.EntityManagementServices
         /// <returns>Количество обнаруженных в директориях, но не добавленных файлов</returns>
         int AddUnitsFromFilesOfFolderAndSyncToDatabase(string directoryPath, bool allowSubDirectories = true);
 
+        void AddUnitsToDatabase(IEnumerable<Unit> units);
+
         public Bunch? GetBunchOf(IEnumerable<Unit> units);
 
         bool IsSameOrNullBunch(IEnumerable<Unit>? units);
@@ -25,7 +27,14 @@ namespace Makman.Middle.EntityManagementServices
 
         void BindToBunch(IEnumerable<Unit> bindingUnits, Bunch? nullableBunch);
 
+        void AddNamePostfix(IEnumerable<Unit> postfixingUnits);
+
+        void ActualizeFileName(Unit unit);
+
         /// <returns>TRUE if binded</returns>
         bool TryBindToBunch(IEnumerable<Unit>? bindingUnits, IEnumerable<Unit>? exampleUnits, bool includeExamples = false);
+
+        void MoveUnitsToDirectory(IEnumerable<Unit> units, CollectionDirectory directory, Action<string>? statusUpdateAction = null);
+
     }
 }

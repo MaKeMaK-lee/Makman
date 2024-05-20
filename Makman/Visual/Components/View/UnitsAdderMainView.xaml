@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Makman.Visual.MVVM.View.UnitsManagerView"
+﻿<UserControl x:Class="Makman.Visual.Components.View.UnitsAdderMainView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,23 +10,19 @@
              xmlns:viewmodel="clr-namespace:Makman.Visual.MVVM.ViewModel"  
              xmlns:controls="clr-namespace:WpfToolkit.Controls;assembly=VirtualizingWrapPanel"
              mc:Ignorable="d" Background="Transparent"  >
-    <Grid >
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
-            <RowDefinition Height="*" />
+            <RowDefinition />
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Row="0">
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="0">
-            <Button FontSize="11" Style="{StaticResource ButtonWithTextTheme}" Command="{Binding SearchDuplicatesStartCommand}" >
-                <Button.Content>
-                    <TextBlock Margin="5" FontSize="16" Text="{x:Static localization:UIText.unit_managepanel_searchduplicates}"></TextBlock>
-                </Button.Content>
-            </Button>
-        </StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="300" Width="4*"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition MinWidth="280" Width="5*" />
+        </Grid.ColumnDefinitions>
+        <GridSplitter Background="#01000000" Grid.Column="1" ShowsPreview="True" Width="3"
+            HorizontalAlignment="Center" VerticalAlignment="Stretch" />
 
-        <ContentControl Grid.Row="1" Margin="0,10,0,0"
-                Content="{Binding CurrentSubview}"/> 
+        <ContentControl Grid.Column="0" Content="{Binding DragDropControl}"/>
 
     </Grid>
 </UserControl>

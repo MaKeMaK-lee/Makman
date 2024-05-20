@@ -1,4 +1,5 @@
 ﻿using Makman.Middle.Entities;
+using Makman.Middle.Entities.Settings;
 using Makman.Middle.Services;
 
 namespace Makman.Visual.MVVM.Model
@@ -38,6 +39,11 @@ namespace Makman.Visual.MVVM.Model
             return _collectionDatabaseService.FindUnitsWhereNamesLooksLikeDuplicate();
         }
 
+        public IEnumerable<IEnumerable<Unit>> GetUnitsDuplicatedByNames(IEnumerable<Unit> newUnits)
+        {
+            return _collectionDatabaseService.GetUnitsDuplicatedByNames(newUnits);
+        }
+
         public void ViewInExplorer(string path)
         {
             _fileSystemAccessService.ViewInExplorer(path);
@@ -56,6 +62,11 @@ namespace Makman.Visual.MVVM.Model
         public bool SaveSettings()
         {
             return _settingsService.Save();
+        }
+
+        public Settings GetSettings()
+        {
+            return _settingsService.CurrentSettings;
         }
     }
 }

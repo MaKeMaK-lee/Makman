@@ -34,9 +34,11 @@ namespace Makman
             services.AddSingleton<CollectionViewModel>();
             services.AddSingleton<DebugViewModel>();
             services.AddSingleton<UnitsManagerViewModel>();
+            services.AddSingleton<UnitsAdderViewModel>();
             services.AddSingleton<Func<Type, ViewModel>>
                 (serviceProvider => viewModelType => (ViewModel)serviceProvider.GetRequiredService(viewModelType));
             services.AddSingleton<INavigation, Navigation>();
+
             services.AddSingleton<IServicesAccessor, ServicesAccessor>();
 
             services.AddSingleton<IConvertService, ConvertService>();

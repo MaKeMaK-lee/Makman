@@ -31,5 +31,7 @@ namespace Makman.Middle.Services
         void WriteAllText(string fileName, string text);
 
         object GetImageOfFile(string path, bool justThumbnail);
+
+        void RenameFile(string path, string newName);
     }
 }

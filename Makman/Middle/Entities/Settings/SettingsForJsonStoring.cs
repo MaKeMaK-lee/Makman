@@ -1,11 +1,8 @@
-﻿
-using Makman.Middle.Core;
-using System.Collections.ObjectModel;
-using System.Text.Json.Serialization;
+﻿ 
 
-namespace Makman.Middle.Entities.Json
+namespace Makman.Middle.Entities.Settings
 {
-    public class Settings
+    public class SettingsForJsonStoring
     {
         public required int MainWindowPositionX { get; set; }
         public required int MainWindowPositionY { get; set; }

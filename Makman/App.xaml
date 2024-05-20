@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Makman"
              xmlns:viewModel="clr-namespace:Makman.Visual.MVVM.ViewModel"
+             xmlns:viewModelComponents="clr-namespace:Makman.Visual.Components.ViewModel"
              xmlns:view="clr-namespace:Makman.Visual.MVVM.View"
+             xmlns:viewComponents="clr-namespace:Makman.Visual.Components.View"
              xmlns:converters="clr-namespace:Makman.Visual.Converters"
               >
 
@@ -24,6 +26,10 @@
 
             <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
                 <view:HomeView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:UnitsAdderViewModel}">
+                <view:UnitsAdderView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:DebugViewModel}">
@@ -48,6 +54,20 @@
 
             <DataTemplate DataType="{x:Type viewModel:TagCategoriesManagerViewModel}">
                 <view:TagCategoriesManagerView/>
+            </DataTemplate>
+
+
+
+            <DataTemplate DataType="{x:Type viewModelComponents:UnitComparerViewModel}">
+                <viewComponents:UnitComparerView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModelComponents:DragDropFilesReceiverViewModel}">
+                <viewComponents:DragDropFilesReceiverView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModelComponents:UnitsAdderMainViewModel}">
+                <viewComponents:UnitsAdderMainView/>
             </DataTemplate>
 
 

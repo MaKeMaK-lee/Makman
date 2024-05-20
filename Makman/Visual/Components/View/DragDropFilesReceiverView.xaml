@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="Makman.Visual.Components.View.DragDropFilesReceiverView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
+             xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:localization="clr-namespace:Makman.Visual.Localization"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:Makman.Visual.MVVM.View"  
+             xmlns:viewmodel="clr-namespace:Makman.Visual.MVVM.ViewModel"  
+             xmlns:controls="clr-namespace:WpfToolkit.Controls;assembly=VirtualizingWrapPanel"
+             xmlns:utilities="clr-namespace:Makman.Visual.Utilities"
+             mc:Ignorable="d" Background="Transparent" >
+    <Grid> 
+        <ScrollViewer Background="#30000000" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" 
+            AllowDrop="True" utilities:FileDragDropHelper.FileDragDropTarget="{Binding }" utilities:FileDragDropHelper.IsFileDragDropEnabled="True" >
+
+            <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="{x:Static localization:UIText.u_no_text}">
+                
+            </Label>
+            
+        </ScrollViewer>
+    </Grid>
+</UserControl>

@@ -36,7 +36,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Visual\Components\" />
     <Folder Include="Visual\Fonts\" />
   </ItemGroup>
 

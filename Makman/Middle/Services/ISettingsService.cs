@@ -1,4 +1,5 @@
 ﻿using Makman.Middle.Entities;
+using Makman.Middle.Entities.Settings;
 
 namespace Makman.Middle.Services
 {
@@ -6,22 +7,7 @@ namespace Makman.Middle.Services
     {
         bool Save();
 
-        int MainWindowPositionX { get; set; }
-        int MainWindowPositionY { get; set; }
-        int MainWindowWidth { get; set; }
-        int MainWindowHeight { get; set; }
-
-        long CloudingAverageSpeedByKBytePerSecond { get; set; }
-        int CloudingPauseBetweenFilesByms { get; set; }
-        string MainDirectoryPath { get; set; }
-        string TagCategoryNameForBindTagToDirectory { get; set; }
-
-        bool DefaultCollectionDirectoryAutoScanning { get; set; }
-        bool DefaultCollectionDirectorySynchronizingWithCloud { get; set; }
-
-        bool DefaultTryMoveFilesByDirectoryTagcategoryNameOnAdding { get; set; }
-        CollectionDirectory? DefaultDirectoryPathToMoveOnAdding { get; set; }
-        IEnumerable<Tag> DefaultTagsOnAdding { get; }
+        Settings CurrentSettings { get; set; }
 
 
 

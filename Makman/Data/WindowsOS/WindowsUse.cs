@@ -68,6 +68,11 @@ namespace Makman.Data.WindowsOS
             return new FileInfo(path).Length;
         }
 
+        static internal void RenameFile(string oldPath, string newPath)
+        {
+            File.Move(oldPath, newPath);
+        }
+
         static internal void FilesMoveToDirectory(IEnumerable<string> filePaths, string directoryPath, Action<string>? statusUpdateAction)
         {
             int count = filePaths.Count();
@@ -98,13 +103,15 @@ namespace Makman.Data.WindowsOS
                 int fileWaitingTime = ((int)(1000 * fileSizeKB / averageSpeedByKBpS)) + msWaitingBetweenFiles;
 
                 long timeSleeped = 0;
-                for (; timeSleeped < fileWaitingTime; timeSleeped += msPerIteration)
+                if (moved != 0)
                 {
-                    statusUpdateAction(statusString + "\n\n" +
-                        $"Waiting: {(double)timeSleeped / 1000:f2} / {(double)fileWaitingTime / 1000:f2} с");
-                    Thread.Sleep(msPerIteration);
+                    for (; timeSleeped < fileWaitingTime; timeSleeped += msPerIteration)
+                    {
+                        statusUpdateAction(statusString + "\n\n" +
+                            $"Waiting: {(double)timeSleeped / 1000:f2} / {(double)fileWaitingTime / 1000:f2} с");
+                        Thread.Sleep(msPerIteration);
+                    }
                 }
-
                 File.Move(filePath, directoryPath + "\\" + filePath.Split("\\").Last());
 
                 moved++;
@@ -121,7 +128,13 @@ namespace Makman.Data.WindowsOS
         {
             try
             {
-                return new BitmapImage(new Uri(path));
+                var image = new BitmapImage();
+                image.BeginInit();
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                image.UriSource = new Uri(path);
+                image.EndInit();
+                return image;
             }
             catch (Exception)
             {
@@ -131,21 +144,23 @@ namespace Makman.Data.WindowsOS
 
         static internal object GetImageOfFile(string path, bool justThumbnail)
         {
-            var shellObject = ShellObject.FromParsingName(path);
-
-            if (!justThumbnail)
+            using (var shellObject = ShellObject.FromParsingName(path))
             {
-                string contentType = (string)shellObject.Properties.GetProperty("System.ContentType").ValueAsObject;
-                if (contentType.StartsWith("image"))
+                if (!justThumbnail)
                 {
-                    var imageResult = TryGetImageOfFile(path);
-                    if (imageResult != null)
-                        return imageResult;
+                    string contentType = (string)shellObject.Properties.GetProperty("System.ContentType").ValueAsObject;
+                    if (contentType?.StartsWith("image") ?? false)
+                    {
+                        var imageResult = TryGetImageOfFile(path);
+                        if (imageResult != null)
+                        {
+                            return imageResult;
+                        }
+                    }
+                    return shellObject.Thumbnail.ExtraLargeBitmapSource;
                 }
-                return shellObject.Thumbnail.ExtraLargeBitmapSource;
+                return shellObject.Thumbnail.MediumBitmapSource;
             }
-            return shellObject.Thumbnail.MediumBitmapSource;
-
         }
     }
 }

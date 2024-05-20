@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="Makman.Visual.MVVM.View.UnitsAdderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
+              xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:localization="clr-namespace:Makman.Visual.Localization"
+             xmlns:utilities="clr-namespace:Makman.Visual.Utilities"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:Makman.Visual.MVVM.View"  
+             xmlns:viewmodel="clr-namespace:Makman.Visual.MVVM.ViewModel"  
+             xmlns:controls="clr-namespace:WpfToolkit.Controls;assembly=VirtualizingWrapPanel"
+             mc:Ignorable="d" Background="Transparent"  >
+    <UserControl.Resources>
+        <Style TargetType="Rectangle">
+            <Style.Setters>
+                <Setter Property="Fill" Value="#10000000" />
+                <Setter Property="IsHitTestVisible" Value="False" />
+                <Setter Property="RadiusX" Value="10" />
+                <Setter Property="RadiusY" Value="10" />
+            </Style.Setters>
+        </Style>
+        <Style x:Key="MiniItemsRectangle" TargetType="Rectangle">
+            <Style.Setters>
+                <Setter Property="OverridesDefaultStyle" Value="True" />
+                <Setter Property="IsHitTestVisible" Value="False" />
+                <Setter Property="RadiusX" Value="3" />
+                <Setter Property="RadiusY" Value="3" />
+            </Style.Setters>
+        </Style>
+    </UserControl.Resources>
+    <Grid  >
+        <ContentControl Content="{Binding CurrentSubview}"/>
+    </Grid>
+</UserControl>

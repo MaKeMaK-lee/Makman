@@ -1,16 +1,20 @@
 ﻿
 using Makman.Middle.Entities;
 using Makman.Middle.Services;
+using Makman.Middle.Utilities;
+using Makman.Visual.Localization;
 
 namespace Makman.Middle.EntityManagementServices
 {
     public class UnitManagementService(ICollectionDatabaseService collectionDatabaseService,
-        IFileSystemAccessService fileSystemAccessService, IBunchManagementService bunchManagementService) : IUnitManagementService
+        IFileSystemAccessService fileSystemAccessService, IBunchManagementService bunchManagementService,
+        IFileMoverService fileMoverService) : IUnitManagementService
     {
 
         readonly ICollectionDatabaseService _collectionDatabaseService = collectionDatabaseService;
         readonly IFileSystemAccessService _fileSystemAccessService = fileSystemAccessService;
         readonly IBunchManagementService _bunchManagementService = bunchManagementService;
+        readonly IFileMoverService _fileMoverService = fileMoverService;
 
         public int AddUnitsFromFilesOfFolderAndSyncToDatabase(string directoryPath, bool allowSubDirectories = true)
         {
@@ -23,10 +27,15 @@ namespace Makman.Middle.EntityManagementServices
             var units = CreateMany(fullFileNamesToAdd.Where(name => !_collectionDatabaseService.GetUnits()
                 .Where(unit => unit.FullFileName == name).Any()));
 
-            _collectionDatabaseService.Add(units);
-            _collectionDatabaseService.Save();
+            AddUnitsToDatabase(units);
 
             return fullFileNamesToAdd.Count() - units.Count();
+        }
+
+        public void AddUnitsToDatabase(IEnumerable<Unit> units)
+        {
+            _collectionDatabaseService.Add(units);
+            _collectionDatabaseService.Save();
         }
 
         public IEnumerable<Unit> CreateMany(IEnumerable<string> fullFileNames)
@@ -135,6 +144,58 @@ namespace Makman.Middle.EntityManagementServices
                 if (!item.Tags.Contains(bindingTag))
                     BindTag(item, bindingTag);
             }
+        }
+
+        public bool TryRename(Unit unit, string newFileName)
+        {
+            try
+            {
+                _fileSystemAccessService.RenameFile(unit.FullFileName, newFileName);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            unit.FullFileName = StringUtils.ReplaceFileName(unit.FullFileName, newFileName);
+            ActualizeFileName(unit);
+            return true;
+        }
+
+        public void Rename(Unit unit, string newFileName)
+        {
+            _fileSystemAccessService.RenameFile(unit.FullFileName, newFileName);
+            unit.FullFileName = StringUtils.ReplaceFileName(unit.FullFileName, newFileName);
+            ActualizeFileName(unit);
+        }
+
+        public void MoveUnitsToDirectory(IEnumerable<Unit> units, CollectionDirectory directory, Action<string>? statusUpdateAction = null)
+        {
+            _fileMoverService.FilesMoveToDirectory(units.Select(u => u.FullFileName), directory, statusUpdateAction);
+            foreach (var u in units)
+            {
+                u.FullFileName = StringUtils.ReplaceFileDirectory(u.FullFileName, directory.Path);
+            }
+        }
+
+        public void AddNamePostfix(IEnumerable<Unit> postfixingUnits)
+        {
+            do
+            {
+                foreach (var u in postfixingUnits)
+                {
+                    string newFileName;
+                    do
+                    {
+                        newFileName = StringUtils.AddPostfixToFileName(u.FullFileName,
+                            " - " + UIText.u_filesystem_copy).GetFileName();
+                    } while (!TryRename(u, newFileName));
+                }
+            } while (_collectionDatabaseService.GetUnitsDuplicatedByNames(postfixingUnits).Any());
+        }
+
+        public void ActualizeFileName(Unit unit)
+        {
+            unit.FileName = unit.FullFileName.GetFileName();
         }
     }
 }

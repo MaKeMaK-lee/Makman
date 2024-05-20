@@ -2,6 +2,7 @@
 using Makman.Middle.Entities;
 using Makman.Visual.Localization;
 using System.Text.RegularExpressions;
+using System.Windows.Documents;
 
 namespace Makman.Middle.Services
 {
@@ -145,14 +146,33 @@ namespace Makman.Middle.Services
                 .Where(list => list.Count() > 1);
         }
 
+        public IEnumerable<IEnumerable<Unit>> GetUnitsDuplicatedByNames(IEnumerable<Unit> unitsForChecking)
+        {
+            return unitsForChecking
+                .Select(unitForChecking =>
+                {
+                    var list = Enumerable.Empty<Unit>().Append(unitForChecking);
+
+                    return list.Concat(
+                        Database.Units.Where(unitInDatabase
+                            => unitForChecking.FileName == unitInDatabase.FileName));
+                })
+                .Where(list => list.Count() > 1);
+        }
+
         public IEnumerable<Tag> GetTagsByNamesLower(IEnumerable<string> names)
         {
             return Database.Tags.Where(tag => names.Any(name => name.ToLower() == tag.Name.ToLower()));
         }
 
-        public CollectionDirectory GetCollectionDirectoryByPath(string path)
+        public CollectionDirectory GetCollectionDirectory(string path)
         {
             return Database.CollectionDirectories.First(collectionDirectory => collectionDirectory.Path == path);
+        }
+
+        public TagCategory GetTagCategoryLower(string name)
+        {
+            return Database.TagCategories.First(tc => tc.Name.ToLower() == name.ToLower());
         }
     }
 }

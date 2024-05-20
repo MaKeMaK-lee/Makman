@@ -7,7 +7,8 @@ namespace Makman.Middle.Services
         //public void Load();
         public IEnumerable<Unit> GetUnits();
         public IEnumerable<CollectionDirectory> GetCollectionDirectories();
-        public CollectionDirectory GetCollectionDirectoryByPath(string path);
+        public CollectionDirectory GetCollectionDirectory(string path);
+        public TagCategory GetTagCategoryLower(string name);
         public IEnumerable<Tag> GetTags();
         public IEnumerable<Tag> GetTagsByNamesLower(IEnumerable<string> names);
         public IEnumerable<TagCategory> GetTagCategories();
@@ -26,5 +27,6 @@ namespace Makman.Middle.Services
 
         /// <returns>List of lists of duplicates</returns>
         public IEnumerable<IEnumerable<Unit>> FindUnitsWhereNamesLooksLikeDuplicate();
+        public IEnumerable<IEnumerable<Unit>> GetUnitsDuplicatedByNames(IEnumerable<Unit> newUnits);
     }
 }
