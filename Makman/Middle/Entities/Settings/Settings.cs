@@ -1,15 +1,15 @@
-﻿using Makman.Middle.Core;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Makman.Middle.Core; 
+using System.Collections.ObjectModel; 
 
 namespace Makman.Middle.Entities.Settings
 {
     public class Settings : ObservableObject
     {
+        private bool tryMoveFilesOnAdding;
+        private bool toggleBunchingOnAddingUnits;
+        private bool addTagsOnAddingUnits;
+        private bool tryMoveFilesByDirectoryTagcategoryNameOnAdding;
+
         //MainWindow
         public required int MainWindowPositionX { get; set; }
         public required int MainWindowPositionY { get; set; }
@@ -21,27 +21,66 @@ namespace Makman.Middle.Entities.Settings
         public required int CloudingPauseBetweenFilesByms { get; set; }
 
         //Default CollectionDirectory props
-        public required bool DefaultCollectionDirectoryAutoScanning { get; set; }
-        public required bool DefaultCollectionDirectorySynchronizingWithCloud { get; set; }
+        public required bool CollectionDirectoryAutoScanningDefaultValue { get; set; }
+        public required bool CollectionDirectorySynchronizingWithCloudDefaultValue { get; set; }
 
-        //Default Unit props 
-        public required ObservableCollection<Tag> TagsOnAdding { get; set; }
+        //Unit adding props 
+        public required bool ToggleBunchingOnAddingUnits
+        {
+            get => toggleBunchingOnAddingUnits;
+            set
+            {
+                toggleBunchingOnAddingUnits = value;
+                OnPropertyChanged(nameof(ToggleBunchingOnAddingUnits));
+            }
+        } 
+        public required bool AddTagsOnAddingUnits
+        {
+            get => addTagsOnAddingUnits;
+            set
+            {
+                addTagsOnAddingUnits = value;
+                OnPropertyChanged(nameof(AddTagsOnAddingUnits));
+            }
+        }
+        public required ObservableCollection<Tag> TagsOnAddingUnits { get; set; }
 
-        //Adding settings variant 1
+
+        //Unit adding directory variant 1
         /// <summary>
         /// Directory where contains subdirectories with names of tags (with "TagCategoryForBindTagToDirectory" prop TagCategory) 
-        /// with units putting here when adding if "DefaultTryMoveFilesByDirectoryTagcategoryNameOnAdding" prop is true
+        /// with units putting here when adding if "TryMoveFilesByDirectoryTagcategoryNameOnAdding" prop is true
         /// </summary>
         public required CollectionDirectory? MainDirectory { get; set; }
-        public required TagCategory? TagCategoryForBindTagToDirectory { get; set; }
-        public required bool DefaultTryMoveFilesByDirectoryTagcategoryNameOnAdding { get; set; }
+        public required TagCategory? TagCategoryForBindTagToDirectory { get; set; } 
+        public required bool TryMoveFilesByDirectoryTagcategoryNameOnAdding
+        {
+            get => tryMoveFilesByDirectoryTagcategoryNameOnAdding;
+            set
+            {
+                tryMoveFilesByDirectoryTagcategoryNameOnAdding = value;
+                OnPropertyChanged(nameof(TryMoveFilesByDirectoryTagcategoryNameOnAdding));
+            }
+        }
 
-        //Adding settings variant 2 
+        //Unit adding directory variant 2 
         /// <summary>
-        /// Current directory to move files on adding. Not storing and sets to "DefaultDirectoryToMoveOnAdding" prop on Makman launch.
+        /// Current directory to move files on adding. Not storing and sets to "DefaultTargetDirectoryToMoveOnAdding" prop on Makman launch.
         /// </summary>
-        public required CollectionDirectory? CurrentDirectoryToMoveOnAdding { get; set; }
-        public required CollectionDirectory? DefaultDirectoryToMoveOnAdding { get; set; }
-
+        public required CollectionDirectory? CurrentTargetDirectoryToMoveOnAdding { get; set; }
+        /// <summary>
+        /// Default directory to move files on adding. 
+        /// </summary>
+        public required CollectionDirectory? DefaultTargetDirectoryToMoveOnAdding { get; set; }
+         
+        public required bool TryMoveFilesOnAdding
+        {
+            get => tryMoveFilesOnAdding;
+            set
+            {
+                tryMoveFilesOnAdding = value;
+                OnPropertyChanged(nameof(TryMoveFilesOnAdding));
+            }
+        } 
     }
 }

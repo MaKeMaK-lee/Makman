@@ -58,15 +58,15 @@ namespace Makman.Middle.Services
             WindowsUse.WriteAllText(fileName, text);
         }
 
-        public void FilesMoveToDirectorySlowly(IEnumerable<string> filePaths, string directoryPath, Action<string>? statusUpdateAction = null)
+        public void FilesMoveToDirectorySlowly(IEnumerable<string> filePaths, string directoryPath, Action<string, bool>? statusUpdateAction = null)
         {
-            if (statusUpdateAction != null)
+
                 WindowsUse.FilesMoveToDirectorySlowly(filePaths, directoryPath, statusUpdateAction,
                     _settingsService.Value.CurrentSettings.CloudingAverageSpeedByKBytePerSecond,
                     _settingsService.Value.CurrentSettings.CloudingPauseBetweenFilesByms);
         }
 
-        public void FilesMoveToDirectory(IEnumerable<string> filePaths, string directoryPath, Action<string>? statusUpdateAction = null)
+        public void FilesMoveToDirectory(IEnumerable<string> filePaths, string directoryPath, Action<string, bool>? statusUpdateAction = null)
         {
             WindowsUse.FilesMoveToDirectory(filePaths, directoryPath, statusUpdateAction);
         }

@@ -16,13 +16,13 @@ using System.Windows.Shapes;
 namespace Makman.Visual.Components.View
 {
     /// <summary>
-    /// Логика взаимодействия для UnitsAdderMainView.xaml
+    /// Логика взаимодействия для WaiterView.xaml
     /// </summary>
-    public partial class UnitsAdderMainView : UserControl
+    public partial class WaiterView : UserControl
     {
-        public UnitsAdderMainView()
+        public WaiterView()
         {
             InitializeComponent();
-        } 
+        }
     }
 }

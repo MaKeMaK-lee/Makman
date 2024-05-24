@@ -7,22 +7,275 @@
              xmlns:localization="clr-namespace:Makman.Visual.Localization"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:Makman.Visual.MVVM.View"  
+             xmlns:components="clr-namespace:Makman.Visual.Components.Inherited"  
              xmlns:viewmodel="clr-namespace:Makman.Visual.MVVM.ViewModel"  
              xmlns:controls="clr-namespace:WpfToolkit.Controls;assembly=VirtualizingWrapPanel"
              mc:Ignorable="d" Background="Transparent"  >
+    <UserControl.Resources>
+        <Style TargetType="Rectangle">
+            <Style.Setters>
+                <Setter Property="Fill" Value="#10000000" />
+                <Setter Property="IsHitTestVisible" Value="False" />
+                <Setter Property="RadiusX" Value="10" />
+                <Setter Property="RadiusY" Value="10" />
+            </Style.Setters>
+        </Style>
+        <Style x:Key="MiniItemsRectangle" TargetType="Rectangle">
+            <Style.Setters>
+                <Setter Property="OverridesDefaultStyle" Value="True" />
+                <Setter Property="IsHitTestVisible" Value="False" />
+                <Setter Property="RadiusX" Value="3" />
+                <Setter Property="RadiusY" Value="3" />
+            </Style.Setters>
+        </Style>
+        <Style x:Key="SettingsGroup" TargetType="Rectangle">
+            <Style.Setters>
+                <Setter Property="Fill" Value="#10000000" />
+                <Setter Property="IsHitTestVisible" Value="False" />
+                <Setter Property="RadiusX" Value="5" />
+                <Setter Property="RadiusY" Value="5" />
+            </Style.Setters>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="300" Width="4*"/>
+            <ColumnDefinition MinWidth="300" Width="7*"/>
             <ColumnDefinition Width="Auto" />
-            <ColumnDefinition MinWidth="280" Width="5*" />
+            <ColumnDefinition MinWidth="320" Width="3*" />
         </Grid.ColumnDefinitions>
         <GridSplitter Background="#01000000" Grid.Column="1" ShowsPreview="True" Width="3"
             HorizontalAlignment="Center" VerticalAlignment="Stretch" />
 
-        <ContentControl Grid.Column="0" Content="{Binding DragDropControl}"/>
+        <Rectangle Margin="3" Fill="#30000000" Grid.Column="0"/>
+        <ContentControl Margin="10" Grid.Column="0" Content="{Binding DragDropControl}"/>
+
+        <Rectangle Margin="3" Grid.Column="2"/>
+        <ScrollViewer Margin="10" MinWidth="300" Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" 
+              VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Background="Transparent"
+            Orientation="Vertical" FlowDirection="LeftToRight">
+                <Grid Margin="0,0,0,5">
+                    <Rectangle Style="{StaticResource SettingsGroup}" Opacity="{Binding BunchingSettingsGroupOpacity}"/>
+                    <CheckBox Margin="5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" 
+                              Content="{x:Static localization:UIText.u_settings_property_name_unitsadding_togglebunching}" 
+                              IsChecked="{Binding Settings.ToggleBunchingOnAddingUnits, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </Grid>
+
+                <Grid Margin="0,0,0,5">
+                    <Rectangle Style="{StaticResource SettingsGroup}" Opacity="{Binding AddTagsSettingsGroupOpacity}"/>
+                    <Grid Margin="5" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <CheckBox Grid.Row="0" Margin="0,0,0,5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" 
+                                      Content="{x:Static localization:UIText.u_settings_property_name_unitsadding_addtagsonaddingunits}" 
+                                      IsChecked="{Binding Settings.AddTagsOnAddingUnits, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" Grid.Row="1" Opacity="{Binding AddTagsSettingsGroupOpacity}">
+                            <components:FilteredComboBox Margin="5" ItemsSource="{Binding TagsPickerList}"
+                             Width="150"
+                            SelectedItem="{Binding TagsPickerListSelectedItem}"
+                            IsEditable="True"
+                            IsTextSearchEnabled="False" 
+                            StaysOpenOnEdit="True"
+                            HorizontalAlignment="Stretch" >
+                                <components:FilteredComboBox.OpacityMask>
+                                    <SolidColorBrush Color="#FFFFFFFF" Opacity="0.4" />
+                                </components:FilteredComboBox.OpacityMask>
+                                <components:FilteredComboBox.Resources>
+                                    <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#20FFFFFF" />
+                                </components:FilteredComboBox.Resources>
+                                <components:FilteredComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Left" Text="{Binding Name}" Foreground="{Binding SummaryColor,
+                                   Converter={StaticResource StringColoroBrushConverter}}" MaxWidth="600"
+                                   ToolTip="{Binding Name}" >
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </components:FilteredComboBox.ItemTemplate>
+                                <components:FilteredComboBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel VirtualizationMode="Recycling" />
+                                    </ItemsPanelTemplate>
+                                </components:FilteredComboBox.ItemsPanel>
+                            </components:FilteredComboBox>
+                            <Button FontSize="11" Style="{StaticResource ButtonWithTextTheme}" MinWidth="35" 
+                                    Command="{Binding TagBindCommand}" IsEnabled="{Binding IsSelectedAnyTag, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" >
+                                <Button.Content>
+                                    <TextBlock Margin="5" FontSize="16" Text="{x:Static localization:UIText.u_add}"></TextBlock>
+                                </Button.Content>
+                            </Button>
+                            <Button FontSize="11" Style="{StaticResource ButtonWithTextTheme}" MinWidth="35" 
+                                    Command="{Binding TagUnbindCommand}" IsEnabled="{Binding IsSelectedAnyTag, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" >
+                                <Button.Content>
+                                    <TextBlock Margin="5" FontSize="16" Text="{x:Static localization:UIText.u_remove}"></TextBlock>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+
+                        <ListView Grid.Row="2" Background="Transparent" Opacity="{Binding AddTagsSettingsGroupOpacity}"
+                            BorderThickness="0" ItemsSource="{Binding Settings.TagsOnAddingUnits, Mode=OneWay}">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate >
+                                    <WrapPanel Background="Transparent" 
+                                        Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"  >
+                                    </WrapPanel>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Height="20">
+                                        <Rectangle Fill="#30000000" Style="{StaticResource MiniItemsRectangle}" />
+                                        <TextBlock Margin="3" Text="{Binding Name}" ToolTip="{Binding Name}"
+                               FontSize="10" Foreground="{Binding SummaryColor,
+                               Converter={StaticResource StringColoroBrushConverter}}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+                </Grid>
+
+                <Grid Margin="0,0,0,5">
+                    <Rectangle Style="{StaticResource SettingsGroup}" Opacity="{Binding MoveToMainSettingsGroupOpacity}"/>
+                    <Grid Margin="5" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MinWidth="130" Width="6*" />
+                            <ColumnDefinition MaxWidth="600" Width="4*" MinWidth="150" />
+                        </Grid.ColumnDefinitions>
+                        <CheckBox Margin="0,0,0,5" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                                  IsChecked="{Binding Settings.TryMoveFilesByDirectoryTagcategoryNameOnAdding, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <TextBox Background="Transparent" BorderThickness="0" TextWrapping="Wrap" IsHitTestVisible="False"
+                                     IsReadOnlyCaretVisible="False" IsReadOnly="True"
+                                Text="{x:Static localization:UIText.u_settings_property_name_unitsadding_trymovefilesbydirectorytagcategorynameonadding}">
+                            </TextBox>
+                        </CheckBox>
+
+                        <TextBox Margin="0,0,0,5" Grid.Row="1" Grid.Column="0" Opacity="{Binding MoveToMainSettingsGroupOpacity}"
+                                 IsReadOnlyCaretVisible="False" IsReadOnly="True"
+                                 Background="Transparent" BorderThickness="0" TextWrapping="Wrap"
+                                 Text="{x:Static localization:UIText.u_settings_property_name_unitsadding_tagcategoryforbindtagtodirectory}"/>
+                        <components:FilteredComboBox Margin="0,0,0,5" Grid.Row="1" Grid.Column="1"
+                                                     Opacity="{Binding MoveToMainSettingsGroupOpacity}"
+                                                     ItemsSource="{Binding TagCategoryPickerList}"
+                                                     SelectedItem="{Binding Settings.TagCategoryForBindTagToDirectory}"
+                                                     IsEditable="True"   
+                                                     IsTextSearchEnabled="False" 
+                                                     StaysOpenOnEdit="True"
+                                                     HorizontalAlignment="Stretch" >
+                            <components:FilteredComboBox.OpacityMask>
+                                <SolidColorBrush Color="#FFFFFFFF" Opacity="0.4" />
+                            </components:FilteredComboBox.OpacityMask>
+                            <components:FilteredComboBox.Resources>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#20FFFFFF" />
+                            </components:FilteredComboBox.Resources>
+                            <components:FilteredComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Left" Text="{Binding Name}" Foreground="{Binding Color,
+                                   Converter={StaticResource StringColoroBrushConverter}}" MaxWidth="600"
+                                   ToolTip="{Binding Name}" >
+                                    </TextBlock>
+                                </DataTemplate>
+                            </components:FilteredComboBox.ItemTemplate>
+                            <components:FilteredComboBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel VirtualizationMode="Recycling" />
+                                </ItemsPanelTemplate>
+                            </components:FilteredComboBox.ItemsPanel>
+                        </components:FilteredComboBox>
+
+                        <TextBox Margin="0,0,0,5" Grid.Row="3" Grid.Column="0" Opacity="{Binding MoveToMainSettingsGroupOpacity}"
+                                 IsReadOnlyCaretVisible="False" IsReadOnly="True"
+                                 Background="Transparent" BorderThickness="0" TextWrapping="Wrap"
+                                 Text="{x:Static localization:UIText.u_settings_property_name_unitsadding_maindirectory}"/>
+                        <components:FilteredComboBox Margin="0,0,0,5" Grid.Row="2" Grid.Column="1"
+                                                     Opacity="{Binding MoveToMainSettingsGroupOpacity}"
+                                                     ItemsSource="{Binding MainDirectoryPickerList}"
+                                                     SelectedItem="{Binding Settings.MainDirectory}"
+                                                     IsEditable="True"   
+                                                     IsTextSearchEnabled="False" 
+                                                     StaysOpenOnEdit="True"
+                                                     HorizontalAlignment="Stretch" >
+                            <components:FilteredComboBox.OpacityMask>
+                                <SolidColorBrush Color="#FFFFFFFF" Opacity="0.4" />
+                            </components:FilteredComboBox.OpacityMask>
+                            <components:FilteredComboBox.Resources>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#20FFFFFF" />
+                            </components:FilteredComboBox.Resources>
+                            <components:FilteredComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Left" Text="{Binding Path}" MaxWidth="600"
+                                   ToolTip="{Binding Path}" >
+                                    </TextBlock>
+                                </DataTemplate>
+                            </components:FilteredComboBox.ItemTemplate>
+                            <components:FilteredComboBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel VirtualizationMode="Recycling" />
+                                </ItemsPanelTemplate>
+                            </components:FilteredComboBox.ItemsPanel>
+                        </components:FilteredComboBox>
+                    </Grid>
+                </Grid>
+
+                <Grid Margin="0,0,0,5">
+                    <Rectangle Style="{StaticResource SettingsGroup}" Opacity="{Binding MoveToTargetSettingsGroupOpacity}"/>
+                    <Grid Margin="5" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MinWidth="130" Width="6*" />
+                            <ColumnDefinition MaxWidth="600" Width="4*" MinWidth="150" />
+                        </Grid.ColumnDefinitions>
+                        <CheckBox Margin="0,0,0,5" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" 
+                                  Content="{x:Static localization:UIText.u_settings_property_name_unitsadding_trymovefilesonadding}" 
+                                  IsChecked="{Binding Settings.TryMoveFilesOnAdding, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <components:FilteredComboBox Margin="0,0,0,5" Grid.Row="1" Grid.Column="1"
+                                                     MinWidth="150" MaxWidth="350"
+                                                     Opacity="{Binding MoveToTargetSettingsGroupOpacity}"
+                                                     ItemsSource="{Binding TargetDirectoryPickerList}"
+                                                     SelectedItem="{Binding Settings.CurrentTargetDirectoryToMoveOnAdding}"
+                                                     IsEditable="True"   
+                                                     IsTextSearchEnabled="False" 
+                                                     StaysOpenOnEdit="True"
+                                                     HorizontalAlignment="Stretch" >
+                            <components:FilteredComboBox.OpacityMask>
+                                <SolidColorBrush Color="#FFFFFFFF" Opacity="0.4" />
+                            </components:FilteredComboBox.OpacityMask>
+                            <components:FilteredComboBox.Resources>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#20FFFFFF" />
+                            </components:FilteredComboBox.Resources>
+                            <components:FilteredComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Left" Text="{Binding Path}" MaxWidth="600"
+                                   ToolTip="{Binding Path}" >
+                                    </TextBlock>
+                                </DataTemplate>
+                            </components:FilteredComboBox.ItemTemplate>
+                            <components:FilteredComboBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel VirtualizationMode="Recycling" />
+                                </ItemsPanelTemplate>
+                            </components:FilteredComboBox.ItemsPanel>
+                        </components:FilteredComboBox>
+                    </Grid>
+                </Grid>
+
+            </StackPanel>
+        </ScrollViewer>
+
 
     </Grid>
 </UserControl>

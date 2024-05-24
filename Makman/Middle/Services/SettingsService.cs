@@ -3,7 +3,7 @@ using Makman.Middle.Core;
 using Makman.Middle.Entities;
 using Makman.Middle.Entities.Settings;
 using System.Collections.ObjectModel;
-using System.Text.Json; 
+using System.Text.Json;
 
 namespace Makman.Middle.Services
 {
@@ -30,12 +30,16 @@ namespace Makman.Middle.Services
                 MainDirectoryPath = settings.MainDirectory?.Path ?? "",
                 TagCategoryNameForBindTagToDirectory = settings.TagCategoryForBindTagToDirectory?.Name ?? "",
 
-                DefaultCollectionDirectoryAutoScanning = settings.DefaultCollectionDirectoryAutoScanning,
-                DefaultCollectionDirectorySynchronizingWithCloud = settings.DefaultCollectionDirectorySynchronizingWithCloud,
+                CollectionDirectoryAutoScanningDefaultValue = settings.CollectionDirectoryAutoScanningDefaultValue,
+                CollectionDirectorySynchronizingWithCloudDefaultValue = settings.CollectionDirectorySynchronizingWithCloudDefaultValue,
 
-                DefaultTryMoveFilesByDirectoryTagcategoryNameOnAdding = settings.DefaultTryMoveFilesByDirectoryTagcategoryNameOnAdding,
-                DefaultDirectoryPathToMoveOnAdding = settings.DefaultDirectoryToMoveOnAdding?.Path ?? "",
-                DefaultTagsOnAdding = settings.TagsOnAdding?.Select(t => t.Name).ToList() ?? []
+                DefaultDirectoryPathToMoveOnAdding = settings.DefaultTargetDirectoryToMoveOnAdding?.Path ?? "",
+                DefaultTagsOnAdding = settings.TagsOnAddingUnits?.Select(t => t.Name).ToList() ?? [],
+
+                TryMoveFilesOnAdding = settings.TryMoveFilesOnAdding,
+                AddTagsOnAddingUnits = settings.AddTagsOnAddingUnits,
+                TryMoveFilesByDirectoryTagcategoryNameOnAdding = settings.TryMoveFilesByDirectoryTagcategoryNameOnAdding,
+                ToggleBunchingOnAddingUnits = settings.ToggleBunchingOnAddingUnits,
             };
         }
 
@@ -56,7 +60,7 @@ namespace Makman.Middle.Services
             else
                 defaultDirectoryToMoveOnAdding = _collectionDatabaseService.GetCollectionDirectory(settingsJson.DefaultDirectoryPathToMoveOnAdding);
 
-            if (!_collectionDatabaseService.IsContainTagCategoryWithNameLower(settingsJson.DefaultDirectoryPathToMoveOnAdding))
+            if (!_collectionDatabaseService.IsContainTagCategoryWithNameLower(settingsJson.TagCategoryNameForBindTagToDirectory))
                 tagCategoryForBindTagToDirectory = null;
             else
                 tagCategoryForBindTagToDirectory = _collectionDatabaseService.GetTagCategoryLower(settingsJson.TagCategoryNameForBindTagToDirectory);
@@ -76,13 +80,16 @@ namespace Makman.Middle.Services
                 MainDirectory = mainDirectory,
                 TagCategoryForBindTagToDirectory = tagCategoryForBindTagToDirectory,
 
-                DefaultCollectionDirectoryAutoScanning = settingsJson.DefaultCollectionDirectoryAutoScanning,
-                DefaultCollectionDirectorySynchronizingWithCloud = settingsJson.DefaultCollectionDirectorySynchronizingWithCloud,
+                CollectionDirectoryAutoScanningDefaultValue = settingsJson.CollectionDirectoryAutoScanningDefaultValue,
+                CollectionDirectorySynchronizingWithCloudDefaultValue = settingsJson.CollectionDirectorySynchronizingWithCloudDefaultValue,
 
-                DefaultTryMoveFilesByDirectoryTagcategoryNameOnAdding = settingsJson.DefaultTryMoveFilesByDirectoryTagcategoryNameOnAdding,
-                DefaultDirectoryToMoveOnAdding = defaultDirectoryToMoveOnAdding,
-                CurrentDirectoryToMoveOnAdding = defaultDirectoryToMoveOnAdding,
-                TagsOnAdding = defaultTagsOnAdding
+                TryMoveFilesOnAdding = settingsJson.TryMoveFilesOnAdding,
+                AddTagsOnAddingUnits = settingsJson.AddTagsOnAddingUnits,
+                TryMoveFilesByDirectoryTagcategoryNameOnAdding = settingsJson.TryMoveFilesByDirectoryTagcategoryNameOnAdding,
+                DefaultTargetDirectoryToMoveOnAdding = defaultDirectoryToMoveOnAdding,
+                CurrentTargetDirectoryToMoveOnAdding = defaultDirectoryToMoveOnAdding,
+                TagsOnAddingUnits = defaultTagsOnAdding,
+                ToggleBunchingOnAddingUnits = settingsJson.ToggleBunchingOnAddingUnits,
             };
         }
 
@@ -107,10 +114,10 @@ namespace Makman.Middle.Services
 
             }
             return false;
-        } 
+        }
 
         public bool Save()
-        { 
+        {
             try
             {
                 string fileName = settingsFileName;
@@ -156,14 +163,17 @@ namespace Makman.Middle.Services
                 CloudingAverageSpeedByKBytePerSecond = 512,
                 MainDirectory = null,
                 TagCategoryForBindTagToDirectory = null,
+                ToggleBunchingOnAddingUnits = false,
 
-                DefaultCollectionDirectoryAutoScanning = true,
-                DefaultCollectionDirectorySynchronizingWithCloud = true,
+                CollectionDirectoryAutoScanningDefaultValue = true,
+                CollectionDirectorySynchronizingWithCloudDefaultValue = true,
 
-                DefaultTryMoveFilesByDirectoryTagcategoryNameOnAdding = false,
-                DefaultDirectoryToMoveOnAdding = null,
-                CurrentDirectoryToMoveOnAdding = null,
-                TagsOnAdding = []
+                TryMoveFilesOnAdding = false,
+                AddTagsOnAddingUnits = false,
+                TryMoveFilesByDirectoryTagcategoryNameOnAdding = false,
+                DefaultTargetDirectoryToMoveOnAdding = null,
+                CurrentTargetDirectoryToMoveOnAdding = null,
+                TagsOnAddingUnits = []
             };
         }
     }

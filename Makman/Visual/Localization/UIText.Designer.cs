@@ -520,6 +520,24 @@ namespace Makman.Visual.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на +.
+        /// </summary>
+        public static string u_add {
+            get {
+                return ResourceManager.GetString("u add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Drop files here.
+        /// </summary>
+        public static string u_draganddrop_drophere {
+            get {
+                return ResourceManager.GetString("u draganddrop drophere", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на copy.
         /// </summary>
         public static string u_filesystem_copy {
@@ -538,11 +556,84 @@ namespace Makman.Visual.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на -.
+        /// </summary>
+        public static string u_remove {
+            get {
+                return ResourceManager.GetString("u remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Search.
         /// </summary>
         public static string u_search {
             get {
                 return ResourceManager.GetString("u search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Add tags.
+        /// </summary>
+        public static string u_settings_property_name_unitsadding_addtagsonaddingunits {
+            get {
+                return ResourceManager.GetString("u settings property name unitsadding addtagsonaddingunits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Main directory.
+        /// </summary>
+        public static string u_settings_property_name_unitsadding_maindirectory {
+            get {
+                return ResourceManager.GetString("u settings property name unitsadding maindirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Tag category for main directory&apos;s subfolder name.
+        /// </summary>
+        public static string u_settings_property_name_unitsadding_tagcategoryforbindtagtodirectory {
+            get {
+                return ResourceManager.GetString("u settings property name unitsadding tagcategoryforbindtagtodirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Bunching.
+        /// </summary>
+        public static string u_settings_property_name_unitsadding_togglebunching {
+            get {
+                return ResourceManager.GetString("u settings property name unitsadding togglebunching", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Bunching.
+        /// </summary>
+        public static string u_settings_property_name_unitsadding_togglebunching7 {
+            get {
+                return ResourceManager.GetString("u settings property name unitsadding togglebunching7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Try move news to folder in main directory with name of tag of this tag category.
+        /// </summary>
+        public static string u_settings_property_name_unitsadding_trymovefilesbydirectorytagcategorynameonadding {
+            get {
+                return ResourceManager.GetString("u settings property name unitsadding trymovefilesbydirectorytagcategorynameonaddi" +
+                        "ng", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Try move news to directory.
+        /// </summary>
+        public static string u_settings_property_name_unitsadding_trymovefilesonadding {
+            get {
+                return ResourceManager.GetString("u settings property name unitsadding trymovefilesonadding", resourceCulture);
             }
         }
         

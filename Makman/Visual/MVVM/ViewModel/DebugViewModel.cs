@@ -13,7 +13,7 @@ namespace Makman.Visual.MVVM.ViewModel
         private INavigation _navigation;
         private readonly IServicesAccessor _servicesAccessor;
         private IFileSystemAccessService _fileSystemAccessService;
-        private IFileMoverService _fileMoverService;
+        private IUnitMoverService _unitMoverService;
 
         public INavigation Navigation
         {
@@ -41,10 +41,10 @@ namespace Makman.Visual.MVVM.ViewModel
         public RelayCommand TestFillCommand { get; set; }
 
 
-        public DebugViewModel(INavigation navigationService, IServicesAccessor servicesAccessor, IFileSystemAccessService fileSystemAccessService, IFileMoverService fileMoverService)
+        public DebugViewModel(INavigation navigationService, IServicesAccessor servicesAccessor, IFileSystemAccessService fileSystemAccessService, IUnitMoverService unitMoverService)
         {
             _servicesAccessor = servicesAccessor;
-            _fileMoverService = fileMoverService;
+            _unitMoverService = unitMoverService;
             _fileSystemAccessService = fileSystemAccessService;
 
             Navigation = navigationService;
@@ -53,11 +53,7 @@ namespace Makman.Visual.MVVM.ViewModel
                 Navigation.NavigateTo<HomeViewModel>();
             }, o => true);
             ViewInExplorerCommand = new RelayCommand(o =>
-            {
-                _fileMoverService.FilesMoveToDirectory(
-                    ["C:\\Users\\Akatsuki\\Desktop\\1\\1.png", "C:\\Users\\Akatsuki\\Desktop\\1\\2.png", "C:\\Users\\Akatsuki\\Desktop\\1\\3.png",],
-                         new CollectionDirectory() { Path = "C:\\Users\\Akatsuki\\Desktop", SynchronizingWithCloud = true },
-                    newStatusString => { TestString = newStatusString; });
+            { 
                 //WindowsUse.ViewInExplorer(WindowsUse.GetFilesFromDirectory(WindowsUse.ChooseDirectory()!).Skip(321).First());
             }, o => true);
             TestFillCommand = new RelayCommand(o =>

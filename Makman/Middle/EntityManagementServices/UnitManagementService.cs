@@ -3,18 +3,19 @@ using Makman.Middle.Entities;
 using Makman.Middle.Services;
 using Makman.Middle.Utilities;
 using Makman.Visual.Localization;
+using System.Collections.ObjectModel;
 
 namespace Makman.Middle.EntityManagementServices
 {
     public class UnitManagementService(ICollectionDatabaseService collectionDatabaseService,
         IFileSystemAccessService fileSystemAccessService, IBunchManagementService bunchManagementService,
-        IFileMoverService fileMoverService) : IUnitManagementService
+        IUnitMoverService unitMoverService) : IUnitManagementService
     {
 
         readonly ICollectionDatabaseService _collectionDatabaseService = collectionDatabaseService;
         readonly IFileSystemAccessService _fileSystemAccessService = fileSystemAccessService;
         readonly IBunchManagementService _bunchManagementService = bunchManagementService;
-        readonly IFileMoverService _fileMoverService = fileMoverService;
+        readonly IUnitMoverService _unitMoverService = unitMoverService;
 
         public int AddUnitsFromFilesOfFolderAndSyncToDatabase(string directoryPath, bool allowSubDirectories = true)
         {
@@ -38,7 +39,7 @@ namespace Makman.Middle.EntityManagementServices
             _collectionDatabaseService.Save();
         }
 
-        public IEnumerable<Unit> CreateMany(IEnumerable<string> fullFileNames)
+        public IEnumerable<Unit> CreateMany(IEnumerable<string> fullFileNames, IEnumerable<Tag>? tags = null, bool bindToBunch = false)
         {
             List<Unit> units = new(fullFileNames.Count());
             var nowDateTimeForThisCreates = DateTime.Now;
@@ -54,8 +55,12 @@ namespace Makman.Middle.EntityManagementServices
                     TimeAddedToCollection = nowDateTimeForThisCreates,
                     TimeLastWrite = _fileSystemAccessService.GetFileLastWriteTime(fullFileName),
                     ChildUnits = [],
-                    Tags = []
+                    Tags = new ObservableCollection<Tag>(tags ?? [])
                 });
+            }
+            if (bindToBunch)
+            {
+                BindToBunch(units, null);
             }
             return units;
         }
@@ -79,7 +84,7 @@ namespace Makman.Middle.EntityManagementServices
             return true;
         }
 
-        public void BindToBunch(IEnumerable<Unit> bindingUnits, Bunch? nullableBunch)
+        public void BindToBunch(IEnumerable<Unit> bindingUnits, Bunch? nullableBunch = null)
         {
             Bunch bunch = nullableBunch ?? _bunchManagementService.AddNew();
 
@@ -168,13 +173,18 @@ namespace Makman.Middle.EntityManagementServices
             ActualizeFileName(unit);
         }
 
-        public void MoveUnitsToDirectory(IEnumerable<Unit> units, CollectionDirectory directory, Action<string>? statusUpdateAction = null)
+        public void StartMovingUnitsToDirectory(IEnumerable<Unit> units, CollectionDirectory directory, Action<string, bool>? statusUpdateAction)
         {
-            _fileMoverService.FilesMoveToDirectory(units.Select(u => u.FullFileName), directory, statusUpdateAction);
-            foreach (var u in units)
+            Task.Run(() =>
             {
-                u.FullFileName = StringUtils.ReplaceFileDirectory(u.FullFileName, directory.Path);
-            }
+                _unitMoverService.FilesMoveToDirectory(units, directory, statusUpdateAction);
+            }).ContinueWith(t =>
+            {
+                foreach (var u in units)
+                {
+                    u.FullFileName = StringUtils.ReplaceFileDirectory(u.FullFileName, directory.Path);
+                }
+            });
         }
 
         public void AddNamePostfix(IEnumerable<Unit> postfixingUnits)
@@ -183,10 +193,11 @@ namespace Makman.Middle.EntityManagementServices
             {
                 foreach (var u in postfixingUnits)
                 {
-                    string newFileName;
+                    string newFileName = u.FullFileName;
                     do
                     {
-                        newFileName = StringUtils.AddPostfixToFileName(u.FullFileName,
+                        newFileName = StringUtils.AddPostfixToFileName(
+                            newFileName,
                             " - " + UIText.u_filesystem_copy).GetFileName();
                     } while (!TryRename(u, newFileName));
                 }

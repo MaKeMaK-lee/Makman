@@ -14,12 +14,15 @@ namespace Makman.Middle.Entities.Settings
         public required string MainDirectoryPath { get; set; }
         public required string TagCategoryNameForBindTagToDirectory { get; set; }
 
-        public required bool DefaultCollectionDirectoryAutoScanning { get; set; }
-        public required bool DefaultCollectionDirectorySynchronizingWithCloud { get; set; }
+        public required bool CollectionDirectoryAutoScanningDefaultValue { get; set; }
+        public required bool CollectionDirectorySynchronizingWithCloudDefaultValue { get; set; }
 
-        public required bool DefaultTryMoveFilesByDirectoryTagcategoryNameOnAdding { get; set; }
+        public required bool TryMoveFilesByDirectoryTagcategoryNameOnAdding { get; set; }
         public required string DefaultDirectoryPathToMoveOnAdding { get; set; }
         public required List<string> DefaultTagsOnAdding { get; set; }
-         
+        public required bool ToggleBunchingOnAddingUnits { get; set; }
+        public required bool AddTagsOnAddingUnits { get; set; }
+        public required bool TryMoveFilesOnAdding { get; set; }
+
     }
 }

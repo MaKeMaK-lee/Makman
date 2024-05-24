@@ -47,5 +47,10 @@ namespace Makman.Middle.Entities
             Id = Guid.NewGuid();
         }
 
+        public override string ToString()
+        {
+            return Name;
+        }
+
     }
 }

@@ -6,6 +6,7 @@
              xmlns:viewModelComponents="clr-namespace:Makman.Visual.Components.ViewModel"
              xmlns:view="clr-namespace:Makman.Visual.MVVM.View"
              xmlns:viewComponents="clr-namespace:Makman.Visual.Components.View"
+             xmlns:components="clr-namespace:Makman.Visual.Components.Inherited"
              xmlns:converters="clr-namespace:Makman.Visual.Converters"
               >
 
@@ -68,6 +69,10 @@
 
             <DataTemplate DataType="{x:Type viewModelComponents:UnitsAdderMainViewModel}">
                 <viewComponents:UnitsAdderMainView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModelComponents:WaiterViewModel}">
+                <viewComponents:WaiterView/>
             </DataTemplate>
 
 
@@ -158,6 +163,28 @@
                 </Setter>
             </Style>
             <Style TargetType="{x:Type ComboBox}">
+                <Setter Property="Padding" Value="2,0,2,0"/>
+                <Setter Property="Background" Value="#10000000"/>
+                <Setter Property="BorderBrush" Value="#80000000"/>
+                <Setter Property="VerticalContentAlignment" Value="Top"/>
+                <Style.Triggers>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Effect" >
+                            <Setter.Value>
+                                <BlurEffect Radius="3"></BlurEffect>
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter  Property="Effect" >
+                            <Setter.Value>
+                                <DropShadowEffect BlurRadius="15" ShadowDepth="0"></DropShadowEffect>
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="{x:Type components:FilteredComboBox}">
                 <Setter Property="Padding" Value="2,0,2,0"/>
                 <Setter Property="Background" Value="#10000000"/>
                 <Setter Property="BorderBrush" Value="#80000000"/>

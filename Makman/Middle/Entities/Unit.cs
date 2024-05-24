@@ -32,7 +32,7 @@ namespace Makman.Middle.Entities
         [Column("UnitTimeLastWrite")]
         [MaxLength(32)]
         public required DateTime TimeLastWrite { get; set; }
-         
+
         [Required]
         [Column("UnitTimeAddedToCollection")]
         [MaxLength(32)]
@@ -58,7 +58,7 @@ namespace Makman.Middle.Entities
         [Column("UnitChildUnits")]
         public required ObservableCollection<Unit> ChildUnits { get; set; }
 
-        [NotMapped] 
+        [NotMapped]
         public ObservableCollection<Unit>? BunchedUnits { get => Bunch?.Units; }
 
 

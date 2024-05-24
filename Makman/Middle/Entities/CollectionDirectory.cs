@@ -3,6 +3,7 @@ using Makman.Middle.Core;
 using Makman.Middle.Services;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Xml.Linq;
 
 namespace Makman.Middle.Entities
 {
@@ -38,7 +39,7 @@ namespace Makman.Middle.Entities
         //public void PickDirectoryCommandAction(object? o)
         //{
         //    var newPath = 
-        //}
+        //} 
         public CollectionDirectory()
         {
 
@@ -53,6 +54,11 @@ namespace Makman.Middle.Entities
         private void init()
         {
             Id = Guid.NewGuid();
+        }
+
+        public override string ToString()
+        {
+            return Path;
         }
 
     }

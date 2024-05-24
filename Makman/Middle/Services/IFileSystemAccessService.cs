@@ -24,9 +24,9 @@ namespace Makman.Middle.Services
 
         string ReadAllText(string fileName);
 
-        void FilesMoveToDirectorySlowly(IEnumerable<string> filePaths, string directoryPath, Action<string>? statusUpdateAction = null);
+        void FilesMoveToDirectorySlowly(IEnumerable<string> filePaths, string directoryPath, Action<string, bool>? statusUpdateAction = null);
 
-        void FilesMoveToDirectory(IEnumerable<string> filePaths, string directoryPath, Action<string>? statusUpdateAction = null);
+        void FilesMoveToDirectory(IEnumerable<string> filePaths, string directoryPath, Action<string, bool>? statusUpdateAction = null);
 
         void WriteAllText(string fileName, string text);
 

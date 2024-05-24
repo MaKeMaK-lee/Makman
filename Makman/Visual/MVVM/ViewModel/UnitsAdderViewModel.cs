@@ -13,7 +13,11 @@ namespace Makman.Visual.MVVM.ViewModel
         private readonly IUnitManagementService _unitManagementService;
 
         private Settings Settings { get; set; }
-        private CollectionDirectory LatestTargetDirectory { get; set; }
+
+        private CollectionDirectory? LatestTargetDirectory { get; set; }
+
+        private Action<string, bool>? WaiterAction { get; set; }
+
 
         private Core.ViewModel? currentSubview;
 
@@ -28,6 +32,7 @@ namespace Makman.Visual.MVVM.ViewModel
         }
         private void ClearCurrentSubview()
         {
+            (CurrentSubview as IDisposable)?.Dispose();
             CurrentSubview = null;
         }
 
@@ -46,13 +51,30 @@ namespace Makman.Visual.MVVM.ViewModel
             (CurrentSubview as UnitComparerViewModel)?.SearchDuplicatesStart(endAction);
         }
 
-        private void SetCurrentSubviewToUnitsAdderMain(Action<string[], CollectionDirectory?> endAction)
+        private void SetCurrentSubviewToUnitsAdderMain(Action<string[]> endAction)
         {
-            CurrentSubview = new UnitsAdderMainViewModel()
+            CurrentSubview = new UnitsAdderMainViewModel(
+                _servicesAccessor.GetTags(),
+                _servicesAccessor.GetTagCategories(),
+                _servicesAccessor.GetDirectories())
             {
                 Settings = Settings
             };
             (CurrentSubview as UnitsAdderMainViewModel)?.StartTryingUnitCreationAction(endAction);
+        }
+
+        private void SetCurrentSubviewToWaitingView(Action endAction)
+        {
+            var waiterViewModel = new WaiterViewModel();
+            CurrentSubview = waiterViewModel;
+
+            WaiterAction = (statusString, finished) =>
+            {
+                waiterViewModel.StatusUpdate(statusString);
+
+                if (finished)
+                    endAction();
+            };
         }
 
         private void ResetCurrentSubview()
@@ -70,9 +92,20 @@ namespace Makman.Visual.MVVM.ViewModel
 
             _unitManagementService.AddUnitsToDatabase(newUnits);
 
-            _unitManagementService.MoveUnitsToDirectory(newUnits, LatestTargetDirectory);
+            if (LatestTargetDirectory != null)
+            {
+                _unitManagementService.StartMovingUnitsToDirectory(newUnits, LatestTargetDirectory, (s, b) => WaiterAction?.Invoke(s, b));
+                SetCurrentSubviewToWaitingView(() =>
+                {
+                    WaiterAction = null;
+                    ResetCurrentSubview();
+                });
+            }
+            else
+            {
+                ResetCurrentSubview();
+            }
 
-            ResetCurrentSubview();
         }
 
         private void CheckDuplicates(IEnumerable<Unit> newUnits)
@@ -84,15 +117,37 @@ namespace Makman.Visual.MVVM.ViewModel
 
         private void Start()
         {
-            SetCurrentSubviewToUnitsAdderMain((filenames, targetDirectory) =>
+            SetCurrentSubviewToUnitsAdderMain((filenames) =>
             {
-                if (targetDirectory == null)
+                CollectionDirectory? directory = null;
+                if (Settings.TryMoveFilesByDirectoryTagcategoryNameOnAdding && Settings.TagCategoryForBindTagToDirectory != null)
                 {
-                    ResetCurrentSubview();
-                    return;
+                    var directoryTag = Settings.TagsOnAddingUnits.FirstOrDefault(t => t.Category == Settings.TagCategoryForBindTagToDirectory, null);
+                    if (directoryTag != null)
+                    {
+                        if (Settings.MainDirectory?.Path != null)
+                        {
+                            directory = new CollectionDirectory(
+                                Settings.MainDirectory.Path + "\\" + directoryTag.Name,
+                                Settings.MainDirectory.AutoScanning,
+                                Settings.MainDirectory.SynchronizingWithCloud);
+                        }
+                    }
                 }
-                LatestTargetDirectory = targetDirectory;
-                var newUnits = _unitManagementService.CreateMany(filenames);
+                if (directory == null)
+                {
+                    if (Settings.TryMoveFilesOnAdding && Settings.CurrentTargetDirectoryToMoveOnAdding != null)
+                    {
+                        directory = Settings.CurrentTargetDirectoryToMoveOnAdding;
+                    }
+                }
+
+                LatestTargetDirectory = directory;
+
+                var newUnits = _unitManagementService.CreateMany(
+                    filenames,
+                    Settings.AddTagsOnAddingUnits ? Settings.TagsOnAddingUnits : [],
+                    Settings.ToggleBunchingOnAddingUnits);
                 CheckDuplicates(newUnits);
             });
         }

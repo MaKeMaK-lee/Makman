@@ -5,7 +5,7 @@ namespace Makman.Middle.EntityManagementServices
     public interface IUnitManagementService
     {
         /// <returns>Созданные сущности</returns>
-        IEnumerable<Unit> CreateMany(IEnumerable<string> fullFileNames);
+        IEnumerable<Unit> CreateMany(IEnumerable<string> fullFileNames, IEnumerable<Tag>? tags = null, bool bindToBunch = false);
 
         /// <returns>Количество обнаруженных в директориях, но не добавленных файлов</returns>
         int AddUnitsFromFilesOfFolderAndSyncToDatabase(string directoryPath, bool allowSubDirectories = true);
@@ -16,7 +16,6 @@ namespace Makman.Middle.EntityManagementServices
 
         bool IsSameOrNullBunch(IEnumerable<Unit>? units);
 
-
         public void UnbindTag(Unit unit, Tag removingTag);
 
         public void TryUnbindTag(IEnumerable<Unit>? units, Tag? removingTag);
@@ -25,7 +24,7 @@ namespace Makman.Middle.EntityManagementServices
 
         public void TryBindTag(IEnumerable<Unit>? units, Tag? bindingTag);
 
-        void BindToBunch(IEnumerable<Unit> bindingUnits, Bunch? nullableBunch);
+        void BindToBunch(IEnumerable<Unit> bindingUnits, Bunch? nullableBunch = null);
 
         void AddNamePostfix(IEnumerable<Unit> postfixingUnits);
 
@@ -34,7 +33,7 @@ namespace Makman.Middle.EntityManagementServices
         /// <returns>TRUE if binded</returns>
         bool TryBindToBunch(IEnumerable<Unit>? bindingUnits, IEnumerable<Unit>? exampleUnits, bool includeExamples = false);
 
-        void MoveUnitsToDirectory(IEnumerable<Unit> units, CollectionDirectory directory, Action<string>? statusUpdateAction = null);
+        void StartMovingUnitsToDirectory(IEnumerable<Unit> units, CollectionDirectory directory, Action<string, bool>? statusUpdateAction = null);
 
     }
 }

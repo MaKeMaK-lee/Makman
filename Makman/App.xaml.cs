@@ -45,7 +45,7 @@ namespace Makman
             services.AddSingleton<ISettingsService, SettingsService>();
             services.AddSingleton<ICollectionDatabaseService, CollectionDatabaseService>();
             services.AddSingleton<ITestAndDebugService, TestAndDebugService>();
-            services.AddSingleton<IFileMoverService, FileMoverService>();
+            services.AddSingleton<IUnitMoverService, UnitMoverService>();
             services.AddSingleton<IFileSystemAccessService, FileSystemAccessService>();
 
             services.AddSingleton<IUnitManagementService, UnitManagementService>();

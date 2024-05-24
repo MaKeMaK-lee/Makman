@@ -73,28 +73,35 @@ namespace Makman.Data.WindowsOS
             File.Move(oldPath, newPath);
         }
 
-        static internal void FilesMoveToDirectory(IEnumerable<string> filePaths, string directoryPath, Action<string>? statusUpdateAction)
+        static internal void FilesMoveToDirectory(IEnumerable<string> filePaths, string directoryPath, Action<string, bool>? statusUpdateAction)
         {
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+
             int count = filePaths.Count();
             int moved = 0;
             foreach (var filePath in filePaths)
             {
-                if (statusUpdateAction != null)
-                    statusUpdateAction("Files moved: " + moved + " / " + count + "\n\n" +
-                         "Current source: " + filePath + "\n\n" +
-                         "Current targrt directory: " + directoryPath);
+                statusUpdateAction?.Invoke("Files moved: " + moved + " / " + count + "\n\n" +
+                    "Current source: " + filePath + "\n\n" +
+                    "Current targrt directory: " + directoryPath, false);
                 File.Move(filePath, directoryPath + "\\" + filePath.Split("\\").Last());
                 moved++;
             }
+            statusUpdateAction?.Invoke("Files moved: " + moved + " / " + count + "\n\n" +
+                 "Current targrt directory: " + directoryPath, true);
         }
 
-        static internal void FilesMoveToDirectorySlowly(IEnumerable<string> filePaths, string directoryPath, Action<string> statusUpdateAction, long averageSpeedByKBpS, int msWaitingBetweenFiles)
+        static internal void FilesMoveToDirectorySlowly(IEnumerable<string> filePaths, string directoryPath, Action<string, bool>? statusUpdateAction, long averageSpeedByKBpS, int msWaitingBetweenFiles)
         {
             int count = filePaths.Count();
             int moved = 0;
+            string statusString = "";
             foreach (var filePath in filePaths)
             {
-                var statusString = "Files moved: " + moved + " / " + count + "\n\n" +
+                statusString = "Files moved: " + moved + " / " + count + "\n\n" +
                     "Current source: " + filePath + "\n\n" +
                     "Current targrt directory: " + directoryPath;
 
@@ -107,8 +114,8 @@ namespace Makman.Data.WindowsOS
                 {
                     for (; timeSleeped < fileWaitingTime; timeSleeped += msPerIteration)
                     {
-                        statusUpdateAction(statusString + "\n\n" +
-                            $"Waiting: {(double)timeSleeped / 1000:f2} / {(double)fileWaitingTime / 1000:f2} с");
+                        statusUpdateAction?.Invoke(statusString + "\n\n" +
+                            $"Waiting: {(double)timeSleeped / 1000:f2} / {(double)fileWaitingTime / 1000:f2} с", false);
                         Thread.Sleep(msPerIteration);
                     }
                 }
@@ -119,9 +126,9 @@ namespace Makman.Data.WindowsOS
                     "Current source: " + filePath + "\n\n" +
                     "Current targrt directory: " + directoryPath;
 
-                statusUpdateAction(statusString + "\n\n");
+                statusUpdateAction?.Invoke(statusString + "\n\n", false);
             }
-
+            statusUpdateAction?.Invoke(statusString + "\n\n", true);
         }
 
         static internal BitmapImage? TryGetImageOfFile(string path)
