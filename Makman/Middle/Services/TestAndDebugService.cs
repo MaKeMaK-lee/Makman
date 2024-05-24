@@ -1,11 +1,10 @@
-﻿using Makman.Middle.EntityManagementServices; 
-
+﻿
 namespace Makman.Middle.Services
 {
-    public class TestAndDebugService(IFileSystemAccessService fileSystemAccessService, IUnitManagementService unitManagementService) : ITestAndDebugService
+    public class TestAndDebugService(IFileSystemAccessService fileSystemAccessService/*, IUnitManagementService unitManagementService*/) : ITestAndDebugService
     {
         private readonly IFileSystemAccessService _fileSystemAccessService = fileSystemAccessService;
-        private readonly IUnitManagementService _unitManagementService = unitManagementService;
+        //private readonly IUnitManagementService _unitManagementService = unitManagementService;
 
         public void DatabaseFill()
         {
@@ -14,7 +13,7 @@ namespace Makman.Middle.Services
             {
                 return;
             }
-            _unitManagementService.AddUnitsFromFilesOfFolderAndSyncToDatabase(chooseResult);
+            //_unitManagementService.AddUnitsFromFilesOfFolderAndSyncToDatabase(chooseResult);
         }
     }
 }

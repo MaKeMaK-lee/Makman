@@ -14,6 +14,7 @@ namespace Makman.Visual.MVVM.Model
         private readonly ICollectionDatabaseService _collectionDatabaseService = collectionDatabaseService;
         private readonly IFileSystemAccessService _fileSystemAccessService = fileSystemAccessService;
         private readonly ISettingsService _settingsService = settingsService;
+
         public void DatabaseFill()
         {
             _testAndDebugService.DatabaseFill();
