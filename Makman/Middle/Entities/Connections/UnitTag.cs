@@ -10,6 +10,7 @@ namespace Makman.Middle.Entities.Connections
         [Required]
         [Column("UnitId")]
         public Guid UnitId { get; set; }
+
         [Required]
         [Column("TagId")]
         public Guid TagId { get; set; }

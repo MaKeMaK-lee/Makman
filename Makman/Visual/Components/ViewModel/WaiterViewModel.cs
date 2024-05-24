@@ -1,5 +1,4 @@
 ﻿
-
 namespace Makman.Visual.Components.ViewModel
 {
     public class WaiterViewModel : Core.ViewModel

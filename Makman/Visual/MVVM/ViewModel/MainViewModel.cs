@@ -6,9 +6,7 @@ namespace Makman.Visual.MVVM.ViewModel
 {
     public class MainViewModel : Core.ViewModel
     {
-
         private INavigation _navigation;
-
 
         public INavigation Navigation
         {
@@ -68,58 +66,5 @@ namespace Makman.Visual.MVVM.ViewModel
             Navigation.NavigateTo<HomeViewModel>();
 
         }
-
-
-
-
-
-
-
-
-
-
-
-
-        //public RelayCommand HomeViewCommand { get; set; }
-        //public RelayCommand DebugViewCommand { get; set; }
-        //public RelayCommand ChangeBGColorCommand { get; set; }
-        //public HomeViewModel HomeVM { get; set; }
-        //public DebugViewModel DiscoveryVM { get; set; }
-
-        //private object currentView;
-
-        //public object DragDropControl
-        //{
-        //    get { return currentView; }
-        //    set
-        //    {
-        //        currentView = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
-
-        //public MainViewModel()
-        //{
-        //    HomeVM = new HomeViewModel();
-        //    DiscoveryVM = new DebugViewModel(this);
-        //    Bgcolor = "#999999";
-
-
-        //    DragDropControl = HomeVM;
-
-        //    ChangeBGColorCommand = new RelayCommand(o =>
-        //    {
-        //        DragDropControl = HomeVM;
-        //    });
-        //    HomeViewCommand = new RelayCommand(o =>
-        //    {
-        //        DragDropControl = HomeVM;
-        //    });
-        //    DebugViewCommand = new RelayCommand(o =>
-        //    {
-        //        DragDropControl = DiscoveryVM;
-        //    });
-
-        //}
     }
 }

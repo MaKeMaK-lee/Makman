@@ -12,6 +12,7 @@ namespace Makman
     public partial class MainWindow : Window
     {
         public required IServicesAccessor _servicesAccessor;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -47,38 +48,3 @@ namespace Makman
         }
     }
 }
-
-/*
-
- 
- using Makman.Entities;
-
-namespace Makman
-{
-    public static class ListExtension
-    {
-        public static void AddFilesFromFolder(this List<Unit> collection, string directoryPath, bool allSubDirectories = false)
-        {
-            IEnumerable<string> filesToAdd;
-            if (allSubDirectories)
-                filesToAdd = WindowsUse.GetFilesFromDirectory(directoryPath);
-            else
-                filesToAdd = WindowsUse.GetFilesFromDirectory(directoryPath);
-
-            List<Unit> tmpCollection = [];
-            foreach (var file in filesToAdd)
-            {
-                tmpCollection.Add(new(file));
-            }
-            collection.AddRange(tmpCollection);
-        }
-    }
-}
-
- 
- 
- 
- 
- 
- * 
- */

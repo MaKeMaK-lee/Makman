@@ -20,7 +20,6 @@ namespace Makman.Visual.MVVM.ViewModel
 
 
         private Core.ViewModel? currentSubview;
-
         public Core.ViewModel? CurrentSubview
         {
             get => currentSubview;
@@ -30,6 +29,7 @@ namespace Makman.Visual.MVVM.ViewModel
                 OnPropertyChanged(nameof(CurrentSubview));
             }
         }
+
         private void ClearCurrentSubview()
         {
             (CurrentSubview as IDisposable)?.Dispose();
@@ -105,7 +105,6 @@ namespace Makman.Visual.MVVM.ViewModel
             {
                 ResetCurrentSubview();
             }
-
         }
 
         private void CheckDuplicates(IEnumerable<Unit> newUnits)
@@ -160,10 +159,7 @@ namespace Makman.Visual.MVVM.ViewModel
             Settings = _servicesAccessor.GetSettings();
 
 
-
             ResetCurrentSubview();
-
-
         }
     }
 }

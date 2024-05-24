@@ -1,7 +1,5 @@
 ﻿
-using Makman.Data.WindowsOS;
 using Makman.Middle.Core;
-using Makman.Middle.Entities;
 using Makman.Middle.Services;
 using Makman.Visual.Core;
 using Makman.Visual.MVVM.Model;
@@ -40,7 +38,6 @@ namespace Makman.Visual.MVVM.ViewModel
         public RelayCommand NavigateToHomeCommand { get; set; }
         public RelayCommand TestFillCommand { get; set; }
 
-
         public DebugViewModel(INavigation navigationService, IServicesAccessor servicesAccessor, IFileSystemAccessService fileSystemAccessService, IUnitMoverService unitMoverService)
         {
             _servicesAccessor = servicesAccessor;
@@ -60,8 +57,6 @@ namespace Makman.Visual.MVVM.ViewModel
             {
                 _servicesAccessor.DatabaseFill();
             }, o => true);
-
-
 
         }
     }

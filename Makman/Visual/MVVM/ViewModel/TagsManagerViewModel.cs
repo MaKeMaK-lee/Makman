@@ -79,6 +79,7 @@ namespace Makman.Visual.MVVM.ViewModel
                 }
             }
         }
+
         public string filterText;
         public string FilterText
         {
@@ -101,6 +102,7 @@ namespace Makman.Visual.MVVM.ViewModel
 
             }
         }
+
         public bool IsSelectedAnyItemInTagCollection
         {
             get
@@ -111,11 +113,13 @@ namespace Makman.Visual.MVVM.ViewModel
                     return true;
             }
         }
+
         public RelayCommand ComboBoxSelectionChangedCommand { get; set; }
         public RelayCommand FilterTextBoxTextChangedCommand { get; set; }
         public RelayCommand DataGridSelectionChangedCommand { get; set; }
         public RelayCommand RemoveTagCommand { get; set; }
         public RelayCommand AddTagCommand { get; set; }
+
         private void SetCommands()
         {
             AddTagCommand = new RelayCommand(o =>
@@ -143,7 +147,6 @@ namespace Makman.Visual.MVVM.ViewModel
             }, o => true);
         }
 
-
         public TagsManagerViewModel(IServicesAccessor servicesAccessor, ITagManagementService tagManagementService)
         {
             _servicesAccessor = servicesAccessor;
@@ -153,10 +156,6 @@ namespace Makman.Visual.MVVM.ViewModel
 
             tagCollection = _servicesAccessor.GetTags();
             tagCategoriesCollection = _servicesAccessor.GetTagCategories();
-            //foreach (var item in TagCollection)
-            //{
-            //    item.PickTagCommand = new RelayCommand(item.PickTagCommandAction, o => true);
-            //};
 
         }
     }

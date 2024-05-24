@@ -63,7 +63,6 @@ namespace Makman
 
 
 
-
             Startup += Application_Startup;
         }
         private void Application_Startup(object sender, StartupEventArgs e)

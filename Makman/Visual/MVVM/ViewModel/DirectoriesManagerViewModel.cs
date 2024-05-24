@@ -35,17 +35,6 @@ namespace Makman.Visual.MVVM.ViewModel
             }
         }
 
-        //private CollectionDirectory selectedDirectory;
-        //public CollectionDirectory SelectedDirectory
-        //{
-        //    get => selectedDirectory;
-        //    set
-        //    {
-        //        selectedDirectory = value;
-        //        OnPropertyChanged(nameof(IsSelectedAnyItemInDirectoryCollection));
-        //    }
-        //}
-
         public bool IsSelectedOnlyOneItemInDirectoryCollection
         {
             get
@@ -58,6 +47,7 @@ namespace Makman.Visual.MVVM.ViewModel
 
             }
         }
+
         public bool IsSelectedAnyItemInDirectoryCollection
         {
             get
@@ -68,10 +58,12 @@ namespace Makman.Visual.MVVM.ViewModel
                     return true;
             }
         }
+
         public RelayCommand DataGridSelectionChangedCommand { get; set; }
         public RelayCommand RemoveDirectoryCommand { get; set; }
         public RelayCommand ChangeDirectoryPathCommand { get; set; }
         public RelayCommand AddDirectoryCommand { get; set; }
+
         private void SetCommands()
         {
             AddDirectoryCommand = new RelayCommand(o =>
@@ -98,7 +90,6 @@ namespace Makman.Visual.MVVM.ViewModel
                 }
             }, o => true);
         }
-
 
         public DirectoriesManagerViewModel(IServicesAccessor servicesAccessor, ICollectionDirectoryManagementService collectionDirectoryManagementService)
         {

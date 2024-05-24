@@ -2,10 +2,7 @@
 using Makman.Middle.Entities;
 using Makman.Middle.EntityManagementServices;
 using Makman.Visual.Components.ViewModel;
-using Makman.Visual.Core;
-using Makman.Visual.Localization;
 using Makman.Visual.MVVM.Model;
-using System.Windows;
 
 namespace Makman.Visual.MVVM.ViewModel
 {
@@ -24,7 +21,6 @@ namespace Makman.Visual.MVVM.ViewModel
         }
 
         private Core.ViewModel? currentSubview;
-
         public Core.ViewModel? CurrentSubview
         {
             get => currentSubview;
@@ -39,7 +35,6 @@ namespace Makman.Visual.MVVM.ViewModel
         {
             CurrentSubview = null;
         }
-
 
         public RelayCommand SearchDuplicatesStartCommand { get; set; }
 
@@ -66,6 +61,5 @@ namespace Makman.Visual.MVVM.ViewModel
 
             unitCollection = _servicesAccessor.GetUnits();
         }
-
     }
 }

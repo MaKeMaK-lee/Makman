@@ -8,11 +8,15 @@ namespace Makman.Visual.Components.ViewModel
     public class UnitComparerViewModel : Core.ViewModel
     {
         public required Func<IEnumerable<IEnumerable<Unit>>> GetOverviewUnitsListsAction { get; set; }
+
         public required Action<string> ViewInExplorerAction { get; set; }
+
         public required bool LeftFromOutside { get; set; }
+
         public Action<IEnumerable<Unit>, IEnumerable<Unit>> SearchDuplicatesEndAction { get; set; }
 
         public IEnumerable<Unit> RefusedUnits { get; set; }
+
         public IEnumerable<Unit> PostfixingUnits { get; set; }
 
         public Visibility RemoveLeftButtonVisibility
@@ -25,8 +29,6 @@ namespace Makman.Visual.Components.ViewModel
             get => LeftFromOutside ? Visibility.Collapsed : Visibility.Visible;
         }
 
-
-
         public void SearchDuplicatesStart(Action<IEnumerable<Unit>, IEnumerable<Unit>> searchDuplicatesEndAction)
         {
             SearchDuplicatesEndAction = searchDuplicatesEndAction;
@@ -35,8 +37,6 @@ namespace Makman.Visual.Components.ViewModel
             SearchDuplicatesMessage = UIText.unit_searchduplicates_message;
 
         }
-
-        public RelayCommand SearchDuplicatesRemoveLeftCommand { get; set; }
 
         public RelayCommand SearchDuplicatesNextToEndCommand { get; set; }
         public RelayCommand SearchDuplicatesPrevToEndCommand { get; set; }
@@ -238,7 +238,6 @@ namespace Makman.Visual.Components.ViewModel
                 OverviewCurrentIndex--;
             RecalculateOverviewUnits();
         }
-
 
         public int OverviewRightUnitsCount => OverviewRightUnits?.Count ?? 0;
 

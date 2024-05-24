@@ -13,6 +13,7 @@ namespace Makman.Middle.Entities
         [Required]
         [Column("BunchId")]
         public Guid Id { get; set; }
+
         [Required]
         [Column("BunchUnits")]
         public ObservableCollection<Unit> Units { get; set; }
@@ -21,18 +22,10 @@ namespace Makman.Middle.Entities
         {
             init();
         }
+
         private void init()
         {
             Id = Guid.NewGuid();
         }
-        //public ICollection<Tag> GetTags()
-        //{
-        //    ICollection<Tag> tags = [];
-        //    foreach (var unit in Units)
-        //    {
-        //        tags = tags. (unit.Tags);
-        //    }
-        //    return tags;
-        //}
     }
 }

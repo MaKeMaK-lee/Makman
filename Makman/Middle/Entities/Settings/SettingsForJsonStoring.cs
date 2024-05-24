@@ -1,5 +1,4 @@
-﻿ 
-
+﻿
 namespace Makman.Middle.Entities.Settings
 {
     public class SettingsForJsonStoring
@@ -11,6 +10,7 @@ namespace Makman.Middle.Entities.Settings
 
         public required long CloudingAverageSpeedByKBytePerSecond { get; set; }
         public required int CloudingPauseBetweenFilesByms { get; set; }
+
         public required string MainDirectoryPath { get; set; }
         public required string TagCategoryNameForBindTagToDirectory { get; set; }
 
@@ -20,6 +20,7 @@ namespace Makman.Middle.Entities.Settings
         public required bool TryMoveFilesByDirectoryTagcategoryNameOnAdding { get; set; }
         public required string DefaultDirectoryPathToMoveOnAdding { get; set; }
         public required List<string> DefaultTagsOnAdding { get; set; }
+
         public required bool ToggleBunchingOnAddingUnits { get; set; }
         public required bool AddTagsOnAddingUnits { get; set; }
         public required bool TryMoveFilesOnAdding { get; set; }

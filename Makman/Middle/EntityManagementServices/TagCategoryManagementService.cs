@@ -6,6 +6,7 @@ namespace Makman.Middle.EntityManagementServices
     public class TagCategoryManagementService(ICollectionDatabaseService collectionDatabaseService ) : ITagCategoryManagementService
     {
         readonly ICollectionDatabaseService _collectionDatabaseService = collectionDatabaseService; 
+
         public void AddNew(string name)
         {
             var createdItem = Create(name);

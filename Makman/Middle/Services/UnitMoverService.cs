@@ -1,5 +1,4 @@
 ﻿
-
 using Makman.Middle.Entities;
 
 namespace Makman.Middle.Services

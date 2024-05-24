@@ -93,7 +93,6 @@ namespace Makman.Middle.Services
             };
         }
 
-
         private bool TryLoadCurrentSettings()
         {
             try

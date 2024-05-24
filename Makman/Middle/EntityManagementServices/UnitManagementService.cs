@@ -11,7 +11,6 @@ namespace Makman.Middle.EntityManagementServices
         IFileSystemAccessService fileSystemAccessService, IBunchManagementService bunchManagementService,
         IUnitMoverService unitMoverService) : IUnitManagementService
     {
-
         readonly ICollectionDatabaseService _collectionDatabaseService = collectionDatabaseService;
         readonly IFileSystemAccessService _fileSystemAccessService = fileSystemAccessService;
         readonly IBunchManagementService _bunchManagementService = bunchManagementService;
@@ -111,7 +110,6 @@ namespace Makman.Middle.EntityManagementServices
                 BindToBunch(bindingUnits, GetBunchOf(exampleUnits));
 
             return true;
-
         }
 
         public void UnbindTag(Unit unit, Tag removingTag)

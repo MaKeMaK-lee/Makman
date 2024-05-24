@@ -11,8 +11,11 @@ namespace Makman.Visual.Components.ViewModel
         public required Settings Settings { get; set; }
 
         public IEnumerable<Tag> TagsPickerList { get; set; }
+
         public IEnumerable<TagCategory> TagCategoryPickerList { get; set; }
+
         public IEnumerable<CollectionDirectory> MainDirectoryPickerList { get; set; }
+
         public IEnumerable<CollectionDirectory> TargetDirectoryPickerList { get; set; }
 
         public Tag? tagsPickerListSelectedItem { get; set; }
@@ -30,13 +33,16 @@ namespace Makman.Visual.Components.ViewModel
         public bool IsSelectedAnyTag => TagsPickerListSelectedItem != null;
 
         public double BunchingSettingsGroupOpacity => Settings.ToggleBunchingOnAddingUnits ? 1 : 0.3;
+
         public double AddTagsSettingsGroupOpacity => Settings.AddTagsOnAddingUnits ? 1 : 0.3;
+
         public double MoveToMainSettingsGroupOpacity => Settings.TryMoveFilesByDirectoryTagcategoryNameOnAdding ? 1 : 0.3;
+
         public double MoveToTargetSettingsGroupOpacity => Settings.TryMoveFilesOnAdding ? 1 : 0.3;
 
         public RelayCommand TagBindCommand { get; set; }
         public RelayCommand TagUnbindCommand { get; set; }
-
+        
         private void SetCommands()
         {
             TagBindCommand = new RelayCommand(o =>
@@ -45,7 +51,6 @@ namespace Makman.Visual.Components.ViewModel
                     if (!Settings.TagsOnAddingUnits.Contains(TagsPickerListSelectedItem))
                         Settings.TagsOnAddingUnits.Add(TagsPickerListSelectedItem);
             }, o => true);
-
             TagUnbindCommand = new RelayCommand(o =>
             {
                 if (TagsPickerListSelectedItem != null)

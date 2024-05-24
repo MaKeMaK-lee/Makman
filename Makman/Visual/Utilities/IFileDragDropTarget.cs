@@ -5,5 +5,4 @@ namespace Makman.Visual.Utilities
     {
         void OnFileDrop(string[] filepaths);
     }
-
 }

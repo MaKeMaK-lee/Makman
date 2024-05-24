@@ -12,16 +12,21 @@ namespace Makman.Middle.Entities.Settings
 
         //MainWindow
         public required int MainWindowPositionX { get; set; }
+
         public required int MainWindowPositionY { get; set; }
+
         public required int MainWindowWidth { get; set; }
+
         public required int MainWindowHeight { get; set; }
 
         //File moving
         public required long CloudingAverageSpeedByKBytePerSecond { get; set; }
+
         public required int CloudingPauseBetweenFilesByms { get; set; }
 
         //Default CollectionDirectory props
         public required bool CollectionDirectoryAutoScanningDefaultValue { get; set; }
+
         public required bool CollectionDirectorySynchronizingWithCloudDefaultValue { get; set; }
 
         //Unit adding props 
@@ -34,6 +39,7 @@ namespace Makman.Middle.Entities.Settings
                 OnPropertyChanged(nameof(ToggleBunchingOnAddingUnits));
             }
         } 
+
         public required bool AddTagsOnAddingUnits
         {
             get => addTagsOnAddingUnits;
@@ -43,8 +49,8 @@ namespace Makman.Middle.Entities.Settings
                 OnPropertyChanged(nameof(AddTagsOnAddingUnits));
             }
         }
-        public required ObservableCollection<Tag> TagsOnAddingUnits { get; set; }
 
+        public required ObservableCollection<Tag> TagsOnAddingUnits { get; set; }
 
         //Unit adding directory variant 1
         /// <summary>
@@ -52,7 +58,9 @@ namespace Makman.Middle.Entities.Settings
         /// with units putting here when adding if "TryMoveFilesByDirectoryTagcategoryNameOnAdding" prop is true
         /// </summary>
         public required CollectionDirectory? MainDirectory { get; set; }
+
         public required TagCategory? TagCategoryForBindTagToDirectory { get; set; } 
+
         public required bool TryMoveFilesByDirectoryTagcategoryNameOnAdding
         {
             get => tryMoveFilesByDirectoryTagcategoryNameOnAdding;
@@ -68,6 +76,7 @@ namespace Makman.Middle.Entities.Settings
         /// Current directory to move files on adding. Not storing and sets to "DefaultTargetDirectoryToMoveOnAdding" prop on Makman launch.
         /// </summary>
         public required CollectionDirectory? CurrentTargetDirectoryToMoveOnAdding { get; set; }
+
         /// <summary>
         /// Default directory to move files on adding. 
         /// </summary>

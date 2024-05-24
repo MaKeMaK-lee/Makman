@@ -9,11 +9,9 @@ namespace Makman.Visual.Components.Inherited
     public class FilteredComboBox : ComboBox
     {
         private string oldFilter = string.Empty;
-
         private string currentFilter = string.Empty;
 
         protected TextBox? EditableTextBox => GetTemplateChild("PART_EditableTextBox") as TextBox;
-
 
         protected override void OnDropDownOpened(EventArgs e)
         {  
@@ -58,7 +56,6 @@ namespace Makman.Visual.Components.Inherited
                     break;
             }
 
-            // Cache text
             oldFilter = Text;
         }
 

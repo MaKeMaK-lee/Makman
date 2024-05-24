@@ -2,7 +2,6 @@
 using Makman.Middle.Entities;
 using Makman.Visual.Localization;
 using System.Text.RegularExpressions;
-using System.Windows.Documents;
 
 namespace Makman.Middle.Services
 {
@@ -11,6 +10,7 @@ namespace Makman.Middle.Services
         private bool disposed = false;
 
         LocalDatabase Database { get; set; }
+
         public CollectionDatabaseService()
         {
 

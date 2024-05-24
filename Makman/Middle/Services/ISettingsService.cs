@@ -1,4 +1,4 @@
-﻿using Makman.Middle.Entities;
+﻿
 using Makman.Middle.Entities.Settings;
 
 namespace Makman.Middle.Services
@@ -8,8 +8,5 @@ namespace Makman.Middle.Services
         bool Save();
 
         Settings CurrentSettings { get; set; }
-
-
-
     }
 }

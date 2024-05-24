@@ -1,26 +1,33 @@
 ﻿
 using Makman.Middle.Entities.Connections;
 using Microsoft.EntityFrameworkCore;
-using System.Windows.Controls.Primitives;
 
 namespace Makman.Middle.Entities.DatabaseContexts
 {
     internal class LocalDatabaseContext : DbContext
     {
         readonly private string _filename;
+
         public LocalDatabaseContext(string filename)
         {
             _filename = filename;
         }
+
         public DbSet<CollectionDirectory> CollectionDirectories { get; set; } = null!;
+
         public DbSet<TagCategory> TagCategories { get; set; } = null!;
+
         public DbSet<Bunch> Bunchs { get; set; } = null!;
+
         public DbSet<Unit> Units { get; set; } = null!;
+
         public DbSet<Tag> Tags { get; set; } = null!;
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Data Source=" + _filename);
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Unit>()

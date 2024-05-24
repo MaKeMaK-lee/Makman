@@ -1,4 +1,4 @@
-﻿ 
+﻿
 using Makman.Middle.Entities;
 using Makman.Middle.Services;
 
@@ -11,7 +11,8 @@ namespace Makman.Middle.EntityManagementServices
         public void AddNew()
         {
             var createdItem = Create();
-            if (createdItem == null) { return; }
+            if (createdItem == null)
+                return;
             _collectionDatabaseService.Add(createdItem);
             _collectionDatabaseService.Save();
         }
@@ -24,6 +25,7 @@ namespace Makman.Middle.EntityManagementServices
             }
             _collectionDatabaseService.Save();
         }
+
         public void PickNewPath(CollectionDirectory collectionDirectory)
         {
             string? path = _fileSystemAccessService.ChooseDirectory();
@@ -39,9 +41,10 @@ namespace Makman.Middle.EntityManagementServices
         public CollectionDirectory? Create()
         {
             string? path = _fileSystemAccessService.ChooseDirectory();
-            if (path == null) { return null; }
+            if (path == null)
+                return null;
 
             return new CollectionDirectory(path, synchronizingwithcloud: false);
-        } 
+        }
     }
 }

@@ -1,17 +1,13 @@
 ﻿
 using Makman.Middle.Core;
-using Makman.Middle.Services;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Xml.Linq;
 
 namespace Makman.Middle.Entities
 {
     [Table("CollectionDirectories")]
     public class CollectionDirectory : ObservableObject
     {
-
-
         [Key]
         [Required]
         [Column("CollectionDirectoryId")]
@@ -34,16 +30,11 @@ namespace Makman.Middle.Entities
         [Column("CollectionDirectorySynchronizingWithCloud", TypeName = "TINYINT(1)")]
         public bool SynchronizingWithCloud { get; set; }
 
-        //[NotMapped]
-        //public object PickDirectoryCommand { get; set; }
-        //public void PickDirectoryCommandAction(object? o)
-        //{
-        //    var newPath = 
-        //} 
         public CollectionDirectory()
         {
 
         }
+
         public CollectionDirectory(string path, bool autoscanning = true, bool synchronizingwithcloud = false)
         {
             init();
@@ -51,6 +42,7 @@ namespace Makman.Middle.Entities
             AutoScanning = autoscanning;
             SynchronizingWithCloud = synchronizingwithcloud;
         }
+
         private void init()
         {
             Id = Guid.NewGuid();
@@ -60,6 +52,5 @@ namespace Makman.Middle.Entities
         {
             return Path;
         }
-
     }
 }

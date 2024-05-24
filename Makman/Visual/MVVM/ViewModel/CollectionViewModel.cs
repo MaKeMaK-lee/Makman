@@ -17,6 +17,7 @@ namespace Makman.Visual.MVVM.ViewModel
         public int CollectionPanelItemWidth { get; } = 95;
         public int CollectionPanelItemImageMaxHeight => CollectionPanelItemHeight - CollectionPanelItemTextMinHeight;
         public int CollectionPanelItemTextMinHeight { get; } = 20;
+
         public string CollectionPanelItemSize => CollectionPanelItemWidth + ", " + CollectionPanelItemHeight;
 
         private readonly IServicesAccessor _servicesAccessor;
@@ -106,8 +107,6 @@ namespace Makman.Visual.MVVM.ViewModel
 
             }
         }
-
-
 
         private void RecalculateSelectedUnitsPrevious()
         {
@@ -238,6 +237,7 @@ namespace Makman.Visual.MVVM.ViewModel
             OnPropertyChanged(nameof(OverviewChildUnits));
             OnPropertyChanged(nameof(OverviewCount));
         }
+
         public string OverviewId
         {
             get

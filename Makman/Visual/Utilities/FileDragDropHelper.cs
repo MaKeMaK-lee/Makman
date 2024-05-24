@@ -57,7 +57,6 @@ namespace Makman.Visual.Utilities
             {
                 fileTarget.OnFileDrop((string[])_dragEventArgs.Data.GetData(DataFormats.FileDrop));
             }
-
         }
     }
 }

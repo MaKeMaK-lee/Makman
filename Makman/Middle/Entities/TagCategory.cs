@@ -35,13 +35,18 @@ namespace Makman.Middle.Entities
             }
         }
 
-        public TagCategory() { }
+        public TagCategory() 
+        {
+
+        }
+
         public TagCategory(string name, string color = "")
         {
             init();
             Name = name;
             Color = color;
         }
+
         private void init()
         {
             Id = Guid.NewGuid();
@@ -51,6 +56,5 @@ namespace Makman.Middle.Entities
         {
             return Name;
         }
-
     }
 }

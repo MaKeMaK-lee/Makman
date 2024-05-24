@@ -61,7 +61,6 @@ namespace Makman.Middle.Entities
         [NotMapped]
         public ObservableCollection<Unit>? BunchedUnits { get => Bunch?.Units; }
 
-
         public bool Equals(Unit unit2)
         {
             if (unit2 == this)
@@ -85,7 +84,5 @@ namespace Makman.Middle.Entities
         {
             return Id.GetHashCode();
         }
-
-
     }
 }

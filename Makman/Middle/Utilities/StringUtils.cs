@@ -1,5 +1,4 @@
 ﻿
-
 namespace Makman.Middle.Utilities
 {
     public static class StringUtils
