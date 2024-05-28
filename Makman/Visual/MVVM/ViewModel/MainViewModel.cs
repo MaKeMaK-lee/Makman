@@ -1,6 +1,7 @@
 ﻿
 using Makman.Middle.Core;
 using Makman.Visual.Core;
+using System.Windows;
 
 namespace Makman.Visual.MVVM.ViewModel
 {
@@ -17,6 +18,22 @@ namespace Makman.Visual.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        public bool debugMode = false;
+        public bool DebugMode
+        {
+            get => debugMode;
+            set
+            {
+                debugMode = value;
+                OnPropertyChanged(nameof(DebugMode));
+                OnPropertyChanged(nameof(DebugNavigationVisibility));
+            }
+        }
+
+        public Visibility DebugNavigationVisibility => debugMode ? Visibility.Visible : Visibility.Collapsed;
+
+        public RelayCommand KeyDownF3Command { get; set; }
 
         public RelayCommand NavigateToHomeCommand { get; set; }
         public RelayCommand NavigateToUnitsAdderCommand { get; set; }
@@ -63,8 +80,15 @@ namespace Makman.Visual.MVVM.ViewModel
                 Navigation.NavigateTo<UnitsManagerViewModel>();
             }, o => true);
 
-            Navigation.NavigateTo<HomeViewModel>();
+            KeyDownF3Command = new RelayCommand(o =>
+            {
+                if (DebugMode)
+                    DebugMode = false;
+                else
+                    DebugMode = true;
+            }, o => true);
 
+            Navigation.NavigateTo<HomeViewModel>();
         }
     }
 }

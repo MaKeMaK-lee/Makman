@@ -6,7 +6,8 @@
         xmlns:shell="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
         xmlns:viewModel="clr-namespace:Makman.Visual.MVVM.ViewModel"
         xmlns:view="clr-namespace:Makman.Visual.MVVM.View"
-        xmlns:localization="clr-namespace:Makman.Visual.Localization"
+        xmlns:localization="clr-namespace:Makman.Visual.Localization" 
+             xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:Makman" 
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
@@ -30,6 +31,11 @@
             </Setter>
         </Style>
     </Window.Style>
+    <behaviors:Interaction.Triggers>
+        <behaviors:KeyTrigger Key="F3" FiredOn="KeyDown">
+            <behaviors:InvokeCommandAction Command="{Binding KeyDownF3Command }"/>
+        </behaviors:KeyTrigger>
+    </behaviors:Interaction.Triggers>
     <Border CornerRadius="20" >
         <Border.Background>
             <RadialGradientBrush RadiusX="2.3" RadiusY="2.1" GradientOrigin="0.2,0.2" Center="1.2,0.9">
@@ -115,7 +121,7 @@
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding NavigateToTagCategoriesManagerCommand}"/>
-                <RadioButton Content="DEBUG"
+                <RadioButton Content="DEBUG" Visibility="{Binding DebugNavigationVisibility}"
                              Height="50"
                              Foreground="WhiteSmoke"
                              FontSize="14"
