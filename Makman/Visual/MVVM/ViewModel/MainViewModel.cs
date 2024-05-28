@@ -88,7 +88,7 @@ namespace Makman.Visual.MVVM.ViewModel
                     DebugMode = true;
             }, o => true);
 
-            Navigation.NavigateTo<HomeViewModel>();
+            Navigation.NavigateTo<UnitsAdderViewModel>();
         }
     }
 }

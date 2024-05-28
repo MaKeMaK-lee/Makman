@@ -77,15 +77,16 @@
 
             <StackPanel Grid.Row="2">
 
-                <RadioButton Content="{x:Static localization:UIText.mw_pagelist_home}"
+                <!--<RadioButton Content="{x:Static localization:UIText.mw_pagelist_home}"
                              Height="50"
                              Foreground="WhiteSmoke"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              IsChecked="True"
                              Command="{Binding NavigateToHomeCommand}"
-                             FontFamily="/Visual/Fonts/#Protest Revolution"/>
+                             FontFamily="/Visual/Fonts/#Protest Revolution"/>-->
                 <RadioButton Content="{x:Static localization:UIText.mw_pagelist_units_adder}"
+                             IsChecked="True"
                              Height="50"
                              Foreground="WhiteSmoke"
                              FontSize="14"
