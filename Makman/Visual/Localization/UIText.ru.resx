@@ -117,16 +117,229 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="co managepanel bind to bunch" xml:space="preserve">
+    <value>Режим группирования</value>
+  </data>
+  <data name="co managepanel tag bind" xml:space="preserve">
+    <value>+</value>
+  </data>
+  <data name="co managepanel tag unbind" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="co unitoverview multiselected filename" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="co unitoverview multiselected filesize" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="co unitoverview multiselected fullfilename" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="co unitoverview multiselected id" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="co unitoverview nonselected filename" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="co unitoverview nonselected filesize" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="co unitoverview nonselected fullfilename" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="co unitoverview nonselected id" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="co_statestring_byte" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="co_statestring_elements" xml:space="preserve">
+    <value>Элементов:</value>
+  </data>
+  <data name="co_statestring_size" xml:space="preserve">
+    <value>Размер:</value>
+  </data>
+  <data name="dir itemspanel headers autoscanning" xml:space="preserve">
+    <value>Авто</value>
+  </data>
+  <data name="dir itemspanel headers autoscanning tt" xml:space="preserve">
+    <value>Автосканирование</value>
+  </data>
+  <data name="dir itemspanel headers id" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="dir itemspanel headers path" xml:space="preserve">
+    <value>Путь</value>
+  </data>
+  <data name="dir itemspanel headers sync" xml:space="preserve">
+    <value>Синх.</value>
+  </data>
+  <data name="dir itemspanel headers sync tt" xml:space="preserve">
+    <value>Синхронизируется с облаком</value>
+  </data>
+  <data name="dir itemspanel headers tag" xml:space="preserve">
+    <value>Тег</value>
+  </data>
+  <data name="dir itemspanel headers tag tt" xml:space="preserve">
+    <value>Специальный тег (поле не используется)</value>
+  </data>
+  <data name="dir itemspanel id" xml:space="preserve">
+    <value>☉</value>
+  </data>
+  <data name="dir managepanel changepath" xml:space="preserve">
+    <value>Сменить путь</value>
+  </data>
+  <data name="dir managepanel connect" xml:space="preserve">
+    <value>Привязать</value>
+  </data>
+  <data name="dir managepanel disconnect" xml:space="preserve">
+    <value>Отвязать</value>
+  </data>
   <data name="mw makman" xml:space="preserve">
     <value>Makman</value>
   </data>
   <data name="mw pagelist collection" xml:space="preserve">
     <value>Коллекция</value>
   </data>
+  <data name="mw pagelist directories manager" xml:space="preserve">
+    <value>Папки</value>
+  </data>
   <data name="mw pagelist home" xml:space="preserve">
-    <value>Обзор</value>
+    <value>Шлак</value>
+  </data>
+  <data name="mw pagelist tag categories manager" xml:space="preserve">
+    <value>Категории тегов</value>
+  </data>
+  <data name="mw pagelist tags manager" xml:space="preserve">
+    <value>Теги</value>
+  </data>
+  <data name="mw pagelist units adder" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
+  <data name="mw pagelist units manager" xml:space="preserve">
+    <value>Управление</value>
+  </data>
+  <data name="mw warning save caption" xml:space="preserve">
+    <value>Ошибка сохранения</value>
+  </data>
+  <data name="mw warning save message" xml:space="preserve">
+    <value>Что-то пошло не так при попытке сохранения. Всё равно продолжить?</value>
+  </data>
+  <data name="tag category itemspanel headers color" xml:space="preserve">
+    <value>Цвет</value>
+  </data>
+  <data name="tag category itemspanel headers id" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="tag category itemspanel headers name" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="tag category itemspanel id" xml:space="preserve">
+    <value>☉</value>
+  </data>
+  <data name="tag category managepanel add" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
+  <data name="tag category managepanel remove" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="tag itemspanel headers category" xml:space="preserve">
+    <value>Категория</value>
+  </data>
+  <data name="tag itemspanel headers color" xml:space="preserve">
+    <value>Цвет</value>
+  </data>
+  <data name="tag itemspanel headers id" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="tag itemspanel headers name" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="tag itemspanel headers parenttag" xml:space="preserve">
+    <value>Родительский тег</value>
+  </data>
+  <data name="tag itemspanel id" xml:space="preserve">
+    <value>☉</value>
+  </data>
+  <data name="tag managepanel add" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
+  <data name="tag managepanel pickcategory" xml:space="preserve">
+    <value>Выбрать категорию</value>
+  </data>
+  <data name="tag managepanel remove" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="u add" xml:space="preserve">
+    <value>+</value>
+  </data>
+  <data name="u draganddrop drophere" xml:space="preserve">
+    <value>Перетащите файлы сюда</value>
   </data>
   <data name="u filesystem copy" xml:space="preserve">
     <value>копия</value>
+  </data>
+  <data name="u no text" xml:space="preserve">
+    <value>[текста нет но вы держитесь]</value>
+  </data>
+  <data name="u remove" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="u search" xml:space="preserve">
+    <value>Поиск</value>
+  </data>
+  <data name="u settings property name unitsadding addtagsonaddingunits" xml:space="preserve">
+    <value>Добавить теги при добавлении</value>
+  </data>
+  <data name="u settings property name unitsadding maindirectory" xml:space="preserve">
+    <value>Главная папка</value>
+  </data>
+  <data name="u settings property name unitsadding tagcategoryforbindtagtodirectory" xml:space="preserve">
+    <value>Категория тегов для перемещения в "главная папка"/"имя тега"</value>
+  </data>
+  <data name="u settings property name unitsadding togglebunching" xml:space="preserve">
+    <value>Группирование при добавлении</value>
+  </data>
+  <data name="u settings property name unitsadding togglebunching7" xml:space="preserve">
+    <value>Группирование</value>
+  </data>
+  <data name="u settings property name unitsadding trymovefilesbydirectorytagcategorynameonadding" xml:space="preserve">
+    <value>Переместить новые файлы в "главная папка"/"имя тега с заданной категорией" (Приоритетно)</value>
+  </data>
+  <data name="u settings property name unitsadding trymovefilesonadding" xml:space="preserve">
+    <value>Переместить новые файлы</value>
+  </data>
+  <data name="unit managepanel searchduplicates" xml:space="preserve">
+    <value>Поиск дубликатов</value>
+  </data>
+  <data name="unit searchduplicates exploreleft" xml:space="preserve">
+    <value>Показать в проводнике</value>
+  </data>
+  <data name="unit searchduplicates exploreright" xml:space="preserve">
+    <value>Показать в проводнике</value>
+  </data>
+  <data name="unit searchduplicates message" xml:space="preserve">
+    <value>Несколько файлов выглядят похоже:</value>
+  </data>
+  <data name="unit searchduplicates next" xml:space="preserve">
+    <value>-&gt;</value>
+  </data>
+  <data name="unit searchduplicates nexttoend" xml:space="preserve">
+    <value>-&gt;|</value>
+  </data>
+  <data name="unit searchduplicates prev" xml:space="preserve">
+    <value>&lt;-</value>
+  </data>
+  <data name="unit searchduplicates prevtoend" xml:space="preserve">
+    <value>|&lt;-</value>
+  </data>
+  <data name="unit searchduplicates removeleft" xml:space="preserve">
+    <value>&lt;- Отказ</value>
+  </data>
+  <data name="unit searchduplicates skip" xml:space="preserve">
+    <value>Пропуск -&gt;</value>
+  </data>
+  <data name="unit searchduplicates skipback" xml:space="preserve">
+    <value>&lt;- Пропуск</value>
   </data>
 </root>
