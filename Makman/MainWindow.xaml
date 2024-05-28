@@ -41,14 +41,7 @@
             <RadialGradientBrush RadiusX="2.3" RadiusY="2.1" GradientOrigin="0.2,0.2" Center="1.2,0.9">
                 <GradientStop Color="#DEB887" Offset="0"/>
                 <GradientStop Color="#594a36" Offset="0.37"/>
-            </RadialGradientBrush>
-            <!--<LinearGradientBrush StartPoint="0,0" EndPoint="2,1">
-                <GradientStop Color="#2C1C1C" Offset="0.0"/> 
-                <GradientStop Color="#544331" Offset="0.2"/>
-                <GradientStop Color="#A0522D" Offset="0.4"/> 
-                <GradientStop Color="black" Offset="0.546"/>
-                <GradientStop Color="Black" Offset="1"/>
-            </LinearGradientBrush>-->
+            </RadialGradientBrush> 
         </Border.Background>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -128,17 +121,7 @@
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding NavigateToDiscoveryCommand}"/>
-            </StackPanel>
-
-            <!--<TextBox Width="250"
-                     Height="40"
-                     VerticalAlignment="Center"
-                     HorizontalAlignment="Left"
-                     Margin="5"
-                     Grid.Row="1"
-                     Grid.Column="1"
-                     FontSize="14"
-                     Style="{StaticResource ModernTextBox}" />-->
+            </StackPanel> 
 
             <ContentControl Grid.Row="1"
                             Grid.Column="1"
@@ -148,18 +131,5 @@
 
         </Grid>
 
-    </Border>
-
-
-
-
-
-
-
-
-    <!--<Grid>
-        <Button Content="добавить из папки" HorizontalAlignment="Left" Margin="190,81,0,0" VerticalAlignment="Top" Height="55" Width="185" Click="Button_Click"/>
-        <Button Content="сохранить дб в файл" HorizontalAlignment="Left" Margin="190,152,0,0" VerticalAlignment="Top" Height="97" Width="170" Click="Button_Click_1"/>
-
-    </Grid>-->
+    </Border> 
 </Window>
