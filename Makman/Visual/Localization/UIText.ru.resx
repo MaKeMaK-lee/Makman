@@ -313,10 +313,10 @@
     <value>Поиск дубликатов</value>
   </data>
   <data name="unit searchduplicates exploreleft" xml:space="preserve">
-    <value>Показать в проводнике</value>
+    <value>Показать файл 📁</value>
   </data>
   <data name="unit searchduplicates exploreright" xml:space="preserve">
-    <value>Показать в проводнике</value>
+    <value>Показать файл 📁</value>
   </data>
   <data name="unit searchduplicates message" xml:space="preserve">
     <value>Несколько файлов выглядят похоже:</value>
