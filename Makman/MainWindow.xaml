@@ -12,7 +12,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="MainWindow" 
-        Height="600" Width="920" MinHeight="600" MinWidth="920"  
+        Height="{Binding Settings.MainWindowHeight, Mode=TwoWay}" Width="{Binding Settings.MainWindowWidth, Mode=TwoWay}" MinHeight="600" MinWidth="920"  
         Background="Transparent" 
         WindowStyle="None"
         ResizeMode="CanResize" 

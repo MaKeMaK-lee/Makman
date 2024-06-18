@@ -1,12 +1,17 @@
 ﻿
 using Makman.Middle.Core;
+using Makman.Middle.Entities.Settings;
 using Makman.Visual.Core;
+using Makman.Visual.MVVM.Model;
 using System.Windows;
 
 namespace Makman.Visual.MVVM.ViewModel
 {
     public class MainViewModel : Core.ViewModel
     {
+        public Settings Settings { get; set; }
+
+
         private INavigation _navigation;
 
         public INavigation Navigation
@@ -44,8 +49,10 @@ namespace Makman.Visual.MVVM.ViewModel
         public RelayCommand NavigateToDirectoriesManagerCommand { get; set; }
         public RelayCommand NavigateToUnitsManagerCommand { get; set; }
 
-        public MainViewModel(INavigation navigationService)
+        public MainViewModel(INavigation navigationService, IServicesAccessor servicesAccessor)
         {
+            Settings = servicesAccessor.GetSettings();
+
             Navigation = navigationService;
             NavigateToHomeCommand = new RelayCommand(o =>
             {
