@@ -4,11 +4,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Makman", "Makman\Makman.csproj", "{66C1B880-3D74-4F3F-A8D8-A867E62FA480}"
+	ProjectSection(ProjectDependencies) = postProject
+		{80D56197-2D3F-4536-9ACE-EF622C2F68E5} = {80D56197-2D3F-4536-9ACE-EF622C2F68E5}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{279A58AC-FC11-41AE-B454-209EBD61B619}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Makman_Data-windows", "Makman_Data-windows\Makman_Data-windows.csproj", "{3C3014D5-3AF4-46E9-AB68-C8FCC665192F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Makman_Core", "Makman_Core\Makman_Core.csproj", "{238A4FA7-CDE1-4326-9CFC-E1915BD0364D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Makman_Entities", "Makman_Entities\Makman_Entities.csproj", "{1F99C83D-5D28-45DB-A439-C9F3F5C31D6F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Makman_Middle", "Makman_Middle\Makman_Middle.csproj", "{80D56197-2D3F-4536-9ACE-EF622C2F68E5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3C3014D5-3AF4-46E9-AB68-C8FCC665192F} = {3C3014D5-3AF4-46E9-AB68-C8FCC665192F}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Makman_Localization", "Makman_Localization\Makman_Localization.csproj", "{7648EEA4-3DB1-4AFA-9AFF-B3E55B7F7E39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +36,26 @@ Global
 		{66C1B880-3D74-4F3F-A8D8-A867E62FA480}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66C1B880-3D74-4F3F-A8D8-A867E62FA480}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66C1B880-3D74-4F3F-A8D8-A867E62FA480}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C3014D5-3AF4-46E9-AB68-C8FCC665192F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C3014D5-3AF4-46E9-AB68-C8FCC665192F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C3014D5-3AF4-46E9-AB68-C8FCC665192F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C3014D5-3AF4-46E9-AB68-C8FCC665192F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{238A4FA7-CDE1-4326-9CFC-E1915BD0364D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{238A4FA7-CDE1-4326-9CFC-E1915BD0364D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{238A4FA7-CDE1-4326-9CFC-E1915BD0364D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{238A4FA7-CDE1-4326-9CFC-E1915BD0364D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F99C83D-5D28-45DB-A439-C9F3F5C31D6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F99C83D-5D28-45DB-A439-C9F3F5C31D6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F99C83D-5D28-45DB-A439-C9F3F5C31D6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F99C83D-5D28-45DB-A439-C9F3F5C31D6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80D56197-2D3F-4536-9ACE-EF622C2F68E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80D56197-2D3F-4536-9ACE-EF622C2F68E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80D56197-2D3F-4536-9ACE-EF622C2F68E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80D56197-2D3F-4536-9ACE-EF622C2F68E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7648EEA4-3DB1-4AFA-9AFF-B3E55B7F7E39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7648EEA4-3DB1-4AFA-9AFF-B3E55B7F7E39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7648EEA4-3DB1-4AFA-9AFF-B3E55B7F7E39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7648EEA4-3DB1-4AFA-9AFF-B3E55B7F7E39}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

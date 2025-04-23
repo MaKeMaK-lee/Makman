@@ -6,7 +6,7 @@
         xmlns:shell="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
         xmlns:viewModel="clr-namespace:Makman.Visual.MVVM.ViewModel"
         xmlns:view="clr-namespace:Makman.Visual.MVVM.View"
-        xmlns:localization="clr-namespace:Makman.Visual.Localization" 
+        xmlns:localization="clr-namespace:Makman_Localization;assembly=Makman_Localization" 
              xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:Makman" 
         mc:Ignorable="d"

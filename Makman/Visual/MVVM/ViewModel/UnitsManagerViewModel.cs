@@ -1,8 +1,9 @@
-﻿using Makman.Middle.Core;
-using Makman.Middle.Entities;
-using Makman.Middle.EntityManagementServices;
+﻿using Makman_Core;
+using Makman_Entities;
+using Makman_Middle.EntityManagementServices;
 using Makman.Visual.Components.ViewModel;
 using Makman.Visual.MVVM.Model;
+using Makman.Visual.Core;
 
 namespace Makman.Visual.MVVM.ViewModel
 {

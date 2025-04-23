@@ -1,7 +1,7 @@
 ﻿
-using Makman.Middle.Core;
-using Makman.Middle.EntityManagementServices;
-using Makman.Middle.Services;
+using Makman_Core;
+using Makman_Middle.EntityManagementServices;
+using Makman_Middle.Services;
 using Makman.Visual.Core;
 using Makman.Visual.MVVM.Model;
 using Makman.Visual.MVVM.ViewModel;

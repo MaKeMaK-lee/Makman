@@ -1,5 +1,5 @@
 ﻿
-using Makman.Middle.Core;
+using Makman_Core;
 
 namespace Makman.Visual.Core
 {

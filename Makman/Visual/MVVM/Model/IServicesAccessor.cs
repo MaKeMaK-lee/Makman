@@ -1,5 +1,5 @@
-﻿using Makman.Middle.Entities;
-using Makman.Middle.Entities.Settings;
+﻿using Makman_Entities;
+using Makman_Entities.Settings;
 
 namespace Makman.Visual.MVVM.Model
 {

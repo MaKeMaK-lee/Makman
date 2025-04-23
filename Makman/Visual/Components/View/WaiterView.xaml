@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
              xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:localization="clr-namespace:Makman.Visual.Localization"
+             xmlns:localization="clr-namespace:Makman_Localization"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:Makman.Visual.MVVM.View"  
              xmlns:components="clr-namespace:Makman.Visual.Components.Inherited"  

@@ -1,6 +1,7 @@
-﻿using Makman.Middle.Core;
-using Makman.Middle.Entities;
-using Makman.Visual.Localization;
+﻿using Makman.Visual.Core;
+using Makman_Core;
+using Makman_Entities;
+using Makman_Localization;
 using System.Windows;
 
 namespace Makman.Visual.Components.ViewModel

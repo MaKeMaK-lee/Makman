@@ -1,5 +1,5 @@
 ﻿
-using Makman.Middle.Core;
+using Makman_Core;
 using Makman.Visual.Core;
 using Makman.Visual.MVVM.Model;
 

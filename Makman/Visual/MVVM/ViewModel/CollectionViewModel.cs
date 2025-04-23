@@ -1,10 +1,11 @@
 ﻿
-using Makman.Middle.Entities;
+using Makman_Entities;
 using Makman.Visual.MVVM.Model;
-using Makman.Middle.Core;
-using Makman.Middle.EntityManagementServices;
-using Makman.Middle.Services;
+using Makman_Localization;
+using Makman_Middle.EntityManagementServices;
+using Makman_Middle.Services;
 using System.Windows;
+using Makman.Visual.Core;
 
 namespace Makman.Visual.MVVM.ViewModel
 {
@@ -248,9 +249,9 @@ namespace Makman.Visual.MVVM.ViewModel
                     {
                         return SelectedUnits.First().Id.ToString();
                     }
-                    return Localization.UIText.co_unitoverview_multiselected_id;
+                    return UIText.co_unitoverview_multiselected_id;
                 }
-                return Localization.UIText.co_unitoverview_nonselected_id;
+                return UIText.co_unitoverview_nonselected_id;
             }
         }
 
@@ -280,9 +281,9 @@ namespace Makman.Visual.MVVM.ViewModel
                     {
                         return SelectedUnits.First().FullFileName;
                     }
-                    return Localization.UIText.co_unitoverview_multiselected_fullfilename;
+                    return UIText.co_unitoverview_multiselected_fullfilename;
                 }
-                return Localization.UIText.co_unitoverview_nonselected_fullfilename;
+                return UIText.co_unitoverview_nonselected_fullfilename;
             }
         }
 
@@ -296,9 +297,9 @@ namespace Makman.Visual.MVVM.ViewModel
                     {
                         return SelectedUnits.First().FileName;
                     }
-                    return Localization.UIText.co_unitoverview_multiselected_filename;
+                    return UIText.co_unitoverview_multiselected_filename;
                 }
-                return Localization.UIText.co_unitoverview_nonselected_filename;
+                return UIText.co_unitoverview_nonselected_filename;
             }
         }
 
@@ -319,7 +320,7 @@ namespace Makman.Visual.MVVM.ViewModel
                     }
                     return size.ToString();
                 }
-                return Localization.UIText.co_unitoverview_nonselected_filesize;
+                return UIText.co_unitoverview_nonselected_filesize;
             }
         }
 

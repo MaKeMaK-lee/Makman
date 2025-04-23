@@ -1,5 +1,5 @@
 ﻿
-using Makman.Visual.Localization;
+using Makman_Localization;
 using Makman.Visual.MVVM.Model;
 using System.Windows;
 using System.Windows.Input;

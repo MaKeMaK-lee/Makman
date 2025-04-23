@@ -1,7 +1,8 @@
 ﻿
-using Makman.Middle.Core;
-using Makman.Middle.Entities;
-using Makman.Middle.Entities.Settings;
+using Makman.Visual.Core;
+using Makman_Core;
+using Makman_Entities;
+using Makman_Entities.Settings;
 using System.ComponentModel;
 
 namespace Makman.Visual.Components.ViewModel

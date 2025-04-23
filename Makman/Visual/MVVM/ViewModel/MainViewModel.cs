@@ -1,6 +1,6 @@
 ﻿
-using Makman.Middle.Core;
-using Makman.Middle.Entities.Settings;
+using Makman_Core;
+using Makman_Entities.Settings;
 using Makman.Visual.Core;
 using Makman.Visual.MVVM.Model;
 using System.Windows;

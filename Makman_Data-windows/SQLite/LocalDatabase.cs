@@ -1,0 +1,124 @@
+﻿using Makman_Entities;
+using Makman_Entities.DatabaseContexts;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.ObjectModel;
+
+namespace Makman_Data_windows.SQLite
+{
+    public class LocalDatabase : IDisposable
+    {
+        private bool disposed = false;
+        private LocalDatabaseContext _dbContext;
+
+        enum DataType
+        {
+            Unit,
+            Tag,
+            Bunch,
+            TagCategory,
+            CollectionDirectory
+        }
+
+        public ObservableCollection<Bunch> Bunchs
+        {
+            private set;
+            get;
+        }
+
+        public ObservableCollection<TagCategory> TagCategories
+        {
+            private set;
+            get;
+        }
+
+        public ObservableCollection<CollectionDirectory> CollectionDirectories
+        {
+            private set;
+            get;
+        }
+
+        public ObservableCollection<Tag> Tags
+        {
+            private set;
+            get;
+        }
+
+        public ObservableCollection<Unit> Units
+        {
+            private set;
+            get;
+        }
+
+        public LocalDatabase()
+        {
+            Init();
+        }
+
+        private void Init()
+        {
+            _dbContext = new LocalDatabaseContext("Collection.db");
+            _dbContext.Database.EnsureCreated();
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+            _dbContext.Units.AsSplitQuery().Load();
+            _dbContext.Tags.AsSplitQuery().Load();
+            _dbContext.TagCategories.AsSplitQuery().Load();
+            _dbContext.CollectionDirectories.AsSplitQuery().Load();
+            _dbContext.Bunchs.AsSplitQuery().Load();
+
+
+            Units = _dbContext.Units.Local.ToObservableCollection();
+            Tags = _dbContext.Tags.Local.ToObservableCollection();
+            TagCategories = _dbContext.TagCategories.Local.ToObservableCollection();
+            CollectionDirectories = _dbContext.CollectionDirectories.Local.ToObservableCollection();
+            Bunchs = _dbContext.Bunchs.Local.ToObservableCollection();
+        }
+
+        private bool SaveChanges()
+        {
+            try
+            {
+                _dbContext.SaveChanges();
+
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+            return true;
+        }
+
+        public void Load()
+        {
+            LoadData();
+        }
+
+        /// <summary>
+        /// Save current database state to file
+        /// </summary>
+        /// <returns>True if saved</returns>
+        public bool Save()
+        {
+            return SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            if (disposed)
+            {
+                return;
+            }
+
+
+            _dbContext.Dispose();
+
+            GC.SuppressFinalize(this);
+            disposed = true;
+
+        }
+    }
+}
