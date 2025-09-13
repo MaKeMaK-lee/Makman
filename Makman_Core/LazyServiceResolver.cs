@@ -14,7 +14,7 @@ namespace Makman_Core
         private class LazilyResolved<T> : Lazy<T>
         {
             public LazilyResolved(IServiceProvider serviceProvider)
-                : base(serviceProvider.GetRequiredService<T>) { }//TODO WHY
+                : base(serviceProvider.GetRequiredService<T>) { }
         }
     }
 }

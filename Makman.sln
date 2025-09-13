@@ -24,7 +24,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Makman_Middle", "Makman_Mid
 		{3C3014D5-3AF4-46E9-AB68-C8FCC665192F} = {3C3014D5-3AF4-46E9-AB68-C8FCC665192F}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Makman_Localization", "Makman_Localization\Makman_Localization.csproj", "{7648EEA4-3DB1-4AFA-9AFF-B3E55B7F7E39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Makman_Localization", "Makman_Localization\Makman_Localization.csproj", "{7648EEA4-3DB1-4AFA-9AFF-B3E55B7F7E39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

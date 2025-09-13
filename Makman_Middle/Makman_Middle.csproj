@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="RandomOrg.CoreApi" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Makman_Data-windows\Makman_Data-windows.csproj" />
     <ProjectReference Include="..\Makman_Entities\Makman_Entities.csproj" />
     <ProjectReference Include="..\Makman_Localization\Makman_Localization.csproj" />

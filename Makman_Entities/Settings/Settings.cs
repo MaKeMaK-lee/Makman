@@ -1,5 +1,5 @@
-﻿using Makman_Core; 
-using System.Collections.ObjectModel; 
+﻿using Makman_Core;
+using System.Collections.ObjectModel;
 
 namespace Makman_Entities.Settings
 {
@@ -18,6 +18,9 @@ namespace Makman_Entities.Settings
         public required int MainWindowWidth { get; set; }
 
         public required int MainWindowHeight { get; set; }
+
+        //Web access
+        public required string RandomOrgApiKey { get; set; }
 
         //File moving
         public required long CloudingAverageSpeedByKBytePerSecond { get; set; }
@@ -38,7 +41,7 @@ namespace Makman_Entities.Settings
                 toggleBunchingOnAddingUnits = value;
                 OnPropertyChanged(nameof(ToggleBunchingOnAddingUnits));
             }
-        } 
+        }
 
         public required bool AddTagsOnAddingUnits
         {
@@ -59,7 +62,7 @@ namespace Makman_Entities.Settings
         /// </summary>
         public required CollectionDirectory? MainDirectory { get; set; }
 
-        public required TagCategory? TagCategoryForBindTagToDirectory { get; set; } 
+        public required TagCategory? TagCategoryForBindTagToDirectory { get; set; }
 
         public required bool TryMoveFilesByDirectoryTagcategoryNameOnAdding
         {
@@ -81,7 +84,7 @@ namespace Makman_Entities.Settings
         /// Default directory to move files on adding. 
         /// </summary>
         public required CollectionDirectory? DefaultTargetDirectoryToMoveOnAdding { get; set; }
-         
+
         public required bool TryMoveFilesOnAdding
         {
             get => tryMoveFilesOnAdding;
@@ -90,6 +93,9 @@ namespace Makman_Entities.Settings
                 tryMoveFilesOnAdding = value;
                 OnPropertyChanged(nameof(TryMoveFilesOnAdding));
             }
-        } 
+        }
+
+
+
     }
 }

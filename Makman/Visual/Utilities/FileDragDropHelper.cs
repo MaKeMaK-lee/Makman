@@ -56,7 +56,7 @@ namespace Makman.Visual.Utilities
             if (_dragEventArgs.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 fileTarget.OnFileDrop((string[])_dragEventArgs.Data.GetData(DataFormats.FileDrop));
-            }
+            }  
         }
     }
 }

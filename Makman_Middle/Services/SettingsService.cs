@@ -25,6 +25,8 @@ namespace Makman_Middle.Services
                 MainWindowWidth = settings.MainWindowWidth,
                 MainWindowHeight = settings.MainWindowHeight,
 
+                RandomOrgApiKey = settings.RandomOrgApiKey,
+
                 CloudingPauseBetweenFilesByms = settings.CloudingPauseBetweenFilesByms,
                 CloudingAverageSpeedByKBytePerSecond = settings.CloudingAverageSpeedByKBytePerSecond,
                 MainDirectoryPath = settings.MainDirectory?.Path ?? "",
@@ -74,6 +76,8 @@ namespace Makman_Middle.Services
                 MainWindowPositionY = settingsJson.MainWindowPositionY,
                 MainWindowWidth = settingsJson.MainWindowWidth,
                 MainWindowHeight = settingsJson.MainWindowHeight,
+
+                RandomOrgApiKey = settingsJson.RandomOrgApiKey,
 
                 CloudingPauseBetweenFilesByms = settingsJson.CloudingPauseBetweenFilesByms,
                 CloudingAverageSpeedByKBytePerSecond = settingsJson.CloudingAverageSpeedByKBytePerSecond,
@@ -157,6 +161,8 @@ namespace Makman_Middle.Services
                 MainWindowPositionY = -1,
                 MainWindowWidth = 920,
                 MainWindowHeight = 600,
+
+                RandomOrgApiKey = "",
 
                 CloudingPauseBetweenFilesByms = 1000,
                 CloudingAverageSpeedByKBytePerSecond = 512,
