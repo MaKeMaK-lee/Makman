@@ -35,9 +35,9 @@ namespace Makman.Visual.MVVM.Model
             return _collectionDatabaseService.GetTagCategories();
         }
 
-        public IEnumerable<IEnumerable<Unit>> FindUnitsWhereNamesLooksLikeDuplicate()
+        public IEnumerable<IEnumerable<Unit>> FindUnitsWhereSomeLooksLikeDuplicate()
         {
-            return _collectionDatabaseService.FindUnitsWhereNamesLooksLikeDuplicate();
+            return _collectionDatabaseService.FindUnitsWhereSomeLooksLikeDuplicate();
         }
 
         public IEnumerable<IEnumerable<Unit>> GetUnitsDuplicatedByNames(IEnumerable<Unit> newUnits)

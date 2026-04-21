@@ -15,7 +15,7 @@ namespace Makman.Visual.MVVM.Model
 
         IEnumerable<Unit> GetUnits();
 
-        IEnumerable<IEnumerable<Unit>> FindUnitsWhereNamesLooksLikeDuplicate();
+        IEnumerable<IEnumerable<Unit>> FindUnitsWhereSomeLooksLikeDuplicate();
 
         IEnumerable<IEnumerable<Unit>> GetUnitsDuplicatedByNames(IEnumerable<Unit> newUnits); 
 

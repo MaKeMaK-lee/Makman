@@ -116,8 +116,18 @@ namespace Makman_Middle.Services
             return Database.CollectionDirectories.Any(i => i.Path == path);
         }
 
-        public IEnumerable<IEnumerable<Unit>> FindUnitsWhereNamesLooksLikeDuplicate()
+        public IEnumerable<IEnumerable<Unit>> FindUnitsWhereSomeLooksLikeDuplicate()
         {
+            var useFileSize = true;
+
+            if (useFileSize)
+            {
+                return Database.Units
+                .GroupBy(u => u.FileSize)
+                .Where(g => g.Count() > 1)
+                .Select(group => group.AsEnumerable());
+            }
+
             string regexPatternString = $"^([\\s\\S]*?)((?= \\(\\d+\\))|(?= — {UIText.u_filesystem_copy}))+([\\s\\S]*?)(\\.[\\s\\S]*?)$";
 
             IEnumerable<(string name, string ext)> potentiallyMultipliedFileNamesWithExtensions =
@@ -144,7 +154,7 @@ namespace Makman_Middle.Services
                     });
                 })
                 .Where(list => list.Count() > 1);
-        }
+        } 
 
         public IEnumerable<IEnumerable<Unit>> GetUnitsDuplicatedByNames(IEnumerable<Unit> unitsForChecking)
         {

@@ -43,7 +43,7 @@ namespace Makman_Middle.Services
         public bool IsContainCollectionDirectoryWithPath(string path);
 
         /// <returns>List of lists of duplicates</returns>
-        public IEnumerable<IEnumerable<Unit>> FindUnitsWhereNamesLooksLikeDuplicate();
+        public IEnumerable<IEnumerable<Unit>> FindUnitsWhereSomeLooksLikeDuplicate();
 
         public IEnumerable<IEnumerable<Unit>> GetUnitsDuplicatedByNames(IEnumerable<Unit> newUnits);
     }

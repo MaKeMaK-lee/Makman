@@ -45,7 +45,7 @@ namespace Makman.Visual.MVVM.ViewModel
             {
                 CurrentSubview = new UnitComparerViewModel()
                 {
-                    GetOverviewUnitsListsAction = _servicesAccessor.FindUnitsWhereNamesLooksLikeDuplicate,
+                    GetOverviewUnitsListsAction = _servicesAccessor.FindUnitsWhereSomeLooksLikeDuplicate,
                     ViewInExplorerAction = filename => _servicesAccessor.ViewInExplorer(filename),
                     LeftFromOutside = false
                 };
