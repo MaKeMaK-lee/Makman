@@ -169,5 +169,22 @@ namespace Makman_Data_windows.WindowsOS
                 return shellObject.Thumbnail.MediumBitmapSource;
             }
         }
+
+        public static IEnumerable<string> GetAllFiles(IEnumerable<string> paths)
+        {
+            var files = new List<string>();
+            var directories = new List<string>();
+
+            foreach (var path in paths)
+            {
+                if ((File.GetAttributes(path) & FileAttributes.Directory) == FileAttributes.Directory)
+                    directories.Add(path);
+                else
+                    files.Add(path);
+            }
+
+            var subfiles = directories.SelectMany(GetFilesFromDirectoryAndChilderns);
+            return files.Union(subfiles);
+        }
     }
 }

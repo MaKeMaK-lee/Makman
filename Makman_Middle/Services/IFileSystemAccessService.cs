@@ -33,5 +33,8 @@ namespace Makman_Middle.Services
         object GetImageOfFile(string path, bool justThumbnail);
 
         void RenameFile(string path, string newName);
+
+        /// <returns>Файлы по указанным путям и из всех указанных директорий</returns>
+        IEnumerable<string> GetAllFiles(IEnumerable<string> paths);
     }
 }

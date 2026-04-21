@@ -116,8 +116,10 @@ namespace Makman.Visual.MVVM.ViewModel
 
         private void Start()
         {
-            SetCurrentSubviewToUnitsAdderMain((filenames) =>
+            SetCurrentSubviewToUnitsAdderMain((paths) =>
             {
+                var filenames = _servicesAccessor.GetAllFiles(paths);
+
                 CollectionDirectory? directory = null;
                 if (Settings.TryMoveFilesByDirectoryTagcategoryNameOnAdding && Settings.TagCategoryForBindTagToDirectory != null)
                 {

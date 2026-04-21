@@ -45,6 +45,11 @@ namespace Makman.Visual.MVVM.Model
             return _collectionDatabaseService.GetUnitsDuplicatedByNames(newUnits);
         }
 
+        public IEnumerable<string> GetAllFiles(IEnumerable<string> paths)
+        {
+            return _fileSystemAccessService.GetAllFiles(paths);
+        }
+
         public void ViewInExplorer(string path)
         {
             _fileSystemAccessService.ViewInExplorer(path);
